@@ -1,0 +1,1281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VocabMaster - Year 11</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 15px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 25px;
+            color: white;
+            padding: 20px 0;
+        }
+
+        .header h1 {
+            font-size: 2.2rem;
+            margin-bottom: 8px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .header p {
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+
+        .stats-bar {
+            display: flex;
+            justify-content: space-around;
+            background: rgba(255,255,255,0.15);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 15px;
+            margin-bottom: 25px;
+            color: white;
+        }
+
+        .stat {
+            text-align: center;
+            flex: 1;
+        }
+
+        .stat-number {
+            font-size: 1.5rem;
+            font-weight: bold;
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 0.8rem;
+            opacity: 0.8;
+            margin-top: 2px;
+        }
+
+        .nav-buttons {
+            display: grid;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .nav-btn {
+            background: rgba(255,255,255,0.95);
+            border: none;
+            border-radius: 20px;
+            padding: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        .nav-btn:hover, .nav-btn:active {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 40px rgba(0,0,0,0.2);
+        }
+
+        .nav-btn h3 {
+            font-size: 1.2rem;
+            margin-bottom: 8px;
+            color: #667eea;
+        }
+
+        .nav-btn p {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .game-area {
+            background: rgba(255,255,255,0.95);
+            border-radius: 25px;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            backdrop-filter: blur(10px);
+            display: none;
+        }
+
+        .game-area.active {
+            display: block;
+        }
+
+        .game-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .back-btn {
+            background: #ff6b6b;
+            color: white;
+            border: none;
+            border-radius: 50px;
+            padding: 8px 16px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .back-btn:hover {
+            background: #ee5a52;
+            transform: scale(1.05);
+        }
+
+        .progress-container {
+            flex: 1;
+            margin: 0 15px;
+        }
+
+        .progress-bar {
+            background: #e0e0e0;
+            border-radius: 10px;
+            height: 8px;
+            overflow: hidden;
+            margin-bottom: 5px;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            transition: width 0.3s ease;
+            width: 0%;
+        }
+
+        .progress-text {
+            font-size: 0.8rem;
+            color: #666;
+            text-align: center;
+        }
+
+        .score {
+            font-weight: bold;
+            font-size: 1rem;
+            color: #667eea;
+        }
+
+        .question-card {
+            background: linear-gradient(135deg, #f8f9ff 0%, #f0f2ff 100%);
+            border-radius: 20px;
+            padding: 25px;
+            margin-bottom: 20px;
+            border-left: 5px solid #667eea;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+
+        .question-title {
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: #667eea;
+            margin-bottom: 15px;
+        }
+
+        .question-text {
+            font-size: 1rem;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .word-display {
+            font-size: 1.4rem;
+            font-weight: bold;
+            color: #764ba2;
+            text-align: center;
+            margin: 20px 0;
+            padding: 15px;
+            background: rgba(118, 75, 162, 0.1);
+            border-radius: 15px;
+        }
+
+        .definition-display {
+            font-size: 1rem;
+            color: #555;
+            text-align: center;
+            margin: 15px 0;
+            font-style: italic;
+        }
+
+        .options-grid {
+            display: grid;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .option-btn {
+            background: white;
+            border: 2px solid #e0e0e0;
+            border-radius: 15px;
+            padding: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: left;
+            font-size: 0.95rem;
+        }
+
+        .option-btn:hover {
+            border-color: #667eea;
+            background: rgba(102, 126, 234, 0.05);
+            transform: translateY(-2px);
+        }
+
+        .option-btn.selected {
+            background: #667eea;
+            color: white;
+            border-color: #667eea;
+        }
+
+        .option-btn.correct {
+            background: #28a745;
+            color: white;
+            border-color: #28a745;
+        }
+
+        .option-btn.incorrect {
+            background: #dc3545;
+            color: white;
+            border-color: #dc3545;
+        }
+
+        .text-input {
+            width: 100%;
+            border: 2px solid #e0e0e0;
+            border-radius: 15px;
+            padding: 15px;
+            font-size: 1rem;
+            margin-bottom: 15px;
+            transition: all 0.3s ease;
+        }
+
+        .text-input:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .btn {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            min-width: 100px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+        }
+
+        .btn-secondary {
+            background: #f8f9fa;
+            color: #667eea;
+            border: 2px solid #667eea;
+        }
+
+        .btn-secondary:hover {
+            background: #667eea;
+            color: white;
+        }
+
+        .feedback {
+            padding: 15px;
+            border-radius: 15px;
+            margin: 15px 0;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        .feedback.correct {
+            background: rgba(40, 167, 69, 0.1);
+            color: #28a745;
+            border: 2px solid rgba(40, 167, 69, 0.3);
+        }
+
+        .feedback.incorrect {
+            background: rgba(220, 53, 69, 0.1);
+            color: #dc3545;
+            border: 2px solid rgba(220, 53, 69, 0.3);
+        }
+
+        .completion-screen {
+            text-align: center;
+            padding: 30px 20px;
+        }
+
+        .completion-screen h2 {
+            color: #667eea;
+            font-size: 2rem;
+            margin-bottom: 15px;
+        }
+
+        .completion-screen .final-score {
+            font-size: 1.5rem;
+            color: #764ba2;
+            font-weight: bold;
+            margin: 20px 0;
+        }
+
+        .completion-screen .encouragement {
+            color: #666;
+            margin: 15px 0;
+            font-size: 1.1rem;
+        }
+
+        .drag-drop-container {
+            display: grid;
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .drag-item {
+            background: white;
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            padding: 12px;
+            cursor: move;
+            transition: all 0.3s ease;
+            user-select: none;
+        }
+
+        .drag-item:hover {
+            border-color: #667eea;
+            transform: translateY(-2px);
+        }
+
+        .drop-zone {
+            border: 2px dashed #ccc;
+            border-radius: 12px;
+            padding: 20px;
+            min-height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .drop-zone.drag-over {
+            border-color: #667eea;
+            background: rgba(102, 126, 234, 0.1);
+        }
+
+        .drop-zone.filled {
+            background: rgba(102, 126, 234, 0.1);
+            border-color: #667eea;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 480px) {
+            .container {
+                padding: 10px;
+            }
+            
+            .header h1 {
+                font-size: 1.8rem;
+            }
+            
+            .game-area {
+                padding: 20px;
+            }
+            
+            .stats-bar {
+                padding: 12px;
+            }
+            
+            .stat-number {
+                font-size: 1.3rem;
+            }
+        }
+
+        .shake {
+            animation: shake 0.5s;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
+        }
+
+        .pulse {
+            animation: pulse 0.6s;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Main Menu -->
+        <div id="main-menu">
+            <div class="header">
+                <h1>📚 VocabMaster</h1>
+                <p>Year 11 Interactive Vocabulary</p>
+            </div>
+
+            <div class="stats-bar">
+                <div class="stat">
+                    <span class="stat-number" id="total-words">500+</span>
+                    <span class="stat-label">Words</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number" id="completed-exercises">0</span>
+                    <span class="stat-label">Completed</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number" id="accuracy">0%</span>
+                    <span class="stat-label">Accuracy</span>
+                </div>
+            </div>
+
+            <div class="nav-buttons">
+                <button class="nav-btn" onclick="startGame('definitions')">
+                    <h3>📖 Definitions</h3>
+                    <p>Match words with their meanings</p>
+                </button>
+                
+                <button class="nav-btn" onclick="startGame('synonyms')">
+                    <h3>🔄 Synonyms</h3>
+                    <p>Find words with similar meanings</p>
+                </button>
+                
+                <button class="nav-btn" onclick="startGame('sentence-completion')">
+                    <h3>✏️ Complete Sentences</h3>
+                    <p>Fill in the missing words</p>
+                </button>
+                
+                <button class="nav-btn" onclick="startGame('word-formation')">
+                    <h3>🔨 Word Formation</h3>
+                    <p>Build new words from roots</p>
+                </button>
+                
+                <button class="nav-btn" onclick="startGame('spelling')">
+                    <h3>🎯 Spelling Challenge</h3>
+                    <p>Test your spelling skills</p>
+                </button>
+                
+                <button class="nav-btn" onclick="startGame('mixed-review')">
+                    <h3>🎲 Mixed Review</h3>
+                    <p>Random mix of all exercises</p>
+                </button>
+            </div>
+        </div>
+
+        <!-- Game Area -->
+        <div id="game-area" class="game-area">
+            <div class="game-header">
+                <button class="back-btn" onclick="goHome()">← Back</button>
+                <div class="progress-container">
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progress-fill"></div>
+                    </div>
+                    <div class="progress-text" id="progress-text">0 / 10</div>
+                </div>
+                <div class="score" id="current-score">Score: 0</div>
+            </div>
+
+            <div class="question-card">
+                <div class="question-title" id="question-title">Question 1</div>
+                <div class="question-text" id="question-text"></div>
+                <div id="question-content"></div>
+                
+                <div class="action-buttons">
+                    <button class="btn btn-primary" id="submit-btn" onclick="submitAnswer()">Submit</button>
+                    <button class="btn btn-secondary" id="hint-btn" onclick="showHint()" style="display: none;">Hint</button>
+                </div>
+            </div>
+
+            <div id="feedback" class="feedback" style="display: none;"></div>
+        </div>
+    </div>
+
+    <script>
+        // Comprehensive vocabulary data from the workbook
+        const vocabularyData = {
+            definitions: [
+                { word: "aberrant", definition: "departing from an accepted standard; deviant", options: ["normal", "deviant", "typical", "standard"] },
+                { word: "abhor", definition: "to regard with disgust and hatred", options: ["love", "hate", "ignore", "appreciate"] },
+                { word: "abstain", definition: "restrain oneself from indulging in", options: ["indulge", "avoid", "enjoy", "consume"] },
+                { word: "acute", definition: "having a sharp point; severe", options: ["blunt", "mild", "severe", "gentle"] },
+                { word: "adept", definition: "very skilled or proficient", options: ["clumsy", "skilled", "beginner", "amateur"] },
+                { word: "adversity", definition: "difficulties; misfortune", options: ["fortune", "ease", "hardship", "comfort"] },
+                { word: "alleviate", definition: "make suffering less intense", options: ["worsen", "relieve", "ignore", "increase"] },
+                { word: "ambiguous", definition: "having more than one meaning", options: ["clear", "vague", "simple", "obvious"] },
+                { word: "analogous", definition: "comparable in certain respects", options: ["different", "similar", "opposite", "unique"] },
+                { word: "apathy", definition: "lack of interest or concern", options: ["enthusiasm", "indifference", "excitement", "passion"] },
+                { word: "arbitrary", definition: "based on random choice rather than reason", options: ["logical", "random", "systematic", "planned"] },
+                { word: "arid", definition: "extremely dry; lacking in interest", options: ["wet", "dry", "humid", "moist"] },
+                { word: "articulate", definition: "having or showing the ability to speak fluently", options: ["silent", "eloquent", "mute", "unclear"] },
+                { word: "authentic", definition: "genuine; real", options: ["fake", "genuine", "false", "artificial"] },
+                { word: "belligerent", definition: "hostile and aggressive", options: ["peaceful", "aggressive", "calm", "friendly"] },
+                { word: "benevolent", definition: "well meaning and kindly", options: ["cruel", "kind", "harsh", "mean"] },
+                { word: "candid", definition: "truthful and straightforward", options: ["dishonest", "honest", "deceptive", "secretive"] },
+                { word: "capitulate", definition: "cease to resist; surrender", options: ["fight", "surrender", "resist", "persist"] },
+                { word: "capricious", definition: "given to sudden changes of mood", options: ["stable", "unpredictable", "consistent", "reliable"] },
+                { word: "caustic", definition: "sarcastic in a scathing way", options: ["gentle", "harsh", "kind", "sweet"] },
+                { word: "censure", definition: "express severe disapproval", options: ["praise", "criticize", "approve", "commend"] },
+                { word: "circumspect", definition: "wary and unwilling to take risks", options: ["reckless", "cautious", "careless", "bold"] },
+                { word: "coherent", definition: "logical and consistent", options: ["confused", "logical", "chaotic", "random"] },
+                { word: "compelling", definition: "evoking interest or attention", options: ["boring", "fascinating", "dull", "uninteresting"] },
+                { word: "comprise", definition: "consist of; be made up of", options: ["exclude", "include", "omit", "reject"] },
+                { word: "concede", definition: "admit that something is true", options: ["deny", "admit", "refuse", "reject"] },
+                { word: "concise", definition: "giving information clearly and briefly", options: ["lengthy", "brief", "verbose", "wordy"] },
+                { word: "condone", definition: "accept behavior that is wrong", options: ["condemn", "approve", "reject", "criticize"] },
+                { word: "conspicuous", definition: "clearly visible; attracting attention", options: ["hidden", "obvious", "subtle", "concealed"] },
+                { word: "contemplate", definition: "think about carefully", options: ["ignore", "consider", "dismiss", "overlook"] },
+                { word: "contemporary", definition: "belonging to the present time", options: ["ancient", "modern", "old", "past"] },
+                { word: "contentious", definition: "causing disagreement or argument", options: ["peaceful", "controversial", "harmonious", "agreeable"] },
+                { word: "credible", definition: "able to be believed; convincing", options: ["unbelievable", "believable", "doubtful", "false"] },
+                { word: "cursory", definition: "hasty and superficial", options: ["thorough", "superficial", "detailed", "comprehensive"] },
+                { word: "cynical", definition: "believing people are motivated by self-interest", options: ["trusting", "skeptical", "naive", "optimistic"] },
+                { word: "debacle", definition: "a sudden disastrous collapse", options: ["success", "disaster", "triumph", "victory"] },
+                { word: "defiant", definition: "boldly resistant or challenging", options: ["obedient", "rebellious", "compliant", "submissive"] },
+                { word: "deliberate", definition: "done consciously and intentionally", options: ["accidental", "intentional", "random", "unplanned"] },
+                { word: "denounce", definition: "publicly declare wrong or evil", options: ["praise", "condemn", "support", "endorse"] },
+                { word: "depict", definition: "show or represent by drawing", options: ["hide", "show", "conceal", "cover"] },
+                { word: "desolate", definition: "deserted; empty", options: ["crowded", "empty", "full", "populated"] },
+                { word: "detrimental", definition: "tending to cause harm", options: ["beneficial", "harmful", "helpful", "advantageous"] },
+                { word: "diligent", definition: "having or showing care in work", options: ["lazy", "hardworking", "careless", "negligent"] },
+                { word: "diminish", definition: "make or become less", options: ["increase", "decrease", "expand", "grow"] },
+                { word: "discern", definition: "perceive or recognize", options: ["ignore", "notice", "overlook", "miss"] },
+                { word: "discriminate", definition: "recognize a distinction", options: ["generalize", "distinguish", "confuse", "mix"] },
+                { word: "disdain", definition: "feeling that something is unworthy", options: ["respect", "contempt", "admiration", "approval"] },
+                { word: "dispel", definition: "make doubt or feeling disappear", options: ["create", "eliminate", "produce", "generate"] },
+                { word: "docile", definition: "ready to accept control", options: ["rebellious", "obedient", "defiant", "resistant"] },
+                { word: "dubious", definition: "hesitating or doubting", options: ["certain", "doubtful", "confident", "sure"] },
+                { word: "eccentric", definition: "unconventional and strange", options: ["normal", "odd", "typical", "ordinary"] },
+                { word: "elated", definition: "very happy and excited", options: ["sad", "joyful", "depressed", "miserable"] },
+                { word: "eloquent", definition: "fluent and persuasive in speaking", options: ["inarticulate", "articulate", "unclear", "confused"] },
+                { word: "embellish", definition: "make more attractive by adding details", options: ["simplify", "decorate", "strip", "reduce"] },
+                { word: "emulate", definition: "match or surpass by imitation", options: ["ignore", "copy", "avoid", "reject"] },
+                { word: "endorse", definition: "declare one's public approval", options: ["oppose", "support", "reject", "condemn"] },
+                { word: "enhance", definition: "intensify or improve quality", options: ["worsen", "improve", "damage", "harm"] },
+                { word: "enigma", definition: "a person or thing that is mysterious", options: ["clarity", "mystery", "obviousness", "simplicity"] },
+                { word: "ephemeral", definition: "lasting for a short time", options: ["permanent", "temporary", "eternal", "lasting"] },
+                { word: "equivocal", definition: "open to more than one interpretation", options: ["clear", "ambiguous", "definite", "precise"] },
+                { word: "erratic", definition: "unpredictable", options: ["consistent", "unpredictable", "regular", "stable"] },
+                { word: "exemplary", definition: "serving as a desirable model", options: ["poor", "excellent", "bad", "inferior"] },
+                { word: "exorbitant", definition: "unreasonably high", options: ["reasonable", "excessive", "cheap", "fair"] },
+                { word: "expedite", definition: "make happen sooner", options: ["delay", "speed up", "postpone", "slow down"] }
+            ],
+            
+            synonyms: [
+                { word: "abandon", synonyms: ["desert", "forsake", "leave"], answer: "desert" },
+                { word: "abate", synonyms: ["decrease", "increase", "maintain"], answer: "decrease" },
+                { word: "abhor", synonyms: ["love", "hate", "like"], answer: "hate" },
+                { word: "abundant", synonyms: ["scarce", "plentiful", "few"], answer: "plentiful" },
+                { word: "acute", synonyms: ["sharp", "dull", "blunt"], answer: "sharp" },
+                { word: "adverse", synonyms: ["favorable", "hostile", "positive"], answer: "hostile" },
+                { word: "alleviate", synonyms: ["worsen", "relieve", "increase"], answer: "relieve" },
+                { word: "ambiguous", synonyms: ["clear", "vague", "obvious"], answer: "vague" },
+                { word: "ample", synonyms: ["small", "large", "tiny"], answer: "large" },
+                { word: "ancient", synonyms: ["modern", "old", "new"], answer: "old" },
+                { word: "ardent", synonyms: ["cold", "passionate", "indifferent"], answer: "passionate" },
+                { word: "arid", synonyms: ["wet", "dry", "moist"], answer: "dry" },
+                { word: "articulate", synonyms: ["unclear", "eloquent", "confused"], answer: "eloquent" },
+                { word: "astute", synonyms: ["foolish", "clever", "stupid"], answer: "clever" },
+                { word: "authentic", synonyms: ["fake", "genuine", "false"], answer: "genuine" },
+                { word: "benevolent", synonyms: ["cruel", "kind", "harsh"], answer: "kind" },
+                { word: "brief", synonyms: ["long", "short", "extended"], answer: "short" },
+                { word: "candid", synonyms: ["dishonest", "frank", "deceptive"], answer: "frank" },
+                { word: "cautious", synonyms: ["reckless", "careful", "careless"], answer: "careful" },
+                { word: "comprehensive", synonyms: ["partial", "complete", "incomplete"], answer: "complete" },
+                { word: "concise", synonyms: ["wordy", "brief", "lengthy"], answer: "brief" },
+                { word: "confident", synonyms: ["uncertain", "sure", "doubtful"], answer: "sure" },
+                { word: "contemporary", synonyms: ["ancient", "modern", "old"], answer: "modern" },
+                { word: "crucial", synonyms: ["unimportant", "vital", "trivial"], answer: "vital" },
+                { word: "deceive", synonyms: ["enlighten", "mislead", "inform"], answer: "mislead" },
+                { word: "defiant", synonyms: ["obedient", "rebellious", "compliant"], answer: "rebellious" },
+                { word: "deliberate", synonyms: ["accidental", "intentional", "unplanned"], answer: "intentional" },
+                { word: "deter", synonyms: ["encourage", "discourage", "promote"], answer: "discourage" },
+                { word: "diligent", synonyms: ["lazy", "hardworking", "careless"], answer: "hardworking" },
+                { word: "eccentric", synonyms: ["normal", "odd", "typical"], answer: "odd" },
+                { word: "elaborate", synonyms: ["simple", "detailed", "basic"], answer: "detailed" },
+                { word: "eloquent", synonyms: ["inarticulate", "articulate", "unclear"], answer: "articulate" },
+                { word: "enhance", synonyms: ["worsen", "improve", "damage"], answer: "improve" },
+                { word: "evident", synonyms: ["hidden", "obvious", "concealed"], answer: "obvious" },
+                { word: "exemplary", synonyms: ["poor", "outstanding", "inferior"], answer: "outstanding" },
+                { word: "expedite", synonyms: ["delay", "hasten", "slow"], answer: "hasten" }
+            ],
+
+            sentenceCompletion: [
+                {
+                    sentence: "The teacher's explanation was so _____ that even the most confused students understood.",
+                    word: "lucid",
+                    options: ["obscure", "lucid", "complex", "vague"]
+                },
+                {
+                    sentence: "Despite the _____ weather, the hikers continued their journey up the mountain.",
+                    word: "adverse",
+                    options: ["favorable", "adverse", "pleasant", "mild"]
+                },
+                {
+                    sentence: "The politician's _____ speech failed to convince the skeptical audience.",
+                    word: "eloquent",
+                    options: ["eloquent", "inarticulate", "clear", "persuasive"]
+                },
+                {
+                    sentence: "Her _____ attitude toward work earned her a promotion within six months.",
+                    word: "diligent",
+                    options: ["lazy", "careless", "diligent", "negligent"]
+                },
+                {
+                    sentence: "The ancient manuscript was so _____ that scholars spent years deciphering it.",
+                    word: "cryptic",
+                    options: ["clear", "simple", "cryptic", "obvious"]
+                },
+                {
+                    sentence: "The company's _____ policies resulted in high employee turnover.",
+                    word: "draconian",
+                    options: ["lenient", "fair", "draconian", "reasonable"]
+                },
+                {
+                    sentence: "His _____ remarks during the meeting offended several colleagues.",
+                    word: "tactless",
+                    options: ["thoughtful", "tactless", "considerate", "diplomatic"]
+                },
+                {
+                    sentence: "The evidence presented was so _____ that the jury reached a quick verdict.",
+                    word: "compelling",
+                    options: ["weak", "compelling", "doubtful", "insufficient"]
+                },
+                {
+                    sentence: "She showed remarkable _____ in the face of personal tragedy.",
+                    word: "fortitude",
+                    options: ["weakness", "fortitude", "despair", "fragility"]
+                },
+                {
+                    sentence: "The artist's _____ use of color created a stunning visual effect.",
+                    word: "judicious",
+                    options: ["careless", "judicious", "random", "thoughtless"]
+                },
+                {
+                    sentence: "The CEO's _____ decision to expand internationally proved very profitable.",
+                    word: "astute",
+                    options: ["foolish", "astute", "reckless", "impulsive"]
+                },
+                {
+                    sentence: "The protesters remained _____ despite police attempts to disperse them.",
+                    word: "resolute",
+                    options: ["wavering", "resolute", "uncertain", "hesitant"]
+                },
+                {
+                    sentence: "His _____ lifestyle contributed to his poor health and low energy.",
+                    word: "sedentary",
+                    options: ["active", "sedentary", "vigorous", "energetic"]
+                },
+                {
+                    sentence: "The novel's _____ plot kept readers guessing until the final chapter.",
+                    word: "intricate",
+                    options: ["simple", "intricate", "straightforward", "basic"]
+                },
+                {
+                    sentence: "The committee's _____ deliberations lasted well into the night.",
+                    word: "protracted",
+                    options: ["brief", "protracted", "quick", "hasty"]
+                }
+            ],
+
+            wordFormation: [
+                { root: "spect", meaning: "to look", examples: ["inspect", "respect", "prospect", "spectacle"] },
+                { root: "port", meaning: "to carry", examples: ["transport", "export", "import", "portable"] },
+                { root: "dict", meaning: "to say", examples: ["dictate", "predict", "contradict", "verdict"] },
+                { root: "scrib/script", meaning: "to write", examples: ["describe", "prescribe", "manuscript", "inscription"] },
+                { root: "aud", meaning: "to hear", examples: ["audience", "audible", "auditorium", "audio"] },
+                { root: "vis/vid", meaning: "to see", examples: ["vision", "video", "visible", "evidence"] },
+                { root: "cred", meaning: "to believe", examples: ["credit", "credible", "incredible", "credential"] },
+                { root: "duc/duct", meaning: "to lead", examples: ["conduct", "reduce", "produce", "induction"] },
+                { root: "fac/fact", meaning: "to make", examples: ["factory", "manufacture", "artifact", "faction"] },
+                { root: "struct", meaning: "to build", examples: ["construct", "structure", "instruct", "destruction"] }
+            ],
+
+            spelling: [
+                { word: "accommodate", hint: "double 'c' and double 'm'" },
+                { word: "achievement", hint: "'i' before 'e' except after 'c'" },
+                { word: "acquire", hint: "'c' then 'qu'" },
+                { word: "amateur", hint: "ends with 'eur'" },
+                { word: "apparent", hint: "double 'p'" },
+                { word: "argument", hint: "no 'e' after 'u'" },
+                { word: "athlete", hint: "no 'e' in the middle" },
+                { word: "believe", hint: "'i' before 'e'" },
+                { word: "calendar", hint: "ends with 'ar'" },
+                { word: "cemetery", hint: "ends with 'ery'" },
+                { word: "conscience", hint: "'sc' in the middle" },
+                { word: "definitely", hint: "'finite' in the middle" },
+                { word: "embarrass", hint: "double 'r' and double 's'" },
+                { word: "environment", hint: "'n' before 'm'" },
+                { word: "existence", hint: "ends with 'ence'" },
+                { word: "February", hint: "first 'r' often silent" },
+                { word: "government", hint: "'n' before 'm'" },
+                { word: "grammar", hint: "double 'm' and ends with 'ar'" },
+                { word: "guarantee", hint: "'gua' at the beginning" },
+                { word: "harassment", hint: "one 'r' and double 's'" },
+                { word: "independent", hint: "ends with 'ent'" },
+                { word: "intelligence", hint: "double 'l'" },
+                { word: "jewelry", hint: "one 'l'" },
+                { word: "knowledge", hint: "silent 'k' at start" },
+                { word: "license", hint: "ends with 'se'" },
+                { word: "maintenance", hint: "'ain' in the middle" },
+                { word: "necessary", hint = "one 'c', double 's'" },
+                { word: "occasion", hint: "double 'c', single 's'" },
+                { word: "parallel", hint: "double 'l' in middle and end" },
+                { word: "privilege", hint: "'i' before 'l'" },
+                { word: "receive", hint: "'e' before 'i' after 'c'" },
+                { word: "restaurant", hint: "'au' in the middle" },
+                { word: "separate", hint: "'par' in the middle" },
+                { word: "tomorrow", hint: "one 'm', double 'r'" },
+                { word: "vacuum", hint: "double 'u'" },
+                { word: "Wednesday", hint: "silent 'd'" }
+            ]
+        };
+
+        // Game state
+        let currentGame = null;
+        let currentQuestion = 0;
+        let score = 0;
+        let totalQuestions = 10;
+        let questions = [];
+        let answered = false;
+        let stats = {
+            totalCompleted: 0,
+            totalCorrect: 0,
+            totalAnswered: 0
+        };
+
+        // Load stats from localStorage if available
+        function loadStats() {
+            const savedStats = localStorage.getItem('vocabStats');
+            if (savedStats) {
+                stats = JSON.parse(savedStats);
+                updateStatsDisplay();
+            }
+        }
+
+        // Save stats to localStorage
+        function saveStats() {
+            localStorage.setItem('vocabStats', JSON.stringify(stats));
+        }
+
+        // Update stats display
+        function updateStatsDisplay() {
+            document.getElementById('completed-exercises').textContent = stats.totalCompleted;
+            const accuracy = stats.totalAnswered > 0 ? Math.round((stats.totalCorrect / stats.totalAnswered) * 100) : 0;
+            document.getElementById('accuracy').textContent = accuracy + '%';
+        }
+
+        // Shuffle array function
+        function shuffleArray(array) {
+            const newArray = [...array];
+            for (let i = newArray.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [newArray[i], newArray[j]] = [newArray[j], newArray[i]];
+            }
+            return newArray;
+        }
+
+        // Start a game
+        function startGame(gameType) {
+            currentGame = gameType;
+            currentQuestion = 0;
+            score = 0;
+            answered = false;
+            
+            // Prepare questions based on game type
+            switch(gameType) {
+                case 'definitions':
+                    questions = shuffleArray(vocabularyData.definitions).slice(0, totalQuestions);
+                    break;
+                case 'synonyms':
+                    questions = shuffleArray(vocabularyData.synonyms).slice(0, totalQuestions);
+                    break;
+                case 'sentence-completion':
+                    questions = shuffleArray(vocabularyData.sentenceCompletion).slice(0, totalQuestions);
+                    break;
+                case 'word-formation':
+                    questions = generateWordFormationQuestions();
+                    break;
+                case 'spelling':
+                    questions = shuffleArray(vocabularyData.spelling).slice(0, totalQuestions);
+                    break;
+                case 'mixed-review':
+                    questions = generateMixedQuestions();
+                    break;
+            }
+            
+            // Show game area
+            document.getElementById('main-menu').style.display = 'none';
+            document.getElementById('game-area').style.display = 'block';
+            document.getElementById('game-area').classList.add('active');
+            
+            // Start first question
+            displayQuestion();
+        }
+
+        // Generate word formation questions
+        function generateWordFormationQuestions() {
+            const formationQuestions = [];
+            const roots = shuffleArray(vocabularyData.wordFormation).slice(0, totalQuestions);
+            
+            roots.forEach(root => {
+                const correctExample = root.examples[Math.floor(Math.random() * root.examples.length)];
+                const wrongOptions = [];
+                
+                // Generate some wrong options
+                const allWords = vocabularyData.definitions.map(d => d.word);
+                const randomWords = shuffleArray(allWords).slice(0, 3);
+                
+                formationQuestions.push({
+                    type: 'word-formation',
+                    root: root.root,
+                    meaning: root.meaning,
+                    word: correctExample,
+                    options: shuffleArray([correctExample, ...randomWords])
+                });
+            });
+            
+            return formationQuestions;
+        }
+
+        // Generate mixed questions
+        function generateMixedQuestions() {
+            const mixed = [];
+            const typesCount = Math.floor(totalQuestions / 4);
+            
+            mixed.push(...shuffleArray(vocabularyData.definitions).slice(0, typesCount));
+            mixed.push(...shuffleArray(vocabularyData.synonyms).slice(0, typesCount));
+            mixed.push(...shuffleArray(vocabularyData.sentenceCompletion).slice(0, typesCount));
+            mixed.push(...shuffleArray(vocabularyData.spelling).slice(0, totalQuestions - mixed.length));
+            
+            return shuffleArray(mixed);
+        }
+
+        // Display current question
+        function displayQuestion() {
+            if (currentQuestion >= questions.length) {
+                showCompletionScreen();
+                return;
+            }
+
+            answered = false;
+            const question = questions[currentQuestion];
+            
+            // Update progress
+            updateProgress();
+            
+            // Update question title
+            document.getElementById('question-title').textContent = `Question ${currentQuestion + 1}`;
+            
+            // Clear previous content
+            document.getElementById('question-content').innerHTML = '';
+            document.getElementById('feedback').style.display = 'none';
+            
+            // Display question based on type
+            switch(currentGame) {
+                case 'definitions':
+                    displayDefinitionQuestion(question);
+                    break;
+                case 'synonyms':
+                    displaySynonymQuestion(question);
+                    break;
+                case 'sentence-completion':
+                    displaySentenceCompletionQuestion(question);
+                    break;
+                case 'word-formation':
+                    displayWordFormationQuestion(question);
+                    break;
+                case 'spelling':
+                    displaySpellingQuestion(question);
+                    break;
+                case 'mixed-review':
+                    displayMixedQuestion(question);
+                    break;
+            }
+        }
+
+        // Display definition question
+        function displayDefinitionQuestion(question) {
+            document.getElementById('question-text').textContent = 'What does this word mean?';
+            
+            const content = document.getElementById('question-content');
+            content.innerHTML = `
+                <div class="word-display">${question.word}</div>
+                <div class="options-grid">
+                    ${question.options.map((option, index) => 
+                        `<button class="option-btn" onclick="selectOption(${index}, '${option}')">${option}</button>`
+                    ).join('')}
+                </div>
+            `;
+        }
+
+        // Display synonym question
+        function displaySynonymQuestion(question) {
+            document.getElementById('question-text').textContent = 'Which word is a synonym for:';
+            
+            const content = document.getElementById('question-content');
+            content.innerHTML = `
+                <div class="word-display">${question.word}</div>
+                <div class="options-grid">
+                    ${question.synonyms.map((option, index) => 
+                        `<button class="option-btn" onclick="selectOption(${index}, '${option}')">${option}</button>`
+                    ).join('')}
+                </div>
+            `;
+        }
+
+        // Display sentence completion question
+        function displaySentenceCompletionQuestion(question) {
+            document.getElementById('question-text').textContent = 'Complete the sentence with the most appropriate word:';
+            
+            const content = document.getElementById('question-content');
+            content.innerHTML = `
+                <div class="definition-display">"${question.sentence}"</div>
+                <div class="options-grid">
+                    ${question.options.map((option, index) => 
+                        `<button class="option-btn" onclick="selectOption(${index}, '${option}')">${option}</button>`
+                    ).join('')}
+                </div>
+            `;
+        }
+
+        // Display word formation question
+        function displayWordFormationQuestion(question) {
+            document.getElementById('question-text').textContent = 'Which word contains the root meaning:';
+            
+            const content = document.getElementById('question-content');
+            content.innerHTML = `
+                <div class="word-display">${question.root} - "${question.meaning}"</div>
+                <div class="options-grid">
+                    ${question.options.map((option, index) => 
+                        `<button class="option-btn" onclick="selectOption(${index}, '${option}')">${option}</button>`
+                    ).join('')}
+                </div>
+            `;
+        }
+
+        // Display spelling question
+        function displaySpellingQuestion(question) {
+            document.getElementById('question-text').textContent = 'Spell this word correctly:';
+            
+            const content = document.getElementById('question-content');
+            // Use text-to-speech or show a hint
+            content.innerHTML = `
+                <div class="definition-display">💡 Hint: ${question.hint}</div>
+                <input type="text" class="text-input" id="spelling-input" placeholder="Type the word here..." 
+                       onkeypress="handleSpellingKeypress(event)">
+                <button class="btn btn-secondary" onclick="speakWord('${question.word}')">🔊 Hear Word</button>
+            `;
+            
+            // Focus on input
+            setTimeout(() => {
+                document.getElementById('spelling-input').focus();
+            }, 100);
+        }
+
+        // Display mixed question
+        function displayMixedQuestion(question) {
+            if (question.definition) {
+                displayDefinitionQuestion(question);
+            } else if (question.synonyms) {
+                displaySynonymQuestion(question);
+            } else if (question.sentence) {
+                displaySentenceCompletionQuestion(question);
+            } else if (question.hint) {
+                displaySpellingQuestion(question);
+            }
+        }
+
+        // Handle spelling keypress
+        function handleSpellingKeypress(event) {
+            if (event.key === 'Enter') {
+                submitAnswer();
+            }
+        }
+
+        // Speak word (if supported)
+        function speakWord(word) {
+            if ('speechSynthesis' in window) {
+                const utterance = new SpeechSynthesisUtterance(word);
+                utterance.rate = 0.7;
+                speechSynthesis.speak(utterance);
+            }
+        }
+
+        // Select option
+        function selectOption(index, value) {
+            if (answered) return;
+            
+            // Remove previous selections
+            document.querySelectorAll('.option-btn').forEach(btn => {
+                btn.classList.remove('selected');
+            });
+            
+            // Select current option
+            event.target.classList.add('selected');
+            event.target.dataset.selected = 'true';
+            event.target.dataset.value = value;
+        }
+
+        // Submit answer
+        function submitAnswer() {
+            if (answered) {
+                nextQuestion();
+                return;
+            }
+
+            let userAnswer = '';
+            let correctAnswer = '';
+            let isCorrect = false;
+
+            const question = questions[currentQuestion];
+
+            // Get user answer based on question type
+            if (currentGame === 'spelling' || (currentGame === 'mixed-review' && question.hint)) {
+                userAnswer = document.getElementById('spelling-input').value.trim().toLowerCase();
+                correctAnswer = question.word.toLowerCase();
+                isCorrect = userAnswer === correctAnswer;
+            } else {
+                const selectedBtn = document.querySelector('.option-btn[data-selected="true"]');
+                if (!selectedBtn) {
+                    showFeedback('Please select an answer!', false);
+                    return;
+                }
+                
+                userAnswer = selectedBtn.dataset.value;
+                
+                // Determine correct answer based on question type
+                if (question.definition) {
+                    correctAnswer = question.definition;
+                    isCorrect = userAnswer === correctAnswer;
+                } else if (question.answer) {
+                    correctAnswer = question.answer;
+                    isCorrect = userAnswer === correctAnswer;
+                } else if (question.word) {
+                    correctAnswer = question.word;
+                    isCorrect = userAnswer === correctAnswer;
+                }
+                
+                // For definition questions, check if selected option matches the definition
+                if (currentGame === 'definitions') {
+                    isCorrect = userAnswer === question.definition;
+                }
+            }
+
+            // Update score and stats
+            if (isCorrect) {
+                score++;
+                stats.totalCorrect++;
+            }
+            stats.totalAnswered++;
+
+            // Show visual feedback
+            showAnswerFeedback(isCorrect, correctAnswer);
+            
+            answered = true;
+            document.getElementById('submit-btn').textContent = 'Next';
+        }
+
+        // Show answer feedback
+        function showAnswerFeedback(isCorrect, correctAnswer) {
+            // Update option buttons visual feedback
+            document.querySelectorAll('.option-btn').forEach(btn => {
+                btn.style.pointerEvents = 'none';
+                
+                if (currentGame !== 'spelling') {
+                    if (btn.dataset.selected === 'true') {
+                        btn.classList.add(isCorrect ? 'correct' : 'incorrect');
+                    }
+                    
+                    // Highlight correct answer
+                    if (btn.textContent === correctAnswer || btn.dataset.value === correctAnswer) {
+                        btn.classList.add('correct');
+                    }
+                }
+            });
+
+            // Show feedback message
+            const message = isCorrect ? 
+                '🎉 Correct! Well done!' : 
+                `❌ Incorrect. The correct answer is: ${correctAnswer}`;
+            
+            showFeedback(message, isCorrect);
+
+            // Add animation
+            const questionCard = document.querySelector('.question-card');
+            questionCard.classList.add(isCorrect ? 'pulse' : 'shake');
+            setTimeout(() => {
+                questionCard.classList.remove('pulse', 'shake');
+            }, 600);
+        }
+
+        // Show feedback
+        function showFeedback(message, isCorrect) {
+            const feedback = document.getElementById('feedback');
+            feedback.textContent = message;
+            feedback.className = `feedback ${isCorrect ? 'correct' : 'incorrect'}`;
+            feedback.style.display = 'block';
+        }
+
+        // Next question
+        function nextQuestion() {
+            currentQuestion++;
+            updateProgress();
+            displayQuestion();
+        }
+
+        // Update progress
+        function updateProgress() {
+            const progress = (currentQuestion / totalQuestions) * 100;
+            document.getElementById('progress-fill').style.width = progress + '%';
+            document.getElementById('progress-text').textContent = `${currentQuestion} / ${totalQuestions}`;
+            document.getElementById('current-score').textContent = `Score: ${score}`;
+        }
+
+        // Show completion screen
+        function showCompletionScreen() {
+            stats.totalCompleted++;
+            saveStats();
+            updateStatsDisplay();
+
+            const percentage = Math.round((score / totalQuestions) * 100);
+            let encouragement = '';
+            
+            if (percentage >= 90) {
+                encouragement = '🌟 Outstanding! You\'re a vocabulary master!';
+            } else if (percentage >= 80) {
+                encouragement = '🎯 Excellent work! Keep it up!';
+            } else if (percentage >= 70) {
+                encouragement = '👏 Good job! You\'re making great progress!';
+            } else if (percentage >= 60) {
+                encouragement = '📚 Not bad! Keep practicing to improve!';
+            } else {
+                encouragement = '💪 Keep studying! Practice makes perfect!';
+            }
+
+            document.getElementById('question-content').innerHTML = `
+                <div class="completion-screen">
+                    <h2>🎊 Quiz Complete!</h2>
+                    <div class="final-score">You scored ${score} out of ${totalQuestions}</div>
+                    <div class="final-score">${percentage}%</div>
+                    <div class="encouragement">${encouragement}</div>
+                    <div class="action-buttons" style="margin-top: 30px;">
+                        <button class="btn btn-primary" onclick="startGame('${currentGame}')">Try Again</button>
+                        <button class="btn btn-secondary" onclick="goHome()">Main Menu</button>
+                    </div>
+                </div>
+            `;
+            
+            // Hide submit button
+            document.getElementById('submit-btn').style.display = 'none';
+            document.getElementById('feedback').style.display = 'none';
+            
+            // Update question title
+            document.getElementById('question-title').textContent = 'Results';
+            document.getElementById('question-text').textContent = '';
+        }
+
+        // Go back to home
+        function goHome() {
+            document.getElementById('main-menu').style.display = 'block';
+            document.getElementById('game-area').style.display = 'none';
+            document.getElementById('game-area').classList.remove('active');
+            document.getElementById('submit-btn').style.display = 'block';
+            document.getElementById('submit-btn').textContent = 'Submit';
+            updateStatsDisplay();
+        }
+
+        // Show hint (if implemented)
+        function showHint() {
+            const question = questions[currentQuestion];
+            if (question.hint) {
+                alert(`Hint: ${question.hint}`);
+            } else {
+                alert('No hint available for this question.');
+            }
+        }
+
+        // Initialize app
+        function initApp() {
+            loadStats();
+            updateStatsDisplay();
+            
+            // Add touch/swipe support for mobile
+            let startY = 0;
+            let endY = 0;
+            
+            document.addEventListener('touchstart', e => {
+                startY = e.touches[0].clientY;
+            });
+            
+            document.addEventListener('touchend', e => {
+                endY = e.changedTouches[0].clientY;
+                handleSwipe();
+            });
+            
+            function handleSwipe() {
+                const swipeThreshold = 50;
+                const diff = startY - endY;
+                
+                if (Math.abs(diff) > swipeThreshold) {
+                    if (diff > 0) {
+                        // Swipe up - could trigger hint or next question
+                    } else {
+                        // Swipe down - could trigger back or menu
+                    }
+                }
+            }
+        }
+
+        // Start the app when page loads
+        document.addEventListener('DOMContentLoaded', initApp);
+
+        // Prevent zoom on double tap for better mobile experience
+        let lastTouchEnd = 0;
+        document.addEventListener('touchend', function (event) {
+            const now = (new Date()).getTime();
+            if (now - lastTouchEnd <= 300) {
+                event.preventDefault();
+            }
+            lastTouchEnd = now;
+        }, false);
+    </script>
+</body>
+</html>
