@@ -1008,18 +1008,38 @@
 
         // Display spelling question
         function displaySpellingQuestion(question) {
-            document.getElementById('question-text').textContent = 'Spell this word correctly:';
+            document.getElementById('question-text').innerHTML = `Spell this word correctly: <strong>"${question.word}"</strong>`;
             
             const content = document.getElementById('question-content');
-            // Use text-to-speech or show a hint
+            // Show the word briefly, then hide it for spelling challenge
             content.innerHTML = `
+                <div class="word-display" id="word-to-spell" style="background: rgba(220, 53, 69, 0.1); color: #dc3545; font-size: 1.6rem; margin: 20px 0; padding: 20px; border-radius: 15px;">
+                    <div style="font-size: 1rem; margin-bottom: 10px; opacity: 0.8;">Word to spell:</div>
+                    <div style="font-weight: bold;">${question.word}</div>
+                    <div style="font-size: 0.9rem; margin-top: 10px; opacity: 0.7;">Study this word, then spell it below!</div>
+                </div>
                 <div class="definition-display">💡 Hint: ${question.hint}</div>
                 <input type="text" class="text-input" id="spelling-input" placeholder="Type the word here..." 
                        onkeypress="handleSpellingKeypress(event)">
-                <button class="btn btn-secondary" onclick="speakWord('${question.word}')">🔊 Hear Word</button>
+                <div style="display: flex; gap: 10px; justify-content: center; margin-top: 15px;">
+                    <button class="btn btn-secondary" onclick="speakWord('${question.word}')">🔊 Hear Word</button>
+                    <button class="btn btn-secondary" onclick="toggleWordDisplay()">👁️ Show/Hide Word</button>
+                </div>
             `;
             
-            // Focus on input
+            // Auto-hide the word after 5 seconds to create spelling challenge
+            setTimeout(() => {
+                const wordDisplay = document.getElementById('word-to-spell');
+                if (wordDisplay) {
+                    wordDisplay.style.opacity = '0.3';
+                    wordDisplay.innerHTML = `
+                        <div style="font-size: 1rem; margin-bottom: 10px;">Word hidden - now spell it!</div>
+                        <div style="font-size: 0.9rem; opacity: 0.7;">Click "Show/Hide Word" if you need to see it again</div>
+                    `;
+                }
+            }, 5000);
+            
+            // Focus on input after a brief delay
             setTimeout(() => {
                 document.getElementById('spelling-input').focus();
             }, 100);
@@ -1035,6 +1055,29 @@
                 displaySentenceCompletionQuestion(question);
             } else if (question.hint) {
                 displaySpellingQuestion(question);
+            }
+        }
+
+        // Toggle word display for spelling
+        function toggleWordDisplay() {
+            const wordDisplay = document.getElementById('word-to-spell');
+            const question = questions[currentQuestion];
+            
+            if (wordDisplay.style.opacity === '0.3') {
+                // Show the word
+                wordDisplay.style.opacity = '1';
+                wordDisplay.innerHTML = `
+                    <div style="font-size: 1rem; margin-bottom: 10px; opacity: 0.8;">Word to spell:</div>
+                    <div style="font-weight: bold;">${question.word}</div>
+                    <div style="font-size: 0.9rem; margin-top: 10px; opacity: 0.7;">Now spell it below!</div>
+                `;
+            } else {
+                // Hide the word
+                wordDisplay.style.opacity = '0.3';
+                wordDisplay.innerHTML = `
+                    <div style="font-size: 1rem; margin-bottom: 10px;">Word hidden - now spell it!</div>
+                    <div style="font-size: 0.9rem; opacity: 0.7;">Click "Show/Hide Word" if you need to see it again</div>
+                `;
             }
         }
 
@@ -1164,14 +1207,16 @@
                 let userAnswer = '';
                 if (currentGame === 'spelling' || (currentGame === 'mixed-review' && question.hint)) {
                     userAnswer = document.getElementById('spelling-input').value.trim();
+                    // For spelling, make sure to show the actual word they were supposed to spell
+                    correctAnswer = question.word;
                 } else {
                     const selectedBtn = document.querySelector('.option-btn[data-selected="true"]');
                     userAnswer = selectedBtn ? selectedBtn.textContent : 'No selection';
                 }
                 
                 message = `❌ <strong>Incorrect</strong><br><br>`;
-                message += `<span style="color: #dc3545;">Your answer:</span> "${userAnswer}"<br>`;
-                message += `<span style="color: #28a745; font-weight: bold;">Correct answer:</span> "${correctAnswer}"<br>`;
+                message += `<span style="color: #dc3545;">Your spelling:</span> "${userAnswer}"<br>`;
+                message += `<span style="color: #28a745; font-weight: bold;">Correct spelling:</span> "${correctAnswer}"<br>`;
                 
                 // Add definition context for learning
                 if (question.definition) {
