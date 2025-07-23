@@ -1416,14 +1416,18 @@
                     userAnswer = document.getElementById('spelling-input').value.trim();
                     // For spelling, make sure to show the actual word they were supposed to spell
                     correctAnswer = question.word;
+                    
+                    message = `❌ <strong>Incorrect</strong><br><br>`;
+                    message += `<span style="color: #dc3545;">Your spelling:</span> "${userAnswer}"<br>`;
+                    message += `<span style="color: #28a745; font-weight: bold;">Correct spelling:</span> "${correctAnswer}"<br>`;
                 } else {
                     const selectedBtn = document.querySelector('.option-btn[data-selected="true"]');
                     userAnswer = selectedBtn ? selectedBtn.textContent : 'No selection';
+                    
+                    message = `❌ <strong>Incorrect</strong><br><br>`;
+                    message += `<span style="color: #dc3545;">Your answer:</span> "${userAnswer}"<br>`;
+                    message += `<span style="color: #28a745; font-weight: bold;">Correct answer:</span> "${correctAnswer}"<br>`;
                 }
-                
-                message = `❌ <strong>Incorrect</strong><br><br>`;
-                message += `<span style="color: #dc3545;">Your spelling:</span> "${userAnswer}"<br>`;
-                message += `<span style="color: #28a745; font-weight: bold;">Correct spelling:</span> "${correctAnswer}"<br>`;
                 
                 // Add definition context for learning
                 if (question.definition) {
