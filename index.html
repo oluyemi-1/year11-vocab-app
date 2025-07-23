@@ -258,22 +258,6 @@
             border-color: #dc3545;
         }
 
-        .text-input {
-            width: 100%;
-            border: 2px solid #e0e0e0;
-            border-radius: 15px;
-            padding: 15px;
-            font-size: 1rem;
-            margin-bottom: 15px;
-            transition: all 0.3s ease;
-        }
-
-        .text-input:focus {
-            outline: none;
-            border-color: #667eea;
-            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
-        }
-
         .action-buttons {
             display: flex;
             gap: 10px;
@@ -370,48 +354,6 @@
             color: #666;
             margin: 15px 0;
             font-size: 1.1rem;
-        }
-
-        .drag-drop-container {
-            display: grid;
-            gap: 15px;
-            margin: 20px 0;
-        }
-
-        .drag-item {
-            background: white;
-            border: 2px solid #e0e0e0;
-            border-radius: 12px;
-            padding: 12px;
-            cursor: move;
-            transition: all 0.3s ease;
-            user-select: none;
-        }
-
-        .drag-item:hover {
-            border-color: #667eea;
-            transform: translateY(-2px);
-        }
-
-        .drop-zone {
-            border: 2px dashed #ccc;
-            border-radius: 12px;
-            padding: 20px;
-            min-height: 60px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.3s ease;
-        }
-
-        .drop-zone.drag-over {
-            border-color: #667eea;
-            background: rgba(102, 126, 234, 0.1);
-        }
-
-        .drop-zone.filled {
-            background: rgba(102, 126, 234, 0.1);
-            border-color: #667eea;
         }
 
         /* Responsive adjustments */
@@ -535,7 +477,6 @@
                 
                 <div class="action-buttons">
                     <button class="btn btn-primary" id="submit-btn" onclick="submitAnswer()">Submit</button>
-                    <button class="btn btn-secondary" id="hint-btn" onclick="showHint()" style="display: none;">Hint</button>
                 </div>
             </div>
 
@@ -544,112 +485,123 @@
     </div>
 
     <script>
-        // Comprehensive vocabulary data from the workbook
+        // Comprehensive vocabulary data for Year 11
         const vocabularyData = {
             definitions: [
-                { word: "aberrant", definition: "departing from an accepted standard; deviant", options: ["normal", "deviant", "typical", "standard"], correct: "deviant" },
+                { word: "abandon", definition: "to give up completely", options: ["keep", "desert", "maintain", "preserve"], correct: "desert" },
+                { word: "abate", definition: "to become less intense or widespread", options: ["increase", "decrease", "maintain", "strengthen"], correct: "decrease" },
                 { word: "abhor", definition: "to regard with disgust and hatred", options: ["love", "hate", "ignore", "appreciate"], correct: "hate" },
-                { word: "abstain", definition: "restrain oneself from indulging in", options: ["indulge", "avoid", "enjoy", "consume"], correct: "avoid" },
-                { word: "acute", definition: "having a sharp point; severe", options: ["blunt", "mild", "severe", "gentle"], correct: "severe" },
-                { word: "adept", definition: "very skilled or proficient", options: ["clumsy", "skilled", "beginner", "amateur"], correct: "skilled" },
-                { word: "adversity", definition: "difficulties; misfortune", options: ["fortune", "ease", "hardship", "comfort"], correct: "hardship" },
+                { word: "abolish", definition: "to formally end or stop something", options: ["create", "eliminate", "support", "encourage"], correct: "eliminate" },
+                { word: "abundant", definition: "existing in large quantities", options: ["scarce", "plentiful", "limited", "rare"], correct: "plentiful" },
+                { word: "accelerate", definition: "to increase in rate, amount, or extent", options: ["slow", "speed up", "maintain", "decrease"], correct: "speed up" },
+                { word: "acclaim", definition: "enthusiastic approval or praise", options: ["criticism", "praise", "disapproval", "silence"], correct: "praise" },
+                { word: "accomplish", definition: "to achieve or complete successfully", options: ["fail", "achieve", "abandon", "ignore"], correct: "achieve" },
+                { word: "accurate", definition: "correct in all details; exact", options: ["wrong", "correct", "false", "approximate"], correct: "correct" },
+                { word: "acquire", definition: "to buy or obtain an asset or object", options: ["lose", "obtain", "sell", "discard"], correct: "obtain" },
+                { word: "acute", definition: "having a sharp point; severe", options: ["blunt", "severe", "mild", "gentle"], correct: "severe" },
+                { word: "adamant", definition: "refusing to be persuaded or to change one's mind", options: ["flexible", "stubborn", "agreeable", "uncertain"], correct: "stubborn" },
+                { word: "adapt", definition: "to become adjusted to new conditions", options: ["resist", "adjust", "maintain", "reject"], correct: "adjust" },
+                { word: "adequate", definition: "satisfactory or acceptable in quality", options: ["inadequate", "sufficient", "poor", "excellent"], correct: "sufficient" },
+                { word: "admire", definition: "to regard with respect or warm approval", options: ["despise", "respect", "hate", "ignore"], correct: "respect" },
+                { word: "adverse", definition: "preventing success or development", options: ["favorable", "harmful", "beneficial", "positive"], correct: "harmful" },
+                { word: "advocate", definition: "to publicly recommend or support", options: ["oppose", "support", "criticize", "reject"], correct: "support" },
+                { word: "affluent", definition: "having plenty of money; wealthy", options: ["poor", "wealthy", "needy", "struggling"], correct: "wealthy" },
+                { word: "aggressive", definition: "ready to attack or confront", options: ["passive", "hostile", "peaceful", "gentle"], correct: "hostile" },
+                { word: "agile", definition: "able to move quickly and easily", options: ["clumsy", "nimble", "slow", "stiff"], correct: "nimble" },
                 { word: "alleviate", definition: "make suffering less intense", options: ["worsen", "relieve", "ignore", "increase"], correct: "relieve" },
                 { word: "ambiguous", definition: "having more than one meaning", options: ["clear", "vague", "simple", "obvious"], correct: "vague" },
-                { word: "analogous", definition: "comparable in certain respects", options: ["different", "similar", "opposite", "unique"], correct: "similar" },
-                { word: "apathy", definition: "lack of interest or concern", options: ["enthusiasm", "indifference", "excitement", "passion"], correct: "indifference" },
-                { word: "arbitrary", definition: "based on random choice rather than reason", options: ["logical", "random", "systematic", "planned"], correct: "random" },
+                { word: "ample", definition: "large or spacious; plentiful", options: ["small", "large", "limited", "tiny"], correct: "large" },
+                { word: "ancient", definition: "belonging to the very distant past", options: ["modern", "old", "new", "recent"], correct: "old" },
+                { word: "apparent", definition: "clearly visible or understood", options: ["hidden", "obvious", "unclear", "secret"], correct: "obvious" },
+                { word: "appreciate", definition: "to recognize the value of something", options: ["ignore", "value", "dismiss", "overlook"], correct: "value" },
+                { word: "approach", definition: "to come near or closer to", options: ["retreat", "advance", "avoid", "flee"], correct: "advance" },
+                { word: "appropriate", definition: "suitable or proper in the circumstances", options: ["inappropriate", "suitable", "wrong", "improper"], correct: "suitable" },
+                { word: "approve", definition: "to officially agree to or accept", options: ["reject", "endorse", "disapprove", "deny"], correct: "endorse" },
+                { word: "ardent", definition: "very passionate and enthusiastic", options: ["cold", "passionate", "indifferent", "calm"], correct: "passionate" },
                 { word: "arid", definition: "extremely dry; lacking in interest", options: ["wet", "dry", "humid", "moist"], correct: "dry" },
-                { word: "articulate", definition: "having or showing the ability to speak fluently", options: ["silent", "eloquent", "mute", "unclear"], correct: "eloquent" },
+                { word: "articulate", definition: "having or showing the ability to speak fluently", options: ["unclear", "eloquent", "confused", "silent"], correct: "eloquent" },
+                { word: "ascend", definition: "to go up or climb", options: ["descend", "rise", "fall", "drop"], correct: "rise" },
+                { word: "assist", definition: "to help someone", options: ["hinder", "help", "obstruct", "prevent"], correct: "help" },
+                { word: "astute", definition: "having sharp judgment", options: ["foolish", "clever", "naive", "stupid"], correct: "clever" },
+                { word: "attach", definition: "to fasten or join", options: ["detach", "connect", "separate", "remove"], correct: "connect" },
+                { word: "attempt", definition: "to make an effort to achieve", options: ["succeed", "try", "accomplish", "complete"], correct: "try" },
+                { word: "attract", definition: "to draw by appealing to interest", options: ["repel", "draw", "push", "discourage"], correct: "draw" },
                 { word: "authentic", definition: "genuine; real", options: ["fake", "genuine", "false", "artificial"], correct: "genuine" },
-                { word: "belligerent", definition: "hostile and aggressive", options: ["peaceful", "aggressive", "calm", "friendly"], correct: "aggressive" },
-                { word: "benevolent", definition: "well meaning and kindly", options: ["cruel", "kind", "harsh", "mean"], correct: "kind" },
-                { word: "candid", definition: "truthful and straightforward", options: ["dishonest", "honest", "deceptive", "secretive"], correct: "honest" },
-                { word: "capitulate", definition: "cease to resist; surrender", options: ["fight", "surrender", "resist", "persist"], correct: "surrender" },
-                { word: "capricious", definition: "given to sudden changes of mood", options: ["stable", "unpredictable", "consistent", "reliable"], correct: "unpredictable" },
-                { word: "caustic", definition: "sarcastic in a scathing way", options: ["gentle", "harsh", "kind", "sweet"], correct: "harsh" },
-                { word: "censure", definition: "express severe disapproval", options: ["praise", "criticize", "approve", "commend"], correct: "criticize" },
-                { word: "circumspect", definition: "wary and unwilling to take risks", options: ["reckless", "cautious", "careless", "bold"], correct: "cautious" },
-                { word: "coherent", definition: "logical and consistent", options: ["confused", "logical", "chaotic", "random"], correct: "logical" },
-                { word: "compelling", definition: "evoking interest or attention", options: ["boring", "fascinating", "dull", "uninteresting"], correct: "fascinating" },
-                { word: "comprise", definition: "consist of; be made up of", options: ["exclude", "include", "omit", "reject"], correct: "include" },
-                { word: "concede", definition: "admit that something is true", options: ["deny", "admit", "refuse", "reject"], correct: "admit" },
-                { word: "concise", definition: "giving information clearly and briefly", options: ["lengthy", "brief", "verbose", "wordy"], correct: "brief" },
-                { word: "condone", definition: "accept behavior that is wrong", options: ["condemn", "approve", "reject", "criticize"], correct: "approve" },
-                { word: "conspicuous", definition: "clearly visible; attracting attention", options: ["hidden", "obvious", "subtle", "concealed"], correct: "obvious" },
-                { word: "contemplate", definition: "think about carefully", options: ["ignore", "consider", "dismiss", "overlook"], correct: "consider" },
-                { word: "contemporary", definition: "belonging to the present time", options: ["ancient", "modern", "old", "past"], correct: "modern" },
-                { word: "contentious", definition: "causing disagreement or argument", options: ["peaceful", "controversial", "harmonious", "agreeable"], correct: "controversial" },
-                { word: "credible", definition: "able to be believed; convincing", options: ["unbelievable", "believable", "doubtful", "false"], correct: "believable" },
-                { word: "cursory", definition: "hasty and superficial", options: ["thorough", "superficial", "detailed", "comprehensive"], correct: "superficial" },
-                { word: "cynical", definition: "believing people are motivated by self-interest", options: ["trusting", "skeptical", "naive", "optimistic"], correct: "skeptical" },
-                { word: "debacle", definition: "a sudden disastrous collapse", options: ["success", "disaster", "triumph", "victory"], correct: "disaster" },
-                { word: "defiant", definition: "boldly resistant or challenging", options: ["obedient", "rebellious", "compliant", "submissive"], correct: "rebellious" },
-                { word: "deliberate", definition: "done consciously and intentionally", options: ["accidental", "intentional", "random", "unplanned"], correct: "intentional" },
-                { word: "denounce", definition: "publicly declare wrong or evil", options: ["praise", "condemn", "support", "endorse"], correct: "condemn" },
-                { word: "depict", definition: "show or represent by drawing", options: ["hide", "show", "conceal", "cover"], correct: "show" },
-                { word: "desolate", definition: "deserted; empty", options: ["crowded", "empty", "full", "populated"], correct: "empty" },
-                { word: "detrimental", definition: "tending to cause harm", options: ["beneficial", "harmful", "helpful", "advantageous"], correct: "harmful" },
-                { word: "diligent", definition: "having or showing care in work", options: ["lazy", "hardworking", "careless", "negligent"], correct: "hardworking" },
-                { word: "diminish", definition: "make or become less", options: ["increase", "decrease", "expand", "grow"], correct: "decrease" },
-                { word: "discern", definition: "perceive or recognize", options: ["ignore", "notice", "overlook", "miss"], correct: "notice" },
-                { word: "discriminate", definition: "recognize a distinction", options: ["generalize", "distinguish", "confuse", "mix"], correct: "distinguish" },
-                { word: "disdain", definition: "feeling that something is unworthy", options: ["respect", "contempt", "admiration", "approval"], correct: "contempt" },
-                { word: "dispel", definition: "make doubt or feeling disappear", options: ["create", "eliminate", "produce", "generate"], correct: "eliminate" },
-                { word: "docile", definition: "ready to accept control", options: ["rebellious", "obedient", "defiant", "resistant"], correct: "obedient" },
-                { word: "dubious", definition: "hesitating or doubting", options: ["certain", "doubtful", "confident", "sure"] },
-                { word: "eccentric", definition: "unconventional and strange", options: ["normal", "odd", "typical", "ordinary"] },
-                { word: "elated", definition: "very happy and excited", options: ["sad", "joyful", "depressed", "miserable"] },
-                { word: "eloquent", definition: "fluent and persuasive in speaking", options: ["inarticulate", "articulate", "unclear", "confused"] },
-                { word: "embellish", definition: "make more attractive by adding details", options: ["simplify", "decorate", "strip", "reduce"] },
-                { word: "emulate", definition: "match or surpass by imitation", options: ["ignore", "copy", "avoid", "reject"] },
-                { word: "endorse", definition: "declare one's public approval", options: ["oppose", "support", "reject", "condemn"] },
-                { word: "enhance", definition: "intensify or improve quality", options: ["worsen", "improve", "damage", "harm"] },
-                { word: "enigma", definition: "a person or thing that is mysterious", options: ["clarity", "mystery", "obviousness", "simplicity"] },
-                { word: "ephemeral", definition: "lasting for a short time", options: ["permanent", "temporary", "eternal", "lasting"] },
-                { word: "equivocal", definition: "open to more than one interpretation", options: ["clear", "ambiguous", "definite", "precise"] },
-                { word: "erratic", definition: "unpredictable", options: ["consistent", "unpredictable", "regular", "stable"] },
-                { word: "exemplary", definition: "serving as a desirable model", options: ["poor", "excellent", "bad", "inferior"] },
-                { word: "exorbitant", definition: "unreasonably high", options: ["reasonable", "excessive", "cheap", "fair"] },
-                { word: "expedite", definition: "make happen sooner", options: ["delay", "speed up", "postpone", "slow down"] }
+                { word: "available", definition: "able to be used or obtained", options: ["unavailable", "accessible", "hidden", "restricted"], correct: "accessible" },
+                { word: "aware", definition: "having knowledge of a situation", options: ["ignorant", "conscious", "unaware", "oblivious"], correct: "conscious" },
+                { word: "awkward", definition: "causing difficulty; hard to do", options: ["graceful", "clumsy", "smooth", "elegant"], correct: "clumsy" }
             ],
-            
+
             synonyms: [
-                { word: "abandon", synonyms: ["desert", "forsake", "leave"], answer: "desert" },
-                { word: "abate", synonyms: ["decrease", "increase", "maintain"], answer: "decrease" },
-                { word: "abhor", synonyms: ["love", "hate", "like"], answer: "hate" },
-                { word: "abundant", synonyms: ["scarce", "plentiful", "few"], answer: "plentiful" },
-                { word: "acute", synonyms: ["sharp", "dull", "blunt"], answer: "sharp" },
-                { word: "adverse", synonyms: ["favorable", "hostile", "positive"], answer: "hostile" },
+                { word: "affluent", synonyms: ["poor", "wealthy", "needy"], answer: "wealthy" },
+                { word: "aggressive", synonyms: ["passive", "hostile", "peaceful"], answer: "hostile" },
+                { word: "agile", synonyms: ["clumsy", "nimble", "slow"], answer: "nimble" },
+                { word: "alert", synonyms: ["sleepy", "watchful", "tired"], answer: "watchful" },
                 { word: "alleviate", synonyms: ["worsen", "relieve", "increase"], answer: "relieve" },
                 { word: "ambiguous", synonyms: ["clear", "vague", "obvious"], answer: "vague" },
                 { word: "ample", synonyms: ["small", "large", "tiny"], answer: "large" },
                 { word: "ancient", synonyms: ["modern", "old", "new"], answer: "old" },
+                { word: "angry", synonyms: ["calm", "furious", "peaceful"], answer: "furious" },
+                { word: "anxious", synonyms: ["calm", "worried", "relaxed"], answer: "worried" },
+                { word: "apparent", synonyms: ["hidden", "obvious", "unclear"], answer: "obvious" },
+                { word: "appreciate", synonyms: ["ignore", "value", "dismiss"], answer: "value" },
+                { word: "approach", synonyms: ["retreat", "advance", "avoid"], answer: "advance" },
+                { word: "appropriate", synonyms: ["unsuitable", "suitable", "wrong"], answer: "suitable" },
+                { word: "approve", synonyms: ["reject", "endorse", "disapprove"], answer: "endorse" },
                 { word: "ardent", synonyms: ["cold", "passionate", "indifferent"], answer: "passionate" },
                 { word: "arid", synonyms: ["wet", "dry", "moist"], answer: "dry" },
                 { word: "articulate", synonyms: ["unclear", "eloquent", "confused"], answer: "eloquent" },
+                { word: "ascend", synonyms: ["descend", "rise", "fall"], answer: "rise" },
+                { word: "assist", synonyms: ["hinder", "help", "obstruct"], answer: "help" },
                 { word: "astute", synonyms: ["foolish", "clever", "stupid"], answer: "clever" },
+                { word: "attach", synonyms: ["detach", "connect", "separate"], answer: "connect" },
+                { word: "attempt", synonyms: ["succeed", "try", "complete"], answer: "try" },
+                { word: "attract", synonyms: ["repel", "draw", "push away"], answer: "draw" },
                 { word: "authentic", synonyms: ["fake", "genuine", "false"], answer: "genuine" },
-                { word: "benevolent", synonyms: ["cruel", "kind", "harsh"], answer: "kind" },
-                { word: "brief", synonyms: ["long", "short", "extended"], answer: "short" },
-                { word: "candid", synonyms: ["dishonest", "frank", "deceptive"], answer: "frank" },
-                { word: "cautious", synonyms: ["reckless", "careful", "careless"], answer: "careful" },
-                { word: "comprehensive", synonyms: ["partial", "complete", "incomplete"], answer: "complete" },
-                { word: "concise", synonyms: ["wordy", "brief", "lengthy"], answer: "brief" },
-                { word: "confident", synonyms: ["uncertain", "sure", "doubtful"], answer: "sure" },
-                { word: "contemporary", synonyms: ["ancient", "modern", "old"], answer: "modern" },
-                { word: "crucial", synonyms: ["unimportant", "vital", "trivial"], answer: "vital" },
-                { word: "deceive", synonyms: ["enlighten", "mislead", "inform"], answer: "mislead" },
-                { word: "defiant", synonyms: ["obedient", "rebellious", "compliant"], answer: "rebellious" },
-                { word: "deliberate", synonyms: ["accidental", "intentional", "unplanned"], answer: "intentional" },
-                { word: "deter", synonyms: ["encourage", "discourage", "promote"], answer: "discourage" },
-                { word: "diligent", synonyms: ["lazy", "hardworking", "careless"], answer: "hardworking" },
-                { word: "eccentric", synonyms: ["normal", "odd", "typical"], answer: "odd" },
-                { word: "elaborate", synonyms: ["simple", "detailed", "basic"], answer: "detailed" },
-                { word: "eloquent", synonyms: ["inarticulate", "articulate", "unclear"], answer: "articulate" },
-                { word: "enhance", synonyms: ["worsen", "improve", "damage"], answer: "improve" },
-                { word: "evident", synonyms: ["hidden", "obvious", "concealed"], answer: "obvious" },
-                { word: "exemplary", synonyms: ["poor", "outstanding", "inferior"], answer: "outstanding" },
-                { word: "expedite", synonyms: ["delay", "hasten", "slow"], answer: "hasten" }
+                { word: "available", synonyms: ["unavailable", "accessible", "hidden"], answer: "accessible" },
+                { word: "aware", synonyms: ["ignorant", "conscious", "unaware"], answer: "conscious" },
+                { word: "awkward", synonyms: ["graceful", "clumsy", "elegant"], answer: "clumsy" },
+                { word: "balance", synonyms: ["imbalance", "equilibrium", "tilt"], answer: "equilibrium" },
+                { word: "ban", synonyms: ["allow", "prohibit", "permit"], answer: "prohibit" },
+                { word: "basic", synonyms: ["advanced", "fundamental", "complex"], answer: "fundamental" },
+                { word: "beautiful", synonyms: ["ugly", "attractive", "hideous"], answer: "attractive" },
+                { word: "begin", synonyms: ["end", "start", "finish"], answer: "start" },
+                { word: "believe", synonyms: ["doubt", "trust", "question"], answer: "trust" },
+                { word: "beneficial", synonyms: ["harmful", "helpful", "damaging"], answer: "helpful" },
+                { word: "benevolent", synonyms: ["cruel", "kind", "harsh"], answer: "kind" }
+            ],
+
+            antonyms: [
+                { word: "abundant", antonym: "scarce", options: ["plenty", "scarce", "wealth", "excess"] },
+                { word: "accept", antonym: "reject", options: ["receive", "reject", "welcome", "embrace"] },
+                { word: "accurate", antonym: "incorrect", options: ["right", "incorrect", "precise", "exact"] },
+                { word: "advance", antonym: "retreat", options: ["progress", "retreat", "move", "forward"] },
+                { word: "advantage", antonym: "disadvantage", options: ["benefit", "disadvantage", "asset", "plus"] },
+                { word: "agree", antonym: "disagree", options: ["consent", "disagree", "accept", "approve"] },
+                { word: "alive", antonym: "dead", options: ["living", "dead", "breathing", "active"] },
+                { word: "allow", antonym: "forbid", options: ["permit", "forbid", "enable", "let"] },
+                { word: "ancient", antonym: "modern", options: ["old", "modern", "historic", "past"] },
+                { word: "angry", antonym: "calm", options: ["furious", "calm", "mad", "irritated"] },
+                { word: "appear", antonym: "disappear", options: ["show", "disappear", "emerge", "arrive"] },
+                { word: "approve", antonym: "disapprove", options: ["endorse", "disapprove", "support", "accept"] },
+                { word: "arrive", antonym: "depart", options: ["come", "depart", "reach", "enter"] },
+                { word: "artificial", antonym: "natural", options: ["fake", "natural", "synthetic", "manufactured"] },
+                { word: "ascend", antonym: "descend", options: ["rise", "descend", "climb", "elevate"] },
+                { word: "attack", antonym: "defend", options: ["assault", "defend", "strike", "charge"] },
+                { word: "attract", antonym: "repel", options: ["draw", "repel", "pull", "lure"] },
+                { word: "awake", antonym: "asleep", options: ["alert", "asleep", "conscious", "aware"] },
+                { word: "beautiful", antonym: "ugly", options: ["attractive", "ugly", "pretty", "lovely"] },
+                { word: "begin", antonym: "end", options: ["start", "end", "commence", "initiate"] },
+                { word: "big", antonym: "small", options: ["large", "small", "huge", "enormous"] },
+                { word: "bitter", antonym: "sweet", options: ["sour", "sweet", "harsh", "unpleasant"] },
+                { word: "black", antonym: "white", options: ["dark", "white", "ebony", "coal"] },
+                { word: "borrow", antonym: "lend", options: ["take", "lend", "use", "get"] },
+                { word: "brave", antonym: "cowardly", options: ["courageous", "cowardly", "bold", "fearless"] },
+                { word: "bright", antonym: "dim", options: ["brilliant", "dim", "shining", "radiant"] },
+                { word: "broad", antonym: "narrow", options: ["wide", "narrow", "extensive", "vast"] },
+                { word: "build", antonym: "destroy", options: ["construct", "destroy", "create", "make"] },
+                { word: "buy", antonym: "sell", options: ["purchase", "sell", "acquire", "get"] },
+                { word: "calm", antonym: "agitated", options: ["peaceful", "agitated", "serene", "quiet"] }
             ],
 
             sentenceCompletion: [
@@ -727,82 +679,31 @@
                     sentence: "The committee's _____ deliberations lasted well into the night.",
                     word: "protracted",
                     options: ["brief", "protracted", "quick", "hasty"]
-                }
-            ],
-                {
-                    sentence: "The teacher's explanation was so _____ that even the most confused students understood.",
-                    word: "lucid",
-                    options: ["obscure", "lucid", "complex", "vague"]
                 },
                 {
-                    sentence: "Despite the _____ weather, the hikers continued their journey up the mountain.",
-                    word: "adverse",
-                    options: ["favorable", "adverse", "pleasant", "mild"]
+                    sentence: "The scientist's _____ research led to groundbreaking discoveries.",
+                    word: "meticulous",
+                    options: ["careless", "meticulous", "hasty", "sloppy"]
                 },
                 {
-                    sentence: "The politician's _____ speech failed to convince the skeptical audience.",
-                    word: "eloquent",
-                    options: ["eloquent", "inarticulate", "clear", "persuasive"]
+                    sentence: "The _____ storm caused widespread damage across the region.",
+                    word: "devastating",
+                    options: ["mild", "devastating", "gentle", "light"]
                 },
                 {
-                    sentence: "Her _____ attitude toward work earned her a promotion within six months.",
-                    word: "diligent",
-                    options: ["lazy", "careless", "diligent", "negligent"]
+                    sentence: "Her _____ personality made her popular among her peers.",
+                    word: "gregarious",
+                    options: ["antisocial", "gregarious", "withdrawn", "shy"]
                 },
                 {
-                    sentence: "The ancient manuscript was so _____ that scholars spent years deciphering it.",
-                    word: "cryptic",
-                    options: ["clear", "simple", "cryptic", "obvious"]
+                    sentence: "The _____ student always completed assignments ahead of schedule.",
+                    word: "conscientious",
+                    options: ["lazy", "conscientious", "careless", "irresponsible"]
                 },
                 {
-                    sentence: "The company's _____ policies resulted in high employee turnover.",
-                    word: "draconian",
-                    options: ["lenient", "fair", "draconian", "reasonable"]
-                },
-                {
-                    sentence: "His _____ remarks during the meeting offended several colleagues.",
-                    word: "tactless",
-                    options: ["thoughtful", "tactless", "considerate", "diplomatic"]
-                },
-                {
-                    sentence: "The evidence presented was so _____ that the jury reached a quick verdict.",
-                    word: "compelling",
-                    options: ["weak", "compelling", "doubtful", "insufficient"]
-                },
-                {
-                    sentence: "She showed remarkable _____ in the face of personal tragedy.",
-                    word: "fortitude",
-                    options: ["weakness", "fortitude", "despair", "fragility"]
-                },
-                {
-                    sentence: "The artist's _____ use of color created a stunning visual effect.",
-                    word: "judicious",
-                    options: ["careless", "judicious", "random", "thoughtless"]
-                },
-                {
-                    sentence: "The CEO's _____ decision to expand internationally proved very profitable.",
-                    word: "astute",
-                    options: ["foolish", "astute", "reckless", "impulsive"]
-                },
-                {
-                    sentence: "The protesters remained _____ despite police attempts to disperse them.",
-                    word: "resolute",
-                    options: ["wavering", "resolute", "uncertain", "hesitant"]
-                },
-                {
-                    sentence: "His _____ lifestyle contributed to his poor health and low energy.",
-                    word: "sedentary",
-                    options: ["active", "sedentary", "vigorous", "energetic"]
-                },
-                {
-                    sentence: "The novel's _____ plot kept readers guessing until the final chapter.",
-                    word: "intricate",
-                    options: ["simple", "intricate", "straightforward", "basic"]
-                },
-                {
-                    sentence: "The committee's _____ deliberations lasted well into the night.",
-                    word: "protracted",
-                    options: ["brief", "protracted", "quick", "hasty"]
+                    sentence: "The restaurant's _____ atmosphere attracted many young professionals.",
+                    word: "vibrant",
+                    options: ["dull", "vibrant", "boring", "lifeless"]
                 }
             ],
 
@@ -816,128 +717,17 @@
                 { root: "cred", meaning: "to believe", examples: ["credit", "credible", "incredible", "credential"] },
                 { root: "duc/duct", meaning: "to lead", examples: ["conduct", "reduce", "produce", "induction"] },
                 { root: "fac/fact", meaning: "to make", examples: ["factory", "manufacture", "artifact", "faction"] },
-                { root: "struct", meaning: "to build", examples: ["construct", "structure", "instruct", "destruction"] }
-            ],
-
-            antonyms: [
-                { word: "abundance", antonym: "scarcity", options: ["plenty", "scarcity", "wealth", "excess"] },
-                { word: "advance", antonym: "retreat", options: ["progress", "retreat", "move", "forward"] },
-                { word: "ancient", antonym: "modern", options: ["old", "modern", "historic", "past"] },
-                { word: "artificial", antonym: "natural", options: ["fake", "natural", "synthetic", "manufactured"] },
-                { word: "ascend", antonym: "descend", options: ["rise", "descend", "climb", "elevate"] },
-                { word: "brave", antonym: "cowardly", options: ["courageous", "cowardly", "bold", "fearless"] },
-                { word: "broad", antonym: "narrow", options: ["wide", "narrow", "extensive", "vast"] },
-                { word: "calm", antonym: "agitated", options: ["peaceful", "agitated", "serene", "quiet"] },
-                { word: "captive", antonym: "free", options: ["prisoner", "free", "confined", "trapped"] },
-                { word: "certain", antonym: "doubtful", options: ["sure", "doubtful", "confident", "definite"] },
-                { word: "cheerful", antonym: "gloomy", options: ["happy", "gloomy", "joyful", "bright"] },
-                { word: "clever", antonym: "stupid", options: ["smart", "stupid", "intelligent", "wise"] },
-                { word: "comfort", antonym: "discomfort", options: ["ease", "discomfort", "relief", "luxury"] },
-                { word: "common", antonym: "rare", options: ["usual", "rare", "ordinary", "typical"] },
-                { word: "complex", antonym: "simple", options: ["complicated", "simple", "intricate", "difficult"] },
-                { word: "conceal", antonym: "reveal", options: ["hide", "reveal", "cover", "mask"] },
-                { word: "confident", antonym: "insecure", options: ["assured", "insecure", "certain", "bold"] },
-                { word: "construct", antonym: "destroy", options: ["build", "destroy", "create", "erect"] },
-                { word: "courage", antonym: "cowardice", options: ["bravery", "cowardice", "valor", "boldness"] },
-                { word: "create", antonym: "destroy", options: ["make", "destroy", "build", "form"] },
-                { word: "cruel", antonym: "kind", options: ["harsh", "kind", "brutal", "mean"] },
-                { word: "damage", antonym: "repair", options: ["harm", "repair", "break", "ruin"] },
-                { word: "dangerous", antonym: "safe", options: ["risky", "safe", "hazardous", "perilous"] },
-                { word: "darkness", antonym: "light", options: ["shadow", "light", "gloom", "blackness"] },
-                { word: "defeat", antonym: "victory", options: ["loss", "victory", "failure", "conquest"] },
-                { word: "difficult", antonym: "easy", options: ["hard", "easy", "challenging", "tough"] },
-                { word: "disappear", antonym: "appear", options: ["vanish", "appear", "fade", "hide"] },
-                { word: "dry", antonym: "wet", options: ["arid", "wet", "parched", "dehydrated"] },
-                { word: "dull", antonym: "bright", options: ["boring", "bright", "bland", "lifeless"] },
-                { word: "early", antonym: "late", options: ["soon", "late", "prompt", "ahead"] },
-                { word: "empty", antonym: "full", options: ["vacant", "full", "hollow", "blank"] },
-                { word: "enemy", antonym: "friend", options: ["foe", "friend", "opponent", "rival"] },
-                { word: "expand", antonym: "contract", options: ["grow", "contract", "enlarge", "extend"] },
-                { word: "expensive", antonym: "cheap", options: ["costly", "cheap", "pricey", "valuable"] },
-                { word: "export", antonym: "import", options: ["send out", "import", "ship", "sell"] },
-                { word: "external", antonym: "internal", options: ["outside", "internal", "outer", "exterior"] },
-                { word: "failure", antonym: "success", options: ["defeat", "success", "loss", "flop"] },
-                { word: "false", antonym: "true", options: ["wrong", "true", "incorrect", "fake"] },
-                { word: "famous", antonym: "unknown", options: ["renowned", "unknown", "celebrated", "notable"] },
-                { word: "fast", antonym: "slow", options: ["quick", "slow", "rapid", "speedy"] },
-                { word: "fiction", antonym: "fact", options: ["fantasy", "fact", "story", "imagination"] },
-                { word: "final", antonym: "initial", options: ["last", "initial", "ending", "ultimate"] },
-                { word: "flexible", antonym: "rigid", options: ["bendable", "rigid", "adaptable", "pliable"] },
-                { word: "frequent", antonym: "rare", options: ["common", "rare", "regular", "often"] },
-                { word: "fresh", antonym: "stale", options: ["new", "stale", "recent", "crisp"] },
-                { word: "generous", antonym: "selfish", options: ["giving", "selfish", "kind", "charitable"] },
-                { word: "gentle", antonym: "rough", options: ["soft", "rough", "mild", "tender"] },
-                { word: "giant", antonym: "tiny", options: ["huge", "tiny", "enormous", "massive"] },
-                { word: "guilty", antonym: "innocent", options: ["responsible", "innocent", "blamed", "at fault"] },
-                { word: "happy", antonym: "sad", options: ["joyful", "sad", "cheerful", "glad"] },
-                { word: "healthy", antonym: "sick", options: ["well", "sick", "fit", "strong"] },
-                { word: "heavy", antonym: "light", options: ["weighty", "light", "massive", "bulky"] },
-                { word: "honest", antonym: "dishonest", options: ["truthful", "dishonest", "sincere", "genuine"] },
-                { word: "huge", antonym: "tiny", options: ["enormous", "tiny", "massive", "gigantic"] },
-                { word: "increase", antonym: "decrease", options: ["grow", "decrease", "expand", "rise"] },
-                { word: "inferior", antonym: "superior", options: ["lower", "superior", "worse", "lesser"] },
-                { word: "innocent", antonym: "guilty", options: ["pure", "guilty", "blameless", "clean"] },
-                { word: "junior", antonym: "senior", options: ["younger", "senior", "lower", "subordinate"] },
-                { word: "knowledge", antonym: "ignorance", options: ["wisdom", "ignorance", "learning", "understanding"] },
-                { word: "legal", antonym: "illegal", options: ["lawful", "illegal", "legitimate", "permitted"] },
-                { word: "liquid", antonym: "solid", options: ["fluid", "solid", "wet", "flowing"] },
-                { word: "maximum", antonym: "minimum", options: ["highest", "minimum", "greatest", "most"] },
-                { word: "natural", antonym: "artificial", options: ["real", "artificial", "organic", "genuine"] },
-                { word: "negative", antonym: "positive", options: ["bad", "positive", "harmful", "pessimistic"] },
-                { word: "noisy", antonym: "quiet", options: ["loud", "quiet", "boisterous", "clamorous"] },
-                { word: "optimistic", antonym: "pessimistic", options: ["hopeful", "pessimistic", "positive", "confident"] },
-                { word: "ordinary", antonym: "extraordinary", options: ["common", "extraordinary", "normal", "typical"] },
-                { word: "permanent", antonym: "temporary", options: ["lasting", "temporary", "enduring", "fixed"] },
-                { word: "poverty", antonym: "wealth", options: ["poorness", "wealth", "need", "lack"] },
-                { word: "private", antonym: "public", options: ["personal", "public", "secret", "individual"] },
-                { word: "professional", antonym: "amateur", options: ["expert", "amateur", "skilled", "trained"] },
-                { word: "rapid", antonym: "slow", options: ["fast", "slow", "quick", "speedy"] },
-                { word: "rough", antonym: "smooth", options: ["coarse", "smooth", "harsh", "uneven"] },
-                { word: "rural", antonym: "urban", options: ["countryside", "urban", "agricultural", "rustic"] },
-                { word: "shallow", antonym: "deep", options: ["surface", "deep", "superficial", "thin"] },
-                { word: "strong", antonym: "weak", options: ["powerful", "weak", "sturdy", "robust"] },
-                { word: "victory", antonym: "defeat", options: ["win", "defeat", "triumph", "success"] },
-                { word: "visible", antonym: "invisible", options: ["seen", "invisible", "apparent", "obvious"] },
-                { word: "wisdom", antonym: "foolishness", options: ["knowledge", "foolishness", "intelligence", "insight"] }
-            ],
-
-            sentenceCompletion: [
-                { word: "accommodate", hint: "double 'c' and double 'm'" },
-                { word: "achievement", hint: "'i' before 'e' except after 'c'" },
-                { word: "acquire", hint: "'c' then 'qu'" },
-                { word: "amateur", hint: "ends with 'eur'" },
-                { word: "apparent", hint: "double 'p'" },
-                { word: "argument", hint: "no 'e' after 'u'" },
-                { word: "athlete", hint: "no 'e' in the middle" },
-                { word: "believe", hint: "'i' before 'e'" },
-                { word: "calendar", hint: "ends with 'ar'" },
-                { word: "cemetery", hint: "ends with 'ery'" },
-                { word: "conscience", hint: "'sc' in the middle" },
-                { word: "definitely", hint: "'finite' in the middle" },
-                { word: "embarrass", hint: "double 'r' and double 's'" },
-                { word: "environment", hint: "'n' before 'm'" },
-                { word: "existence", hint: "ends with 'ence'" },
-                { word: "February", hint: "first 'r' often silent" },
-                { word: "government", hint: "'n' before 'm'" },
-                { word: "grammar", hint: "double 'm' and ends with 'ar'" },
-                { word: "guarantee", hint: "'gua' at the beginning" },
-                { word: "harassment", hint: "one 'r' and double 's'" },
-                { word: "independent", hint: "ends with 'ent'" },
-                { word: "intelligence", hint: "double 'l'" },
-                { word: "jewelry", hint: "one 'l'" },
-                { word: "knowledge", hint: "silent 'k' at start" },
-                { word: "license", hint: "ends with 'se'" },
-                { word: "maintenance", hint: "'ain' in the middle" },
-                { word: "necessary", hint: "one 'c', double 's'" },
-                { word: "occasion", hint: "double 'c', single 's'" },
-                { word: "parallel", hint: "double 'l' in middle and end" },
-                { word: "privilege", hint: "'i' before 'l'" },
-                { word: "receive", hint: "'e' before 'i' after 'c'" },
-                { word: "restaurant", hint: "'au' in the middle" },
-                { word: "separate", hint: "'par' in the middle" },
-                { word: "tomorrow", hint: "one 'm', double 'r'" },
-                { word: "vacuum", hint: "double 'u'" },
-                { word: "Wednesday", hint: "silent 'd'" }
+                { root: "struct", meaning: "to build", examples: ["construct", "structure", "instruct", "destruction"] },
+                { root: "form", meaning: "shape", examples: ["transform", "conform", "deform", "uniform"] },
+                { root: "tract", meaning: "to pull", examples: ["attract", "contract", "extract", "distract"] },
+                { root: "ject", meaning: "to throw", examples: ["project", "reject", "inject", "subject"] },
+                { root: "mit/miss", meaning: "to send", examples: ["transmit", "mission", "permit", "submit"] },
+                { root: "graph", meaning: "to write", examples: ["photograph", "biography", "autograph", "telegraph"] },
+                { root: "log", meaning: "word/study", examples: ["biology", "psychology", "dialogue", "catalog"] },
+                { root: "phon", meaning: "sound", examples: ["telephone", "microphone", "symphony", "phonics"] },
+                { root: "geo", meaning: "earth", examples: ["geography", "geology", "geometry", "geothermal"] },
+                { root: "bio", meaning: "life", examples: ["biology", "biography", "antibiotic", "biodegradable"] },
+                { root: "chron", meaning: "time", examples: ["chronological", "synchronize", "chronicle", "chronic"] }
             ]
         };
 
@@ -953,20 +743,6 @@
             totalCorrect: 0,
             totalAnswered: 0
         };
-
-        // Load stats from localStorage if available
-        function loadStats() {
-            const savedStats = localStorage.getItem('vocabStats');
-            if (savedStats) {
-                stats = JSON.parse(savedStats);
-                updateStatsDisplay();
-            }
-        }
-
-        // Save stats to localStorage
-        function saveStats() {
-            localStorage.setItem('vocabStats', JSON.stringify(stats));
-        }
 
         // Update stats display
         function updateStatsDisplay() {
@@ -1180,193 +956,6 @@
             `;
         }
 
-        // Handle keypress for inputs {
-                        pattern.push('<span style="color: #ff6b6b; font-weight: bold;" data-letter="' + wordArray[i] + '" data-position="' + i + '">_</span>');
-                    } else {
-                        pattern.push(wordArray[i]);
-                    }
-                }
-            }
-            
-            return pattern.join('');
-        }
-
-        // Reveal one letter at a time - much simpler approach
-        function revealLetter() {
-            if (!window.spellingData) return;
-            
-            if (window.spellingData.usedReveals >= window.spellingData.maxReveals) {
-                showTemporaryMessage('No more letters can be revealed! Try to complete the word.', 'warning');
-                return;
-            }
-
-            const patternElement = document.getElementById('word-pattern');
-            const hiddenSpans = patternElement.querySelectorAll('span[data-letter]');
-            
-            if (hiddenSpans.length === 0) {
-                showTemporaryMessage('All letters are already revealed!', 'warning');
-                return;
-            }
-            
-            // Pick a random hidden letter to reveal
-            const randomIndex = Math.floor(Math.random() * hiddenSpans.length);
-            const spanToReveal = hiddenSpans[randomIndex];
-            const letter = spanToReveal.getAttribute('data-letter');
-            
-            // Replace the underscore with the actual letter
-            spanToReveal.outerHTML = letter;
-            
-            window.spellingData.usedReveals++;
-            
-            // Show progress
-            showTemporaryMessage(
-                `Letter revealed! (${window.spellingData.usedReveals}/${window.spellingData.maxReveals} hints used)`, 
-                'info'
-            );
-        }
-
-        // Show additional contextual clues
-        function showAdditionalClue(word) {
-            const cluesDiv = document.getElementById('additional-clues');
-            const additionalClues = getAdditionalClues(word);
-            
-            if (cluesDiv.children.length >= additionalClues.length) {
-                showTemporaryMessage('No more clues available!', 'warning');
-                return;
-            }
-            
-            const clueIndex = cluesDiv.children.length;
-            const newClue = document.createElement('div');
-            newClue.style.cssText = 'background: rgba(255, 193, 7, 0.1); border: 1px solid rgba(255, 193, 7, 0.3); border-radius: 10px; padding: 12px; margin: 8px 0; color: #856404;';
-            newClue.innerHTML = `🔍 <strong>Clue ${clueIndex + 1}:</strong> ${additionalClues[clueIndex]}`;
-            
-            cluesDiv.appendChild(newClue);
-        }
-
-        // Get contextual clues for words
-        function getAdditionalClues(word) {
-            const clueMap = {
-                'accommodate': [
-                    'This word means "to provide lodging or space for"',
-                    'It has double C and double M',
-                    'Often used when talking about hotels or making room for someone'
-                ],
-                'achievement': [
-                    'This word means "a successful accomplishment"',
-                    'Remember: "i" before "e" except after "c"',
-                    'Think of something you accomplished or earned'
-                ],
-                'privilege': [
-                    'This word means "a special right or advantage"',
-                    'It ends with "-lege" like "college"',
-                    'Think of special benefits or rights some people have'
-                ],
-                'necessary': [
-                    'This word means "required" or "essential"',
-                    'It has one C and double S',
-                    'Think of something you absolutely need'
-                ],
-                'embarrass': [
-                    'This word means "to cause shame or awkwardness"',
-                    'It has double R and double S',
-                    'Think of feeling awkward in front of others'
-                ],
-                'grammar': [
-                    'This word relates to language rules',
-                    'It has double M and ends with "ar"',
-                    'Think of sentence structure and language rules'
-                ],
-                'government': [
-                    'This word means "the ruling authority"',
-                    'It has an "n" before the "m"',
-                    'Think of political leadership and laws'
-                ]
-            };
-            
-            return clueMap[word.toLowerCase()] || [
-                `This word has ${word.length} letters`,
-                `It starts with "${word[0]}" and ends with "${word[word.length-1]}"`,
-                'Think about the context and spelling patterns'
-            ];
-        }
-
-        // Show temporary messages
-        function showTemporaryMessage(message, type) {
-            const messageDiv = document.createElement('div');
-            const colors = {
-                info: 'background: rgba(23, 162, 184, 0.1); color: #117a8b; border: 1px solid rgba(23, 162, 184, 0.3);',
-                warning: 'background: rgba(255, 193, 7, 0.1); color: #856404; border: 1px solid rgba(255, 193, 7, 0.3);',
-                success: 'background: rgba(40, 167, 69, 0.1); color: #155724; border: 1px solid rgba(40, 167, 69, 0.3);'
-            };
-            
-            messageDiv.style.cssText = `${colors[type]} border-radius: 10px; padding: 10px; margin: 10px 0; text-align: center; font-size: 0.9rem;`;
-            messageDiv.textContent = message;
-            
-            const cluesDiv = document.getElementById('additional-clues');
-            cluesDiv.appendChild(messageDiv);
-            
-            // Remove after 3 seconds
-            setTimeout(() => {
-                if (messageDiv.parentNode) {
-                    messageDiv.parentNode.removeChild(messageDiv);
-                }
-            }, 3000);
-        }
-
-        // Create word pattern with missing letters
-        function createWordPattern(word) {
-            const length = word.length;
-            let pattern = '';
-            
-            // Different strategies based on word length and difficulty
-            if (length <= 4) {
-                // Short words: remove 1-2 letters
-                pattern = hideRandomLetters(word, Math.ceil(length * 0.3));
-            } else if (length <= 8) {
-                // Medium words: remove 2-3 letters, focus on tricky parts
-                pattern = hideRandomLetters(word, Math.ceil(length * 0.4));
-            } else {
-                // Long words: remove 3-4 letters
-                pattern = hideRandomLetters(word, Math.ceil(length * 0.5));
-            }
-            
-            return pattern;
-        }
-
-        // Hide random letters but keep some structure
-        function hideRandomLetters(word, numToHide) {
-            const wordArray = word.split('');
-            const indices = [];
-            
-            // Always show first and last letter for context
-            for (let i = 1; i < word.length - 1; i++) {
-                indices.push(i);
-            }
-            
-            // Shuffle and take the required number
-            const shuffled = indices.sort(() => 0.5 - Math.random());
-            const toHide = shuffled.slice(0, Math.min(numToHide, indices.length));
-            
-            // Create pattern
-            return wordArray.map((letter, index) => {
-                if (toHide.includes(index)) {
-                    return '<span style="color: #ff6b6b; font-weight: bold;">_</span>';
-                }
-                return letter;
-            }).join('');
-        }
-
-        // Show full word temporarily
-        function showFullWord(word) {
-            const display = document.getElementById('full-word-display');
-            display.style.display = 'block';
-            
-            // Hide again after 3 seconds
-            setTimeout(() => {
-                display.style.display = 'none';
-            }, 3000);
-        }
-
         // Display mixed question
         function displayMixedQuestion(question) {
             if (question.definition) {
@@ -1377,22 +966,6 @@
                 displayAntonymQuestion(question);
             } else if (question.sentence) {
                 displaySentenceCompletionQuestion(question);
-            }
-        }
-
-        // Handle spelling keypress
-        function handleSpellingKeypress(event) {
-            if (event.key === 'Enter') {
-                submitAnswer();
-            }
-        }
-
-        // Speak word (if supported)
-        function speakWord(word) {
-            if ('speechSynthesis' in window) {
-                const utterance = new SpeechSynthesisUtterance(word);
-                utterance.rate = 0.7;
-                speechSynthesis.speak(utterance);
             }
         }
 
@@ -1424,7 +997,7 @@
 
             const question = questions[currentQuestion];
 
-            // Get user answer - no spelling questions now
+            // Get user answer
             const selectedBtn = document.querySelector('.option-btn[data-selected="true"]');
             if (!selectedBtn) {
                 showFeedback('Please select an answer!', false);
@@ -1468,16 +1041,14 @@
             document.querySelectorAll('.option-btn').forEach(btn => {
                 btn.style.pointerEvents = 'none';
                 
-                if (currentGame !== 'spelling') {
-                    // Highlight user's selected answer
-                    if (btn.dataset.selected === 'true') {
-                        btn.classList.add(isCorrect ? 'correct' : 'incorrect');
-                    }
-                    
-                    // Always highlight the correct answer in green
-                    if (btn.textContent === correctAnswer || btn.dataset.value === correctAnswer) {
-                        btn.classList.add('correct');
-                    }
+                // Highlight user's selected answer
+                if (btn.dataset.selected === 'true') {
+                    btn.classList.add(isCorrect ? 'correct' : 'incorrect');
+                }
+                
+                // Always highlight the correct answer in green
+                if (btn.textContent === correctAnswer || btn.dataset.value === correctAnswer) {
+                    btn.classList.add('correct');
                 }
             });
 
@@ -1550,7 +1121,6 @@
         // Show completion screen
         function showCompletionScreen() {
             stats.totalCompleted++;
-            saveStats();
             updateStatsDisplay();
 
             const percentage = Math.round((score / totalQuestions) * 100);
@@ -1600,46 +1170,9 @@
             updateStatsDisplay();
         }
 
-        // Show hint (if implemented)
-        function showHint() {
-            const question = questions[currentQuestion];
-            if (question.hint) {
-                alert(`Hint: ${question.hint}`);
-            } else {
-                alert('No hint available for this question.');
-            }
-        }
-
         // Initialize app
         function initApp() {
-            loadStats();
             updateStatsDisplay();
-            
-            // Add touch/swipe support for mobile
-            let startY = 0;
-            let endY = 0;
-            
-            document.addEventListener('touchstart', e => {
-                startY = e.touches[0].clientY;
-            });
-            
-            document.addEventListener('touchend', e => {
-                endY = e.changedTouches[0].clientY;
-                handleSwipe();
-            });
-            
-            function handleSwipe() {
-                const swipeThreshold = 50;
-                const diff = startY - endY;
-                
-                if (Math.abs(diff) > swipeThreshold) {
-                    if (diff > 0) {
-                        // Swipe up - could trigger hint or next question
-                    } else {
-                        // Swipe down - could trigger back or menu
-                    }
-                }
-            }
         }
 
         // Start the app when page loads
@@ -1654,6 +1187,3 @@
             }
             lastTouchEnd = now;
         }, false);
-    </script>
-</body>
-</html>
