@@ -1008,30 +1008,34 @@
 
         // Display spelling question
         function displaySpellingQuestion(question) {
-            const wordPattern = createWordPattern(question.word);
             document.getElementById('question-text').innerHTML = `Complete the spelling:`;
+            
+            // Create initial pattern and store it
+            const initialPattern = createWordPattern(question.word);
             
             const content = document.getElementById('question-content');
             content.innerHTML = `
                 <div class="word-display" id="word-pattern" style="background: rgba(102, 126, 234, 0.1); color: #667eea; font-size: 2rem; margin: 20px 0; padding: 20px; border-radius: 15px; font-family: monospace; letter-spacing: 3px;">
-                    ${wordPattern}
+                    ${initialPattern}
                 </div>
                 <div class="definition-display">💡 Spelling Hint: ${question.hint}</div>
                 <input type="text" class="text-input" id="spelling-input" placeholder="Type the complete word here..." 
                        onkeypress="handleSpellingKeypress(event)">
                 <div style="display: flex; gap: 10px; justify-content: center; margin-top: 15px; flex-wrap: wrap;">
                     <button class="btn btn-secondary" onclick="speakWord('${question.word}')">🔊 Hear Word</button>
-                    <button class="btn btn-secondary" onclick="revealLetter('${question.word}')">💡 Reveal One Letter</button>
+                    <button class="btn btn-secondary" onclick="revealLetter()">💡 Reveal One Letter</button>
                     <button class="btn btn-secondary" onclick="showAdditionalClue('${question.word}')">🔍 More Clues</button>
                 </div>
                 <div id="additional-clues" style="margin-top: 15px;"></div>
-                <div id="letters-revealed" style="display: none;"></div>
             `;
             
-            // Initialize revealed letters tracking
-            window.currentWordPattern = wordPattern;
-            window.lettersRevealed = 0;
-            window.maxReveals = Math.ceil(question.word.length * 0.3); // Allow revealing 30% of letters
+            // Store word data for this question
+            window.spellingData = {
+                word: question.word,
+                revealedLetters: [],
+                maxReveals: Math.max(2, Math.ceil(question.word.length * 0.3)),
+                usedReveals: 0
+            };
             
             // Focus on input
             setTimeout(() => {
@@ -1039,98 +1043,60 @@
             }, 100);
         }
 
-        // Reveal one letter at a time
-        function revealLetter(word) {
-            if (window.lettersRevealed >= window.maxReveals) {
+        // Create word pattern with missing letters - simpler approach
+        function createWordPattern(word) {
+            const wordArray = word.split('');
+            const pattern = [];
+            
+            // Always show first and last letter
+            for (let i = 0; i < word.length; i++) {
+                if (i === 0 || i === word.length - 1) {
+                    pattern.push(wordArray[i]);
+                } else {
+                    // Hide about 50% of middle letters
+                    if (Math.random() > 0.5) {
+                        pattern.push('<span style="color: #ff6b6b; font-weight: bold;" data-letter="' + wordArray[i] + '" data-position="' + i + '">_</span>');
+                    } else {
+                        pattern.push(wordArray[i]);
+                    }
+                }
+            }
+            
+            return pattern.join('');
+        }
+
+        // Reveal one letter at a time - much simpler approach
+        function revealLetter() {
+            if (!window.spellingData) return;
+            
+            if (window.spellingData.usedReveals >= window.spellingData.maxReveals) {
                 showTemporaryMessage('No more letters can be revealed! Try to complete the word.', 'warning');
                 return;
             }
 
             const patternElement = document.getElementById('word-pattern');
-            const currentPattern = patternElement.innerHTML;
+            const hiddenSpans = patternElement.querySelectorAll('span[data-letter]');
             
-            // Find hidden letters (underscores)
-            const hiddenIndices = [];
-            for (let i = 0; i < word.length; i++) {
-                if (currentPattern.includes('_') && !currentPattern.charAt(i * 10).match(/[a-zA-Z]/)) {
-                    // This is a simplified check - in real implementation, we'd track this better
-                }
+            if (hiddenSpans.length === 0) {
+                showTemporaryMessage('All letters are already revealed!', 'warning');
+                return;
             }
             
-            // Create new pattern with one more letter revealed
-            const newPattern = revealOneMoreLetter(word, currentPattern);
-            patternElement.innerHTML = newPattern;
-            window.currentWordPattern = newPattern;
-            window.lettersRevealed++;
+            // Pick a random hidden letter to reveal
+            const randomIndex = Math.floor(Math.random() * hiddenSpans.length);
+            const spanToReveal = hiddenSpans[randomIndex];
+            const letter = spanToReveal.getAttribute('data-letter');
+            
+            // Replace the underscore with the actual letter
+            spanToReveal.outerHTML = letter;
+            
+            window.spellingData.usedReveals++;
             
             // Show progress
-            showTemporaryMessage(`Letter revealed! (${window.lettersRevealed}/${window.maxReveals} hints used)`, 'info');
-        }
-
-        // Reveal one more letter in the pattern
-        function revealOneMoreLetter(word, currentPattern) {
-            const wordArray = word.split('');
-            const patternDiv = document.createElement('div');
-            patternDiv.innerHTML = currentPattern;
-            
-            // Find all underscore spans
-            const underscores = patternDiv.querySelectorAll('span');
-            const hiddenPositions = [];
-            
-            // Rebuild pattern and find hidden positions
-            let newPattern = '';
-            let spanIndex = 0;
-            
-            for (let i = 0; i < word.length; i++) {
-                if (currentPattern.includes('_') && spanIndex < underscores.length) {
-                    // Check if this position has an underscore
-                    const tempDiv = document.createElement('div');
-                    tempDiv.innerHTML = currentPattern;
-                    const spans = tempDiv.querySelectorAll('span');
-                    
-                    // Simple approach: rebuild the pattern with one less underscore
-                    if (spans.length > 0 && Math.random() > 0.7) {
-                        newPattern += wordArray[i];
-                        continue;
-                    }
-                }
-                
-                // Keep existing character or underscore
-                if (currentPattern.charAt(i) === '_' || currentPattern.includes(`>${wordArray[i]}<`)) {
-                    if (currentPattern.includes('_') && hiddenPositions.length === 0) {
-                        newPattern += wordArray[i]; // Reveal this one
-                        hiddenPositions.push(i);
-                    } else if (currentPattern.includes(`>${wordArray[i]}<`)) {
-                        newPattern += wordArray[i];
-                    } else {
-                        newPattern += '<span style="color: #ff6b6b; font-weight: bold;">_</span>';
-                    }
-                } else {
-                    newPattern += wordArray[i];
-                }
-            }
-            
-            return newPattern || revealRandomLetter(word, currentPattern);
-        }
-
-        // Fallback method to reveal a random letter
-        function revealRandomLetter(word, currentPattern) {
-            const wordArray = word.split('');
-            let newPattern = '';
-            let revealed = false;
-            
-            for (let i = 0; i < word.length; i++) {
-                if (currentPattern.includes('_') && !revealed && Math.random() > 0.5) {
-                    newPattern += wordArray[i];
-                    revealed = true;
-                } else if (currentPattern.includes('_')) {
-                    newPattern += '<span style="color: #ff6b6b; font-weight: bold;">_</span>';
-                } else {
-                    newPattern += wordArray[i];
-                }
-            }
-            
-            return newPattern;
+            showTemporaryMessage(
+                `Letter revealed! (${window.spellingData.usedReveals}/${window.spellingData.maxReveals} hints used)`, 
+                'info'
+            );
         }
 
         // Show additional contextual clues
