@@ -314,11 +314,13 @@
         }
 
         .feedback {
-            padding: 15px;
+            padding: 20px;
             border-radius: 15px;
             margin: 15px 0;
-            text-align: center;
-            font-weight: 600;
+            text-align: left;
+            font-weight: 500;
+            line-height: 1.6;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
         }
 
         .feedback.correct {
@@ -331,6 +333,19 @@
             background: rgba(220, 53, 69, 0.1);
             color: #dc3545;
             border: 2px solid rgba(220, 53, 69, 0.3);
+        }
+
+        .feedback.incorrect .correct-highlight {
+            color: #28a745;
+            font-weight: bold;
+        }
+
+        .feedback .definition-context {
+            margin-top: 10px;
+            padding-top: 10px;
+            border-top: 1px solid rgba(0,0,0,0.1);
+            font-style: italic;
+            opacity: 0.9;
         }
 
         .completion-screen {
@@ -532,55 +547,55 @@
         // Comprehensive vocabulary data from the workbook
         const vocabularyData = {
             definitions: [
-                { word: "aberrant", definition: "departing from an accepted standard; deviant", options: ["normal", "deviant", "typical", "standard"] },
-                { word: "abhor", definition: "to regard with disgust and hatred", options: ["love", "hate", "ignore", "appreciate"] },
-                { word: "abstain", definition: "restrain oneself from indulging in", options: ["indulge", "avoid", "enjoy", "consume"] },
-                { word: "acute", definition: "having a sharp point; severe", options: ["blunt", "mild", "severe", "gentle"] },
-                { word: "adept", definition: "very skilled or proficient", options: ["clumsy", "skilled", "beginner", "amateur"] },
-                { word: "adversity", definition: "difficulties; misfortune", options: ["fortune", "ease", "hardship", "comfort"] },
-                { word: "alleviate", definition: "make suffering less intense", options: ["worsen", "relieve", "ignore", "increase"] },
-                { word: "ambiguous", definition: "having more than one meaning", options: ["clear", "vague", "simple", "obvious"] },
-                { word: "analogous", definition: "comparable in certain respects", options: ["different", "similar", "opposite", "unique"] },
-                { word: "apathy", definition: "lack of interest or concern", options: ["enthusiasm", "indifference", "excitement", "passion"] },
-                { word: "arbitrary", definition: "based on random choice rather than reason", options: ["logical", "random", "systematic", "planned"] },
-                { word: "arid", definition: "extremely dry; lacking in interest", options: ["wet", "dry", "humid", "moist"] },
-                { word: "articulate", definition: "having or showing the ability to speak fluently", options: ["silent", "eloquent", "mute", "unclear"] },
-                { word: "authentic", definition: "genuine; real", options: ["fake", "genuine", "false", "artificial"] },
-                { word: "belligerent", definition: "hostile and aggressive", options: ["peaceful", "aggressive", "calm", "friendly"] },
-                { word: "benevolent", definition: "well meaning and kindly", options: ["cruel", "kind", "harsh", "mean"] },
-                { word: "candid", definition: "truthful and straightforward", options: ["dishonest", "honest", "deceptive", "secretive"] },
-                { word: "capitulate", definition: "cease to resist; surrender", options: ["fight", "surrender", "resist", "persist"] },
-                { word: "capricious", definition: "given to sudden changes of mood", options: ["stable", "unpredictable", "consistent", "reliable"] },
-                { word: "caustic", definition: "sarcastic in a scathing way", options: ["gentle", "harsh", "kind", "sweet"] },
-                { word: "censure", definition: "express severe disapproval", options: ["praise", "criticize", "approve", "commend"] },
-                { word: "circumspect", definition: "wary and unwilling to take risks", options: ["reckless", "cautious", "careless", "bold"] },
-                { word: "coherent", definition: "logical and consistent", options: ["confused", "logical", "chaotic", "random"] },
-                { word: "compelling", definition: "evoking interest or attention", options: ["boring", "fascinating", "dull", "uninteresting"] },
-                { word: "comprise", definition: "consist of; be made up of", options: ["exclude", "include", "omit", "reject"] },
-                { word: "concede", definition: "admit that something is true", options: ["deny", "admit", "refuse", "reject"] },
-                { word: "concise", definition: "giving information clearly and briefly", options: ["lengthy", "brief", "verbose", "wordy"] },
-                { word: "condone", definition: "accept behavior that is wrong", options: ["condemn", "approve", "reject", "criticize"] },
-                { word: "conspicuous", definition: "clearly visible; attracting attention", options: ["hidden", "obvious", "subtle", "concealed"] },
-                { word: "contemplate", definition: "think about carefully", options: ["ignore", "consider", "dismiss", "overlook"] },
-                { word: "contemporary", definition: "belonging to the present time", options: ["ancient", "modern", "old", "past"] },
-                { word: "contentious", definition: "causing disagreement or argument", options: ["peaceful", "controversial", "harmonious", "agreeable"] },
-                { word: "credible", definition: "able to be believed; convincing", options: ["unbelievable", "believable", "doubtful", "false"] },
-                { word: "cursory", definition: "hasty and superficial", options: ["thorough", "superficial", "detailed", "comprehensive"] },
-                { word: "cynical", definition: "believing people are motivated by self-interest", options: ["trusting", "skeptical", "naive", "optimistic"] },
-                { word: "debacle", definition: "a sudden disastrous collapse", options: ["success", "disaster", "triumph", "victory"] },
-                { word: "defiant", definition: "boldly resistant or challenging", options: ["obedient", "rebellious", "compliant", "submissive"] },
-                { word: "deliberate", definition: "done consciously and intentionally", options: ["accidental", "intentional", "random", "unplanned"] },
-                { word: "denounce", definition: "publicly declare wrong or evil", options: ["praise", "condemn", "support", "endorse"] },
-                { word: "depict", definition: "show or represent by drawing", options: ["hide", "show", "conceal", "cover"] },
-                { word: "desolate", definition: "deserted; empty", options: ["crowded", "empty", "full", "populated"] },
-                { word: "detrimental", definition: "tending to cause harm", options: ["beneficial", "harmful", "helpful", "advantageous"] },
-                { word: "diligent", definition: "having or showing care in work", options: ["lazy", "hardworking", "careless", "negligent"] },
-                { word: "diminish", definition: "make or become less", options: ["increase", "decrease", "expand", "grow"] },
-                { word: "discern", definition: "perceive or recognize", options: ["ignore", "notice", "overlook", "miss"] },
-                { word: "discriminate", definition: "recognize a distinction", options: ["generalize", "distinguish", "confuse", "mix"] },
-                { word: "disdain", definition: "feeling that something is unworthy", options: ["respect", "contempt", "admiration", "approval"] },
-                { word: "dispel", definition: "make doubt or feeling disappear", options: ["create", "eliminate", "produce", "generate"] },
-                { word: "docile", definition: "ready to accept control", options: ["rebellious", "obedient", "defiant", "resistant"] },
+                { word: "aberrant", definition: "departing from an accepted standard; deviant", options: ["normal", "deviant", "typical", "standard"], correct: "deviant" },
+                { word: "abhor", definition: "to regard with disgust and hatred", options: ["love", "hate", "ignore", "appreciate"], correct: "hate" },
+                { word: "abstain", definition: "restrain oneself from indulging in", options: ["indulge", "avoid", "enjoy", "consume"], correct: "avoid" },
+                { word: "acute", definition: "having a sharp point; severe", options: ["blunt", "mild", "severe", "gentle"], correct: "severe" },
+                { word: "adept", definition: "very skilled or proficient", options: ["clumsy", "skilled", "beginner", "amateur"], correct: "skilled" },
+                { word: "adversity", definition: "difficulties; misfortune", options: ["fortune", "ease", "hardship", "comfort"], correct: "hardship" },
+                { word: "alleviate", definition: "make suffering less intense", options: ["worsen", "relieve", "ignore", "increase"], correct: "relieve" },
+                { word: "ambiguous", definition: "having more than one meaning", options: ["clear", "vague", "simple", "obvious"], correct: "vague" },
+                { word: "analogous", definition: "comparable in certain respects", options: ["different", "similar", "opposite", "unique"], correct: "similar" },
+                { word: "apathy", definition: "lack of interest or concern", options: ["enthusiasm", "indifference", "excitement", "passion"], correct: "indifference" },
+                { word: "arbitrary", definition: "based on random choice rather than reason", options: ["logical", "random", "systematic", "planned"], correct: "random" },
+                { word: "arid", definition: "extremely dry; lacking in interest", options: ["wet", "dry", "humid", "moist"], correct: "dry" },
+                { word: "articulate", definition: "having or showing the ability to speak fluently", options: ["silent", "eloquent", "mute", "unclear"], correct: "eloquent" },
+                { word: "authentic", definition: "genuine; real", options: ["fake", "genuine", "false", "artificial"], correct: "genuine" },
+                { word: "belligerent", definition: "hostile and aggressive", options: ["peaceful", "aggressive", "calm", "friendly"], correct: "aggressive" },
+                { word: "benevolent", definition: "well meaning and kindly", options: ["cruel", "kind", "harsh", "mean"], correct: "kind" },
+                { word: "candid", definition: "truthful and straightforward", options: ["dishonest", "honest", "deceptive", "secretive"], correct: "honest" },
+                { word: "capitulate", definition: "cease to resist; surrender", options: ["fight", "surrender", "resist", "persist"], correct: "surrender" },
+                { word: "capricious", definition: "given to sudden changes of mood", options: ["stable", "unpredictable", "consistent", "reliable"], correct: "unpredictable" },
+                { word: "caustic", definition: "sarcastic in a scathing way", options: ["gentle", "harsh", "kind", "sweet"], correct: "harsh" },
+                { word: "censure", definition: "express severe disapproval", options: ["praise", "criticize", "approve", "commend"], correct: "criticize" },
+                { word: "circumspect", definition: "wary and unwilling to take risks", options: ["reckless", "cautious", "careless", "bold"], correct: "cautious" },
+                { word: "coherent", definition: "logical and consistent", options: ["confused", "logical", "chaotic", "random"], correct: "logical" },
+                { word: "compelling", definition: "evoking interest or attention", options: ["boring", "fascinating", "dull", "uninteresting"], correct: "fascinating" },
+                { word: "comprise", definition: "consist of; be made up of", options: ["exclude", "include", "omit", "reject"], correct: "include" },
+                { word: "concede", definition: "admit that something is true", options: ["deny", "admit", "refuse", "reject"], correct: "admit" },
+                { word: "concise", definition: "giving information clearly and briefly", options: ["lengthy", "brief", "verbose", "wordy"], correct: "brief" },
+                { word: "condone", definition: "accept behavior that is wrong", options: ["condemn", "approve", "reject", "criticize"], correct: "approve" },
+                { word: "conspicuous", definition: "clearly visible; attracting attention", options: ["hidden", "obvious", "subtle", "concealed"], correct: "obvious" },
+                { word: "contemplate", definition: "think about carefully", options: ["ignore", "consider", "dismiss", "overlook"], correct: "consider" },
+                { word: "contemporary", definition: "belonging to the present time", options: ["ancient", "modern", "old", "past"], correct: "modern" },
+                { word: "contentious", definition: "causing disagreement or argument", options: ["peaceful", "controversial", "harmonious", "agreeable"], correct: "controversial" },
+                { word: "credible", definition: "able to be believed; convincing", options: ["unbelievable", "believable", "doubtful", "false"], correct: "believable" },
+                { word: "cursory", definition: "hasty and superficial", options: ["thorough", "superficial", "detailed", "comprehensive"], correct: "superficial" },
+                { word: "cynical", definition: "believing people are motivated by self-interest", options: ["trusting", "skeptical", "naive", "optimistic"], correct: "skeptical" },
+                { word: "debacle", definition: "a sudden disastrous collapse", options: ["success", "disaster", "triumph", "victory"], correct: "disaster" },
+                { word: "defiant", definition: "boldly resistant or challenging", options: ["obedient", "rebellious", "compliant", "submissive"], correct: "rebellious" },
+                { word: "deliberate", definition: "done consciously and intentionally", options: ["accidental", "intentional", "random", "unplanned"], correct: "intentional" },
+                { word: "denounce", definition: "publicly declare wrong or evil", options: ["praise", "condemn", "support", "endorse"], correct: "condemn" },
+                { word: "depict", definition: "show or represent by drawing", options: ["hide", "show", "conceal", "cover"], correct: "show" },
+                { word: "desolate", definition: "deserted; empty", options: ["crowded", "empty", "full", "populated"], correct: "empty" },
+                { word: "detrimental", definition: "tending to cause harm", options: ["beneficial", "harmful", "helpful", "advantageous"], correct: "harmful" },
+                { word: "diligent", definition: "having or showing care in work", options: ["lazy", "hardworking", "careless", "negligent"], correct: "hardworking" },
+                { word: "diminish", definition: "make or become less", options: ["increase", "decrease", "expand", "grow"], correct: "decrease" },
+                { word: "discern", definition: "perceive or recognize", options: ["ignore", "notice", "overlook", "miss"], correct: "notice" },
+                { word: "discriminate", definition: "recognize a distinction", options: ["generalize", "distinguish", "confuse", "mix"], correct: "distinguish" },
+                { word: "disdain", definition: "feeling that something is unworthy", options: ["respect", "contempt", "admiration", "approval"], correct: "contempt" },
+                { word: "dispel", definition: "make doubt or feeling disappear", options: ["create", "eliminate", "produce", "generate"], correct: "eliminate" },
+                { word: "docile", definition: "ready to accept control", options: ["rebellious", "obedient", "defiant", "resistant"], correct: "obedient" },
                 { word: "dubious", definition: "hesitating or doubting", options: ["certain", "doubtful", "confident", "sure"] },
                 { word: "eccentric", definition: "unconventional and strange", options: ["normal", "odd", "typical", "ordinary"] },
                 { word: "elated", definition: "very happy and excited", options: ["sad", "joyful", "depressed", "miserable"] },
@@ -1082,7 +1097,10 @@
                 userAnswer = selectedBtn.dataset.value;
                 
                 // Determine correct answer based on question type
-                if (question.definition) {
+                if (question.correct) {
+                    correctAnswer = question.correct;
+                    isCorrect = userAnswer === correctAnswer;
+                } else if (question.definition) {
                     correctAnswer = question.definition;
                     isCorrect = userAnswer === correctAnswer;
                 } else if (question.answer) {
@@ -1093,9 +1111,12 @@
                     isCorrect = userAnswer === correctAnswer;
                 }
                 
-                // For definition questions, check if selected option matches the definition
-                if (currentGame === 'definitions') {
-                    isCorrect = userAnswer === question.definition;
+                // For definition questions, check if selected option is the correct answer
+                if (currentGame === 'definitions' || (currentGame === 'mixed-review' && question.definition)) {
+                    isCorrect = userAnswer === (question.correct || question.options.find(opt => 
+                        opt.toLowerCase().includes(question.word.toLowerCase()) || 
+                        question.definition.toLowerCase().includes(opt.toLowerCase())
+                    ));
                 }
             }
 
@@ -1120,21 +1141,51 @@
                 btn.style.pointerEvents = 'none';
                 
                 if (currentGame !== 'spelling') {
+                    // Highlight user's selected answer
                     if (btn.dataset.selected === 'true') {
                         btn.classList.add(isCorrect ? 'correct' : 'incorrect');
                     }
                     
-                    // Highlight correct answer
+                    // Always highlight the correct answer in green
                     if (btn.textContent === correctAnswer || btn.dataset.value === correctAnswer) {
                         btn.classList.add('correct');
                     }
                 }
             });
 
-            // Show feedback message
-            const message = isCorrect ? 
-                '🎉 Correct! Well done!' : 
-                `❌ Incorrect. The correct answer is: ${correctAnswer}`;
+            // Show enhanced feedback message with learning context
+            let message = '';
+            const question = questions[currentQuestion];
+            
+            if (isCorrect) {
+                message = '🎉 <strong>Correct!</strong> Well done!';
+            } else {
+                // Show what they selected vs correct answer
+                let userAnswer = '';
+                if (currentGame === 'spelling' || (currentGame === 'mixed-review' && question.hint)) {
+                    userAnswer = document.getElementById('spelling-input').value.trim();
+                } else {
+                    const selectedBtn = document.querySelector('.option-btn[data-selected="true"]');
+                    userAnswer = selectedBtn ? selectedBtn.textContent : 'No selection';
+                }
+                
+                message = `❌ <strong>Incorrect</strong><br><br>`;
+                message += `<span style="color: #dc3545;">Your answer:</span> "${userAnswer}"<br>`;
+                message += `<span style="color: #28a745; font-weight: bold;">Correct answer:</span> "${correctAnswer}"<br>`;
+                
+                // Add definition context for learning
+                if (question.definition) {
+                    message += `<br><div class="definition-context">💡 <strong>${question.word}</strong> means "${question.definition}"</div>`;
+                } else if (question.sentence) {
+                    message += `<br><div class="definition-context">💡 The word "<strong>${correctAnswer}</strong>" fits best in this context.</div>`;
+                } else if (question.synonyms) {
+                    message += `<br><div class="definition-context">💡 "<strong>${correctAnswer}</strong>" is a synonym for "<strong>${question.word}</strong>".</div>`;
+                } else if (question.root) {
+                    message += `<br><div class="definition-context">💡 "<strong>${correctAnswer}</strong>" contains the root "<strong>${question.root}</strong>" meaning "${question.meaning}".</div>`;
+                } else if (question.hint) {
+                    message += `<br><div class="definition-context">💡 Remember: ${question.hint}</div>`;
+                }
+            }
             
             showFeedback(message, isCorrect);
 
@@ -1149,7 +1200,11 @@
         // Show feedback
         function showFeedback(message, isCorrect) {
             const feedback = document.getElementById('feedback');
-            feedback.textContent = message;
+            
+            // Replace \n with <br> for proper line breaks in HTML
+            const htmlMessage = message.replace(/\n/g, '<br>');
+            
+            feedback.innerHTML = htmlMessage;
             feedback.className = `feedback ${isCorrect ? 'correct' : 'incorrect'}`;
             feedback.style.display = 'block';
         }
