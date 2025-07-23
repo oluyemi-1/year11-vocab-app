@@ -1013,25 +1013,212 @@
             
             const content = document.getElementById('question-content');
             content.innerHTML = `
-                <div class="word-display" style="background: rgba(102, 126, 234, 0.1); color: #667eea; font-size: 2rem; margin: 20px 0; padding: 20px; border-radius: 15px; font-family: monospace; letter-spacing: 3px;">
+                <div class="word-display" id="word-pattern" style="background: rgba(102, 126, 234, 0.1); color: #667eea; font-size: 2rem; margin: 20px 0; padding: 20px; border-radius: 15px; font-family: monospace; letter-spacing: 3px;">
                     ${wordPattern}
                 </div>
-                <div class="definition-display">💡 Hint: ${question.hint}</div>
+                <div class="definition-display">💡 Spelling Hint: ${question.hint}</div>
                 <input type="text" class="text-input" id="spelling-input" placeholder="Type the complete word here..." 
                        onkeypress="handleSpellingKeypress(event)">
                 <div style="display: flex; gap: 10px; justify-content: center; margin-top: 15px; flex-wrap: wrap;">
                     <button class="btn btn-secondary" onclick="speakWord('${question.word}')">🔊 Hear Word</button>
-                    <button class="btn btn-secondary" onclick="showFullWord('${question.word}')">👁️ Show Full Word</button>
+                    <button class="btn btn-secondary" onclick="revealLetter('${question.word}')">💡 Reveal One Letter</button>
+                    <button class="btn btn-secondary" onclick="showAdditionalClue('${question.word}')">🔍 More Clues</button>
                 </div>
-                <div id="full-word-display" style="display: none; margin-top: 15px; padding: 10px; background: rgba(40, 167, 69, 0.1); border-radius: 10px; text-align: center;">
-                    <strong>${question.word}</strong>
-                </div>
+                <div id="additional-clues" style="margin-top: 15px;"></div>
+                <div id="letters-revealed" style="display: none;"></div>
             `;
+            
+            // Initialize revealed letters tracking
+            window.currentWordPattern = wordPattern;
+            window.lettersRevealed = 0;
+            window.maxReveals = Math.ceil(question.word.length * 0.3); // Allow revealing 30% of letters
             
             // Focus on input
             setTimeout(() => {
                 document.getElementById('spelling-input').focus();
             }, 100);
+        }
+
+        // Reveal one letter at a time
+        function revealLetter(word) {
+            if (window.lettersRevealed >= window.maxReveals) {
+                showTemporaryMessage('No more letters can be revealed! Try to complete the word.', 'warning');
+                return;
+            }
+
+            const patternElement = document.getElementById('word-pattern');
+            const currentPattern = patternElement.innerHTML;
+            
+            // Find hidden letters (underscores)
+            const hiddenIndices = [];
+            for (let i = 0; i < word.length; i++) {
+                if (currentPattern.includes('_') && !currentPattern.charAt(i * 10).match(/[a-zA-Z]/)) {
+                    // This is a simplified check - in real implementation, we'd track this better
+                }
+            }
+            
+            // Create new pattern with one more letter revealed
+            const newPattern = revealOneMoreLetter(word, currentPattern);
+            patternElement.innerHTML = newPattern;
+            window.currentWordPattern = newPattern;
+            window.lettersRevealed++;
+            
+            // Show progress
+            showTemporaryMessage(`Letter revealed! (${window.lettersRevealed}/${window.maxReveals} hints used)`, 'info');
+        }
+
+        // Reveal one more letter in the pattern
+        function revealOneMoreLetter(word, currentPattern) {
+            const wordArray = word.split('');
+            const patternDiv = document.createElement('div');
+            patternDiv.innerHTML = currentPattern;
+            
+            // Find all underscore spans
+            const underscores = patternDiv.querySelectorAll('span');
+            const hiddenPositions = [];
+            
+            // Rebuild pattern and find hidden positions
+            let newPattern = '';
+            let spanIndex = 0;
+            
+            for (let i = 0; i < word.length; i++) {
+                if (currentPattern.includes('_') && spanIndex < underscores.length) {
+                    // Check if this position has an underscore
+                    const tempDiv = document.createElement('div');
+                    tempDiv.innerHTML = currentPattern;
+                    const spans = tempDiv.querySelectorAll('span');
+                    
+                    // Simple approach: rebuild the pattern with one less underscore
+                    if (spans.length > 0 && Math.random() > 0.7) {
+                        newPattern += wordArray[i];
+                        continue;
+                    }
+                }
+                
+                // Keep existing character or underscore
+                if (currentPattern.charAt(i) === '_' || currentPattern.includes(`>${wordArray[i]}<`)) {
+                    if (currentPattern.includes('_') && hiddenPositions.length === 0) {
+                        newPattern += wordArray[i]; // Reveal this one
+                        hiddenPositions.push(i);
+                    } else if (currentPattern.includes(`>${wordArray[i]}<`)) {
+                        newPattern += wordArray[i];
+                    } else {
+                        newPattern += '<span style="color: #ff6b6b; font-weight: bold;">_</span>';
+                    }
+                } else {
+                    newPattern += wordArray[i];
+                }
+            }
+            
+            return newPattern || revealRandomLetter(word, currentPattern);
+        }
+
+        // Fallback method to reveal a random letter
+        function revealRandomLetter(word, currentPattern) {
+            const wordArray = word.split('');
+            let newPattern = '';
+            let revealed = false;
+            
+            for (let i = 0; i < word.length; i++) {
+                if (currentPattern.includes('_') && !revealed && Math.random() > 0.5) {
+                    newPattern += wordArray[i];
+                    revealed = true;
+                } else if (currentPattern.includes('_')) {
+                    newPattern += '<span style="color: #ff6b6b; font-weight: bold;">_</span>';
+                } else {
+                    newPattern += wordArray[i];
+                }
+            }
+            
+            return newPattern;
+        }
+
+        // Show additional contextual clues
+        function showAdditionalClue(word) {
+            const cluesDiv = document.getElementById('additional-clues');
+            const additionalClues = getAdditionalClues(word);
+            
+            if (cluesDiv.children.length >= additionalClues.length) {
+                showTemporaryMessage('No more clues available!', 'warning');
+                return;
+            }
+            
+            const clueIndex = cluesDiv.children.length;
+            const newClue = document.createElement('div');
+            newClue.style.cssText = 'background: rgba(255, 193, 7, 0.1); border: 1px solid rgba(255, 193, 7, 0.3); border-radius: 10px; padding: 12px; margin: 8px 0; color: #856404;';
+            newClue.innerHTML = `🔍 <strong>Clue ${clueIndex + 1}:</strong> ${additionalClues[clueIndex]}`;
+            
+            cluesDiv.appendChild(newClue);
+        }
+
+        // Get contextual clues for words
+        function getAdditionalClues(word) {
+            const clueMap = {
+                'accommodate': [
+                    'This word means "to provide lodging or space for"',
+                    'It has double C and double M',
+                    'Often used when talking about hotels or making room for someone'
+                ],
+                'achievement': [
+                    'This word means "a successful accomplishment"',
+                    'Remember: "i" before "e" except after "c"',
+                    'Think of something you accomplished or earned'
+                ],
+                'privilege': [
+                    'This word means "a special right or advantage"',
+                    'It ends with "-lege" like "college"',
+                    'Think of special benefits or rights some people have'
+                ],
+                'necessary': [
+                    'This word means "required" or "essential"',
+                    'It has one C and double S',
+                    'Think of something you absolutely need'
+                ],
+                'embarrass': [
+                    'This word means "to cause shame or awkwardness"',
+                    'It has double R and double S',
+                    'Think of feeling awkward in front of others'
+                ],
+                'grammar': [
+                    'This word relates to language rules',
+                    'It has double M and ends with "ar"',
+                    'Think of sentence structure and language rules'
+                ],
+                'government': [
+                    'This word means "the ruling authority"',
+                    'It has an "n" before the "m"',
+                    'Think of political leadership and laws'
+                ]
+            };
+            
+            return clueMap[word.toLowerCase()] || [
+                `This word has ${word.length} letters`,
+                `It starts with "${word[0]}" and ends with "${word[word.length-1]}"`,
+                'Think about the context and spelling patterns'
+            ];
+        }
+
+        // Show temporary messages
+        function showTemporaryMessage(message, type) {
+            const messageDiv = document.createElement('div');
+            const colors = {
+                info: 'background: rgba(23, 162, 184, 0.1); color: #117a8b; border: 1px solid rgba(23, 162, 184, 0.3);',
+                warning: 'background: rgba(255, 193, 7, 0.1); color: #856404; border: 1px solid rgba(255, 193, 7, 0.3);',
+                success: 'background: rgba(40, 167, 69, 0.1); color: #155724; border: 1px solid rgba(40, 167, 69, 0.3);'
+            };
+            
+            messageDiv.style.cssText = `${colors[type]} border-radius: 10px; padding: 10px; margin: 10px 0; text-align: center; font-size: 0.9rem;`;
+            messageDiv.textContent = message;
+            
+            const cluesDiv = document.getElementById('additional-clues');
+            cluesDiv.appendChild(messageDiv);
+            
+            // Remove after 3 seconds
+            setTimeout(() => {
+                if (messageDiv.parentNode) {
+                    messageDiv.parentNode.removeChild(messageDiv);
+                }
+            }, 3000);
         }
 
         // Create word pattern with missing letters
