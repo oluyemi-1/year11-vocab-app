@@ -406,7 +406,7 @@
 
             <div class="stats-bar">
                 <div class="stat">
-                    <span class="stat-number" id="total-words">400+</span>
+                    <span class="stat-number" id="total-words">1200+</span>
                     <span class="stat-label">Words</span>
                 </div>
                 <div class="stat">
@@ -480,36 +480,71 @@
     </div>
 
     <script>
-        // Comprehensive vocabulary data for Year 11 - FIXED VERSION
+        // Comprehensive vocabulary data for Year 11 - CLEANED VERSION
         const vocabularyData = {
             definitions: [
+                // A words
+                { word: "aberrant", definition: "departing from an accepted standard", options: ["normal", "deviant", "typical", "conventional"], correct: "deviant" },
+                { word: "abject", definition: "extremely bad, unpleasant, and degrading", options: ["pleasant", "miserable", "happy", "comfortable"], correct: "miserable" },
+                { word: "abnegate", definition: "to renounce or reject something", options: ["accept", "deny", "embrace", "welcome"], correct: "deny" },
+                { word: "abstruse", definition: "difficult to understand; obscure", options: ["clear", "complex", "simple", "obvious"], correct: "complex" },
+                { word: "accolade", definition: "an award or privilege granted as a special honor", options: ["punishment", "honor", "criticism", "penalty"], correct: "honor" },
+                { word: "acrimonious", definition: "angry and bitter", options: ["sweet", "bitter", "kind", "gentle"], correct: "bitter" },
+                { word: "adroit", definition: "clever or skillful", options: ["clumsy", "skillful", "awkward", "incompetent"], correct: "skillful" },
+                { word: "aesthetic", definition: "concerned with beauty or the appreciation of beauty", options: ["ugly", "beautiful", "plain", "unattractive"], correct: "beautiful" },
+                { word: "affable", definition: "friendly, good-natured, or easy to talk to", options: ["unfriendly", "friendly", "hostile", "mean"], correct: "friendly" },
+                { word: "alacrity", definition: "brisk and cheerful readiness", options: ["reluctance", "eagerness", "slowness", "hesitation"], correct: "eagerness" },
+                
+                // B words
+                { word: "banal", definition: "so lacking in originality as to be obvious", options: ["original", "boring", "creative", "unique"], correct: "boring" },
+                { word: "bellicose", definition: "demonstrating aggression and willingness to fight", options: ["peaceful", "aggressive", "calm", "gentle"], correct: "aggressive" },
+                { word: "benign", definition: "gentle and harmless", options: ["harmful", "harmless", "dangerous", "threatening"], correct: "harmless" },
+                { word: "bombastic", definition: "high-sounding but with little meaning", options: ["meaningful", "pompous", "simple", "clear"], correct: "pompous" },
+                { word: "bucolic", definition: "relating to the pleasant aspects of countryside", options: ["urban", "rural", "industrial", "metropolitan"], correct: "rural" },
+                
+                // C words
+                { word: "cacophony", definition: "a harsh, discordant mixture of sounds", options: ["harmony", "discord", "melody", "rhythm"], correct: "discord" },
+                { word: "cajole", definition: "to persuade someone to do something by coaxing", options: ["force", "coax", "threaten", "command"], correct: "coax" },
+                { word: "callous", definition: "showing or having an insensitive disregard", options: ["sensitive", "insensitive", "caring", "compassionate"], correct: "insensitive" },
+                { word: "candor", definition: "the quality of being open and honest", options: ["dishonesty", "honesty", "deception", "secrecy"], correct: "honesty" },
+                { word: "capricious", definition: "given to sudden changes of mood or behavior", options: ["consistent", "unpredictable", "stable", "reliable"], correct: "unpredictable" },
+                
+                // D words
+                { word: "debacle", definition: "a sudden and ignominious failure", options: ["success", "disaster", "victory", "triumph"], correct: "disaster" },
+                { word: "decorous", definition: "in keeping with good taste and propriety", options: ["improper", "proper", "inappropriate", "vulgar"], correct: "proper" },
+                { word: "deleterious", definition: "causing harm or damage", options: ["beneficial", "harmful", "helpful", "positive"], correct: "harmful" },
+                { word: "denigrate", definition: "to criticize unfairly; disparage", options: ["praise", "criticize", "compliment", "honor"], correct: "criticize" },
+                { word: "diffident", definition: "modest or shy because of a lack of confidence", options: ["confident", "shy", "bold", "assertive"], correct: "shy" },
+                
+                // E words
+                { word: "ebullient", definition: "cheerful and full of energy", options: ["gloomy", "enthusiastic", "depressed", "sad"], correct: "enthusiastic" },
+                { word: "eclectic", definition: "deriving ideas from a broad range of sources", options: ["narrow", "varied", "limited", "restricted"], correct: "varied" },
+                { word: "efficacious", definition: "successful in producing a desired result", options: ["ineffective", "effective", "useless", "unsuccessful"], correct: "effective" },
+                { word: "egregious", definition: "outstandingly bad; shocking", options: ["excellent", "terrible", "good", "admirable"], correct: "terrible" },
+                { word: "enigmatic", definition: "difficult to interpret or understand", options: ["clear", "mysterious", "obvious", "simple"], correct: "mysterious" },
+                
+                // F-Z words (continuing with key vocabulary)
+                { word: "facetious", definition: "treating serious issues with inappropriate humor", options: ["serious", "flippant", "grave", "solemn"], correct: "flippant" },
+                { word: "gregarious", definition: "fond of the company of others", options: ["antisocial", "sociable", "solitary", "withdrawn"], correct: "sociable" },
+                { word: "hackneyed", definition: "lacking in freshness or originality", options: ["original", "clichéd", "fresh", "innovative"], correct: "clichéd" },
+                { word: "iconoclast", definition: "a person who attacks cherished beliefs", options: ["conformist", "rebel", "traditionalist", "conservative"], correct: "rebel" },
+                { word: "judicious", definition: "having or showing good judgment", options: ["poor judgment", "wise", "foolish", "reckless"], correct: "wise" },
+                { word: "laconic", definition: "using few words; terse", options: ["verbose", "brief", "wordy", "lengthy"], correct: "brief" },
+                { word: "magnanimous", definition: "generous or forgiving", options: ["petty", "generous", "mean", "vindictive"], correct: "generous" },
+                { word: "nascent", definition: "just coming into existence", options: ["dying", "emerging", "established", "mature"], correct: "emerging" },
+                { word: "obdurate", definition: "stubbornly refusing to change opinion", options: ["flexible", "stubborn", "yielding", "compliant"], correct: "stubborn" },
+                { word: "palpable", definition: "able to be touched or felt", options: ["intangible", "tangible", "invisible", "imperceptible"], correct: "tangible" },
+                { word: "quixotic", definition: "extremely idealistic and unrealistic", options: ["practical", "idealistic", "realistic", "sensible"], correct: "idealistic" },
+                { word: "rancorous", definition: "characterized by bitterness or resentment", options: ["forgiving", "bitter", "kind", "merciful"], correct: "bitter" },
+                { word: "sagacious", definition: "having good judgment", options: ["foolish", "wise", "stupid", "unwise"], correct: "wise" },
+                { word: "taciturn", definition: "reserved or uncommunicative in speech", options: ["talkative", "quiet", "chatty", "verbose"], correct: "quiet" },
+                { word: "ubiquitous", definition: "present, appearing, or found everywhere", options: ["rare", "everywhere", "absent", "scarce"], correct: "everywhere" },
+                { word: "vacillate", definition: "to alternate between different opinions", options: ["be firm", "waver", "be decisive", "be certain"], correct: "waver" },
+                { word: "winsome", definition: "attractive or appealing in appearance", options: ["unattractive", "charming", "repulsive", "ugly"], correct: "charming" },
+                { word: "xenophobia", definition: "dislike of people from other countries", options: ["tolerance", "prejudice", "acceptance", "welcome"], correct: "prejudice" },
+                { word: "zeal", definition: "great energy or enthusiasm", options: ["apathy", "enthusiasm", "indifference", "laziness"], correct: "enthusiasm" },
 
-    { word: "aberrant", definition: "departing from an accepted standard", options: ["normal", "deviant", "typical", "conventional"], correct: "deviant" },
-    { word: "abject", definition: "extremely bad, unpleasant, and degrading", options: ["pleasant", "miserable", "happy", "comfortable"], correct: "miserable" },
-    { word: "abnegate", definition: "to renounce or reject something", options: ["accept", "deny", "embrace", "welcome"], correct: "deny" },
-    { word: "abstruse", definition: "difficult to understand; obscure", options: ["clear", "complex", "simple", "obvious"], correct: "complex" },
-    { word: "accolade", definition: "an award or privilege granted as a special honor", options: ["punishment", "honor", "criticism", "penalty"], correct: "honor" },
-    { word: "acrimonious", definition: "angry and bitter", options: ["sweet", "bitter", "kind", "gentle"], correct: "bitter" },
-    { word: "adroit", definition: "clever or skillful", options: ["clumsy", "skillful", "awkward", "incompetent"], correct: "skillful" },
-    { word: "aesthetic", definition: "concerned with beauty or the appreciation of beauty", options: ["ugly", "beautiful", "plain", "unattractive"], correct: "beautiful" },
-    { word: "affable", definition: "friendly, good-natured, or easy to talk to", options: ["unfriendly", "friendly", "hostile", "mean"], correct: "friendly" },
-    { word: "alacrity", definition: "brisk and cheerful readiness", options: ["reluctance", "eagerness", "slowness", "hesitation"], correct: "eagerness" },
-    { word: "ameliorate", definition: "to make or become better", options: ["worsen", "improve", "maintain", "destroy"], correct: "improve" },
-    { word: "amiable", definition: "having a friendly and pleasant manner", options: ["hostile", "friendly", "mean", "rude"], correct: "friendly" },
-    { word: "amorphous", definition: "without a clearly defined shape or form", options: ["structured", "shapeless", "organized", "defined"], correct: "shapeless" },
-    { word: "anachronism", definition: "something belonging to a different time period", options: ["modern thing", "outdated thing", "current thing", "new thing"], correct: "outdated thing" },
-    { word: "anecdotal", definition: "based on personal accounts rather than facts", options: ["factual", "personal", "scientific", "proven"], correct: "personal" },
-    
-    // B words
-    { word: "banal", definition: "so lacking in originality as to be obvious", options: ["original", "boring", "creative", "unique"], correct: "boring" },
-    { word: "bellicose", definition: "demonstrating aggression and willingness to fight", options: ["peaceful", "aggressive", "calm", "gentle"], correct: "aggressive" },
-    { word: "benign", definition: "gentle and harmless", options: ["harmful", "harmless", "dangerous", "threatening"], correct: "harmless" },
-    { word: "bombastic", definition: "high-sounding but with little meaning", options: ["meaningful", "pompous", "simple", "clear"], correct: "pompous" },
-    { word: "bucolic", definition: "relating to the pleasant aspects of countryside", options: ["urban", "rural", "industrial", "metropolitan"], correct: "rural" },
-    { word: "buttress", definition: "to support or strengthen", options: ["weaken", "support", "destroy", "undermine"], correct: "support" },
-    { word: "byzantine", definition: "excessively complicated", options: ["simple", "complex", "clear", "straightforward"], correct: "complex" },
-    
-    // C words
+
     { word: "cacophony", definition: "a harsh, discordant mixture of sounds", options: ["harmony", "discord", "melody", "rhythm"], correct: "discord" },
     { word: "cajole", definition: "to persuade someone to do something by coaxing", options: ["force", "coax", "threaten", "command"], correct: "coax" },
     { word: "callous", definition: "showing or having an insensitive disregard", options: ["sensitive", "insensitive", "caring", "compassionate"], correct: "insensitive" },
@@ -545,7 +580,6 @@
     { word: "culpable", definition: "deserving blame", options: ["innocent", "guilty", "blameless", "virtuous"], correct: "guilty" },
     { word: "cursory", definition: "hasty and therefore not thorough", options: ["thorough", "superficial", "detailed", "comprehensive"], correct: "superficial" },
     
-    // D words
     { word: "debacle", definition: "a sudden and ignominious failure", options: ["success", "disaster", "victory", "triumph"], correct: "disaster" },
     { word: "debilitate", definition: "to make someone very weak", options: ["strengthen", "weaken", "energize", "invigorate"], correct: "weaken" },
     { word: "decorous", definition: "in keeping with good taste and propriety", options: ["improper", "proper", "inappropriate", "vulgar"], correct: "proper" },
@@ -571,7 +605,6 @@
     { word: "dormant", definition: "temporarily inactive", options: ["active", "inactive", "energetic", "busy"], correct: "inactive" },
     { word: "dubious", definition: "hesitating or doubting", options: ["certain", "doubtful", "confident", "sure"], correct: "doubtful" },
     
-    // E words
     { word: "ebullient", definition: "cheerful and full of energy", options: ["gloomy", "enthusiastic", "depressed", "sad"], correct: "enthusiastic" },
     { word: "eclectic", definition: "deriving ideas from a broad range of sources", options: ["narrow", "varied", "limited", "restricted"], correct: "varied" },
     { word: "efficacious", definition: "successful in producing a desired result", options: ["ineffective", "effective", "useless", "unsuccessful"], correct: "effective" },
@@ -597,7 +630,6 @@
     { word: "extol", definition: "to praise enthusiastically", options: ["criticize", "praise", "condemn", "disparage"], correct: "praise" },
     { word: "extraneous", definition: "irrelevant or unrelated to the subject", options: ["relevant", "irrelevant", "important", "essential"], correct: "irrelevant" },
     
-    // F words
     { word: "facetious", definition: "treating serious issues with inappropriate humor", options: ["serious", "flippant", "grave", "solemn"], correct: "flippant" },
     { word: "fallacious", definition: "based on a mistaken belief", options: ["correct", "false", "true", "accurate"], correct: "false" },
     { word: "fastidious", definition: "very attentive to accuracy and detail", options: ["careless", "meticulous", "sloppy", "negligent"], correct: "meticulous" },
@@ -609,8 +641,7 @@
     { word: "fractious", definition: "irritable and quarrelsome", options: ["peaceful", "quarrelsome", "calm", "agreeable"], correct: "quarrelsome" },
     { word: "frugal", definition: "sparing or economical with regard to money", options: ["wasteful", "economical", "extravagant", "lavish"], correct: "economical" },
     { word: "furtive", definition: "attempting to avoid notice", options: ["open", "secretive", "obvious", "blatant"], correct: "secretive" },
-    
-    // G words
+   
     { word: "garrulous", definition: "excessively talkative", options: ["quiet", "talkative", "silent", "reserved"], correct: "talkative" },
     { word: "germane", definition: "relevant to a subject under consideration", options: ["irrelevant", "relevant", "unrelated", "off-topic"], correct: "relevant" },
     { word: "grandiloquent", definition: "pompous or extravagant in language", options: ["simple", "pompous", "plain", "modest"], correct: "pompous" },
@@ -618,7 +649,7 @@
     { word: "gregarious", definition: "fond of the company of others", options: ["antisocial", "sociable", "solitary", "withdrawn"], correct: "sociable" },
     { word: "guileless", definition: "devoid of guile; innocent and without deception", options: ["deceptive", "innocent", "cunning", "crafty"], correct: "innocent" },
     
-    // H words
+    
     { word: "hackneyed", definition: "lacking in freshness or originality", options: ["original", "clichéd", "fresh", "innovative"], correct: "clichéd" },
     { word: "halcyon", definition: "denoting a period of time that was idyllically happy", options: ["troubled", "peaceful", "chaotic", "difficult"], correct: "peaceful" },
     { word: "hapless", definition: "unfortunate", options: ["lucky", "unlucky", "fortunate", "blessed"], correct: "unlucky" },
@@ -628,7 +659,7 @@
     { word: "homogeneous", definition: "of the same kind; alike", options: ["different", "similar", "diverse", "varied"], correct: "similar" },
     { word: "hyperbole", definition: "exaggerated statements not meant to be taken literally", options: ["understatement", "exaggeration", "truth", "accuracy"], correct: "exaggeration" },
     
-    // Continue with remaining letters...
+    
     { word: "iconoclast", definition: "a person who attacks cherished beliefs", options: ["conformist", "rebel", "traditionalist", "conservative"], correct: "rebel" },
     { word: "idiosyncratic", definition: "relating to idiosyncrasy; peculiar to an individual", options: ["common", "unique", "typical", "normal"], correct: "unique" },
     { word: "ignominious", definition: "deserving or causing public disgrace", options: ["honorable", "shameful", "respectable", "dignified"], correct: "shameful" },
@@ -744,7 +775,7 @@
     { word: "punctilious", definition: "showing great attention to detail", options: ["careless", "meticulous", "sloppy", "negligent"], correct: "meticulous" },
     { word: "pusillanimous", definition: "showing a lack of courage", options: ["brave", "cowardly", "bold", "fearless"], correct: "cowardly" },
     
-    // Q words
+ 
     { word: "quaff", definition: "to drink heartily", options: ["sip", "gulp", "abstain", "refuse"], correct: "gulp" },
     { word: "qualm", definition: "an uneasy feeling of doubt", options: ["certainty", "doubt", "confidence", "assurance"], correct: "doubt" },
     { word: "querulous", definition: "complaining in a petulant way", options: ["content", "complaining", "satisfied", "pleased"], correct: "complaining" },
@@ -752,7 +783,7 @@
     { word: "quintessential", definition: "representing the most perfect example", options: ["imperfect", "perfect", "flawed", "inadequate"], correct: "perfect" },
     { word: "quixotic", definition: "extremely idealistic and unrealistic", options: ["practical", "idealistic", "realistic", "sensible"], correct: "idealistic" },
     
-    // R words
+    
     { word: "rancorous", definition: "characterized by bitterness or resentment", options: ["forgiving", "bitter", "kind", "merciful"], correct: "bitter" },
     { word: "rapacious", definition: "aggressively greedy or grasping", options: ["generous", "greedy", "giving", "selfless"], correct: "greedy" },
     { word: "recalcitrant", definition: "having an obstinately uncooperative attitude", options: ["cooperative", "stubborn", "helpful", "compliant"], correct: "stubborn" },
@@ -773,7 +804,7 @@
     { word: "rife", definition: "of common occurrence; widespread", options: ["rare", "widespread", "uncommon", "scarce"], correct: "widespread" },
     { word: "ruminate", definition: "to think deeply about something", options: ["ignore", "ponder", "dismiss", "overlook"], correct: "ponder" },
     
-    // S words
+   
     { word: "sagacious", definition: "having good judgment", options: ["foolish", "wise", "stupid", "unwise"], correct: "wise" },
     { word: "salacious", definition: "having an excessive interest in sexual matters", options: ["pure", "lustful", "innocent", "chaste"], correct: "lustful" },
     { word: "salubrious", definition: "health-giving; healthy", options: ["unhealthy", "healthy", "harmful", "toxic"], correct: "healthy" },
@@ -850,88 +881,45 @@
     { word: "yoke", definition: "a wooden crosspiece fastened over necks of animals", options: ["freedom", "harness", "liberation", "release"], correct: "harness" },
     { word: "zeal", definition: "great energy or enthusiasm", options: ["apathy", "enthusiasm", "indifference", "laziness"], correct: "enthusiasm" },
     { word: "zenith", definition: "the time at which something is most powerful", options: ["nadir", "peak", "bottom", "low point"], correct: "peak" }
-];
-
-                { word: "abandon", definition: "to give up completely", options: ["keep", "desert", "maintain", "preserve"], correct: "desert" },
-                { word: "abate", definition: "to become less intense or widespread", options: ["increase", "decrease", "maintain", "strengthen"], correct: "decrease" },
-                { word: "abhor", definition: "to regard with disgust and hatred", options: ["love", "hate", "ignore", "appreciate"], correct: "hate" },
-                { word: "abolish", definition: "to formally end or stop something", options: ["create", "eliminate", "support", "encourage"], correct: "eliminate" },
-                { word: "abundant", definition: "existing in large quantities", options: ["scarce", "plentiful", "limited", "rare"], correct: "plentiful" },
-                { word: "accelerate", definition: "to increase in rate, amount, or extent", options: ["slow", "speed up", "maintain", "decrease"], correct: "speed up" },
-                { word: "acclaim", definition: "enthusiastic approval or praise", options: ["criticism", "praise", "disapproval", "silence"], correct: "praise" },
-                { word: "accomplish", definition: "to achieve or complete successfully", options: ["fail", "achieve", "abandon", "ignore"], correct: "achieve" },
-                { word: "accurate", definition: "correct in all details; exact", options: ["wrong", "correct", "false", "approximate"], correct: "correct" },
-                { word: "acquire", definition: "to buy or obtain an asset or object", options: ["lose", "obtain", "sell", "discard"], correct: "obtain" },
-                { word: "acute", definition: "having a sharp point; severe", options: ["blunt", "severe", "mild", "gentle"], correct: "severe" },
-                { word: "adamant", definition: "refusing to be persuaded or to change one's mind", options: ["flexible", "stubborn", "agreeable", "uncertain"], correct: "stubborn" },
-                { word: "adapt", definition: "to become adjusted to new conditions", options: ["resist", "adjust", "maintain", "reject"], correct: "adjust" },
-                { word: "adequate", definition: "satisfactory or acceptable in quality", options: ["inadequate", "sufficient", "poor", "excellent"], correct: "sufficient" },
-                { word: "admire", definition: "to regard with respect or warm approval", options: ["despise", "respect", "hate", "ignore"], correct: "respect" },
-                { word: "adverse", definition: "preventing success or development", options: ["favorable", "harmful", "beneficial", "positive"], correct: "harmful" },
-                { word: "advocate", definition: "to publicly recommend or support", options: ["oppose", "support", "criticize", "reject"], correct: "support" },
-                { word: "affluent", definition: "having plenty of money; wealthy", options: ["poor", "wealthy", "needy", "struggling"], correct: "wealthy" },
-                { word: "aggressive", definition: "ready to attack or confront", options: ["passive", "hostile", "peaceful", "gentle"], correct: "hostile" },
-                { word: "agile", definition: "able to move quickly and easily", options: ["clumsy", "nimble", "slow", "stiff"], correct: "nimble" },
-                { word: "alleviate", definition: "make suffering less intense", options: ["worsen", "relieve", "ignore", "increase"], correct: "relieve" },
-                { word: "ambiguous", definition: "having more than one meaning", options: ["clear", "vague", "simple", "obvious"], correct: "vague" },
-                { word: "ample", definition: "large or spacious; plentiful", options: ["small", "large", "limited", "tiny"], correct: "large" },
-                { word: "ancient", definition: "belonging to the very distant past", options: ["modern", "old", "new", "recent"], correct: "old" },
-                { word: "apparent", definition: "clearly visible or understood", options: ["hidden", "obvious", "unclear", "secret"], correct: "obvious" },
-                { word: "appreciate", definition: "to recognize the value of something", options: ["ignore", "value", "dismiss", "overlook"], correct: "value" },
-                { word: "approach", definition: "to come near or closer to", options: ["retreat", "advance", "avoid", "flee"], correct: "advance" },
-                { word: "appropriate", definition: "suitable or proper in the circumstances", options: ["inappropriate", "suitable", "wrong", "improper"], correct: "suitable" },
-                { word: "approve", definition: "to officially agree to or accept", options: ["reject", "endorse", "disapprove", "deny"], correct: "endorse" },
-                { word: "ardent", definition: "very passionate and enthusiastic", options: ["cold", "passionate", "indifferent", "calm"], correct: "passionate" },
-                { word: "arid", definition: "extremely dry; lacking in interest", options: ["wet", "dry", "humid", "moist"], correct: "dry" },
-                { word: "articulate", definition: "having or showing the ability to speak fluently", options: ["unclear", "eloquent", "confused", "silent"], correct: "eloquent" },
-                { word: "ascend", definition: "to go up or climb", options: ["descend", "rise", "fall", "drop"], correct: "rise" },
-                { word: "assist", definition: "to help someone", options: ["hinder", "help", "obstruct", "prevent"], correct: "help" },
-                { word: "astute", definition: "having sharp judgment", options: ["foolish", "clever", "naive", "stupid"], correct: "clever" },
-                { word: "attach", definition: "to fasten or join", options: ["detach", "connect", "separate", "remove"], correct: "connect" },
-                { word: "attempt", definition: "to make an effort to achieve", options: ["succeed", "try", "accomplish", "complete"], correct: "try" },
-                { word: "attract", definition: "to draw by appealing to interest", options: ["repel", "draw", "push", "discourage"], correct: "draw" },
-                { word: "authentic", definition: "genuine; real", options: ["fake", "genuine", "false", "artificial"], correct: "genuine" },
-                { word: "available", definition: "able to be used or obtained", options: ["unavailable", "accessible", "hidden", "restricted"], correct: "accessible" },
-                { word: "aware", definition: "having knowledge of a situation", options: ["ignorant", "conscious", "unaware", "oblivious"], correct: "conscious" }
             ],
 
             synonyms: [
                 { word: "affluent", synonyms: ["poor", "wealthy", "needy"], answer: "wealthy" },
                 { word: "aggressive", synonyms: ["passive", "hostile", "peaceful"], answer: "hostile" },
                 { word: "agile", synonyms: ["clumsy", "nimble", "slow"], answer: "nimble" },
-                { word: "alert", synonyms: ["sleepy", "watchful", "tired"], answer: "watchful" },
                 { word: "alleviate", synonyms: ["worsen", "relieve", "increase"], answer: "relieve" },
                 { word: "ambiguous", synonyms: ["clear", "vague", "obvious"], answer: "vague" },
                 { word: "ample", synonyms: ["small", "large", "tiny"], answer: "large" },
                 { word: "ancient", synonyms: ["modern", "old", "new"], answer: "old" },
-                { word: "angry", synonyms: ["calm", "furious", "peaceful"], answer: "furious" },
-                { word: "anxious", synonyms: ["calm", "worried", "relaxed"], answer: "worried" },
                 { word: "apparent", synonyms: ["hidden", "obvious", "unclear"], answer: "obvious" },
-                { word: "appreciate", synonyms: ["ignore", "value", "dismiss"], answer: "value" },
-                { word: "approach", synonyms: ["retreat", "advance", "avoid"], answer: "advance" },
-                { word: "appropriate", synonyms: ["unsuitable", "suitable", "wrong"], answer: "suitable" },
-                { word: "approve", synonyms: ["reject", "endorse", "disapprove"], answer: "endorse" },
                 { word: "ardent", synonyms: ["cold", "passionate", "indifferent"], answer: "passionate" },
-                { word: "arid", synonyms: ["wet", "dry", "moist"], answer: "dry" },
                 { word: "articulate", synonyms: ["unclear", "eloquent", "confused"], answer: "eloquent" },
-                { word: "ascend", synonyms: ["descend", "rise", "fall"], answer: "rise" },
-                { word: "assist", synonyms: ["hinder", "help", "obstruct"], answer: "help" },
                 { word: "astute", synonyms: ["foolish", "clever", "stupid"], answer: "clever" },
-                { word: "attach", synonyms: ["detach", "connect", "separate"], answer: "connect" },
-                { word: "attempt", synonyms: ["succeed", "try", "complete"], answer: "try" },
-                { word: "attract", synonyms: ["repel", "draw", "push away"], answer: "draw" },
                 { word: "authentic", synonyms: ["fake", "genuine", "false"], answer: "genuine" },
-                { word: "available", synonyms: ["unavailable", "accessible", "hidden"], answer: "accessible" },
-                { word: "aware", synonyms: ["ignorant", "conscious", "unaware"], answer: "conscious" },
-                { word: "awkward", synonyms: ["graceful", "clumsy", "elegant"], answer: "clumsy" },
-                { word: "balance", synonyms: ["imbalance", "equilibrium", "tilt"], answer: "equilibrium" },
-                { word: "ban", synonyms: ["allow", "prohibit", "permit"], answer: "prohibit" },
-                { word: "basic", synonyms: ["advanced", "fundamental", "complex"], answer: "fundamental" },
-                { word: "beautiful", synonyms: ["ugly", "attractive", "hideous"], answer: "attractive" },
-                { word: "begin", synonyms: ["end", "start", "finish"], answer: "start" },
-                { word: "believe", synonyms: ["doubt", "trust", "question"], answer: "trust" },
-                { word: "beneficial", synonyms: ["harmful", "helpful", "damaging"], answer: "helpful" },
-                    { word: "compliant", synonyms: ["rebellious", "submissive", "defiant"], answer: "submissive" },
+                { word: "benevolent", synonyms: ["cruel", "kind", "harsh"], answer: "kind" },
+                { word: "cogent", synonyms: ["weak", "compelling", "unclear"], answer: "compelling" },
+                { word: "cordial", synonyms: ["cold", "warm", "hostile"], answer: "warm" },
+                { word: "cryptic", synonyms: ["clear", "enigmatic", "obvious"], answer: "enigmatic" },
+                { word: "ebullient", synonyms: ["gloomy", "exuberant", "depressed"], answer: "exuberant" },
+                { word: "facetious", synonyms: ["serious", "frivolous", "grave"], answer: "frivolous" },
+                { word: "garrulous", synonyms: ["quiet", "loquacious", "silent"], answer: "loquacious" },
+                { word: "hackneyed", synonyms: ["original", "banal", "fresh"], answer: "banal" },
+                { word: "iconoclast", synonyms: ["conformist", "rebel", "traditionalist"], answer: "rebel" },
+                { word: "judicious", synonyms: ["poor judgment", "prudent", "foolish"], answer: "prudent" },
+                { word: "laconic", synonyms: ["verbose", "concise", "wordy"], answer: "concise" },
+                { word: "magnanimous", synonyms: ["petty", "noble", "mean"], answer: "noble" },
+                { word: "nascent", synonyms: ["dying", "budding", "established"], answer: "budding" },
+                { word: "obdurate", synonyms: ["flexible", "obstinate", "yielding"], answer: "obstinate" },
+                { word: "palpable", synonyms: ["intangible", "tangible", "invisible"], answer: "tangible" },
+                { word: "quixotic", synonyms: ["practical", "idealistic", "realistic"], answer: "idealistic" },
+                { word: "rancorous", synonyms: ["forgiving", "spiteful", "kind"], answer: "spiteful" },
+                { word: "sagacious", synonyms: ["foolish", "wise", "stupid"], answer: "wise" },
+                { word: "taciturn", synonyms: ["talkative", "reticent", "chatty"], answer: "reticent" },
+                { word: "ubiquitous", synonyms: ["rare", "omnipresent", "absent"], answer: "omnipresent" },
+                { word: "vacillate", synonyms: ["be firm", "fluctuate", "be decisive"], answer: "fluctuate" },
+                { word: "winsome", synonyms: ["unattractive", "engaging", "repulsive"], answer: "engaging" },
+                { word: "zeal", synonyms: ["apathy", "fervor", "indifference"], answer: "fervor" }
+
     { word: "conciliatory", synonyms: ["aggressive", "pacifying", "hostile"], answer: "pacifying" },
     { word: "condescending", synonyms: ["humble", "patronizing", "modest"], answer: "patronizing" },
     { word: "congenial", synonyms: ["unpleasant", "agreeable", "hostile"], answer: "agreeable" },
@@ -1207,53 +1195,6 @@
     { word: "truculent", synonyms: ["peaceful", "belligerent", "calm"], answer: "belligerent" },
     { word: "turgid", synonyms: ["deflated", "bloated", "shrunk"], answer: "bloated" },
     { word: "turpitude", synonyms: ["virtue", "depravity", "goodness"], answer: "depravity" },
-
-    { word: "ubiquitous", synonyms: ["rare", "omnipresent", "absent"], answer: "omnipresent" },
-   
-const additionalSynonyms = [
-    { word: "aberrant", synonyms: ["normal", "deviant", "typical"], answer: "deviant" },
-    { word: "abject", synonyms: ["noble", "wretched", "dignified"], answer: "wretched" },
-    { word: "abnegate", synonyms: ["accept", "renounce", "embrace"], answer: "renounce" },
-    { word: "abstruse", synonyms: ["clear", "obscure", "simple"], answer: "obscure" },
-    { word: "accolade", synonyms: ["criticism", "honor", "insult"], answer: "honor" },
-    { word: "acrimonious", synonyms: ["sweet", "bitter", "kind"], answer: "bitter" },
-    { word: "adroit", synonyms: ["clumsy", "skillful", "awkward"], answer: "skillful" },
-    { word: "aesthetic", synonyms: ["ugly", "artistic", "plain"], answer: "artistic" },
-    { word: "affable", synonyms: ["hostile", "friendly", "mean"], answer: "friendly" },
-    { word: "alacrity", synonyms: ["reluctance", "eagerness", "slowness"], answer: "eagerness" },
-    { word: "ameliorate", synonyms: ["worsen", "improve", "maintain"], answer: "improve" },
-    { word: "amiable", synonyms: ["hostile", "genial", "mean"], answer: "genial" },
-    { word: "amorphous", synonyms: ["structured", "formless", "organized"], answer: "formless" },
-    { word: "anachronism", synonyms: ["modern", "outdated", "current"], answer: "outdated" },
-    { word: "anecdotal", synonyms: ["factual", "personal", "scientific"], answer: "personal" },
-
-    { word: "banal", synonyms: ["original", "trite", "creative"], answer: "trite" },
-    { word: "bellicose", synonyms: ["peaceful", "warlike", "calm"], answer: "warlike" },
-    { word: "benign", synonyms: ["harmful", "harmless", "dangerous"], answer: "harmless" },
-    { word: "bombastic", synonyms: ["modest", "pompous", "simple"], answer: "pompous" },
-    { word: "bucolic", synonyms: ["urban", "pastoral", "industrial"], answer: "pastoral" },
-    { word: "buttress", synonyms: ["weaken", "support", "destroy"], answer: "support" },
-    { word: "byzantine", synonyms: ["simple", "intricate", "clear"], answer: "intricate" },
-
-    { word: "cacophony", synonyms: ["harmony", "discord", "melody"], answer: "discord" },
-    { word: "cajole", synonyms: ["force", "coax", "threaten"], answer: "coax" },
-    { word: "callous", synonyms: ["sensitive", "unfeeling", "caring"], answer: "unfeeling" },
-    { word: "candor", synonyms: ["dishonesty", "frankness", "deception"], answer: "frankness" },
-    { word: "capricious", synonyms: ["consistent", "whimsical", "stable"], answer: "whimsical" },
-    { word: "caustic", synonyms: ["sweet", "corrosive", "gentle"], answer: "corrosive" },
-    { word: "censure", synonyms: ["praise", "condemn", "approve"], answer: "condemn" },
-    { word: "charlatan", synonyms: ["expert", "impostor", "professional"], answer: "impostor" },
-    { word: "chastise", synonyms: ["praise", "rebuke", "reward"], answer: "rebuke" },
-    { word: "chicanery", synonyms: ["honesty", "trickery", "truth"], answer: "trickery" },
-    { word: "churlish", synonyms: ["polite", "boorish", "courteous"], answer: "boorish" },
-    { word: "circumlocution", synonyms: ["brevity", "verbosity", "conciseness"], answer: "verbosity" },
-    { word: "clandestine", synonyms: ["open", "covert", "public"], answer: "covert" },
-    { word: "cogent", synonyms: ["weak", "compelling", "unclear"], answer: "compelling" },
-    { word: "colloquial", synonyms: ["formal", "conversational", "academic"], answer: "conversational" },
-    { word: "complacent", synonyms: ["dissatisfied", "smug", "worried"], answer: "smug" },
-    { word: "compliant", synonyms: ["rebellious", "submiss
-                
-                { word: "benevolent", synonyms: ["cruel", "kind", "harsh"], answer: "kind" }
             ],
 
             antonyms: [
@@ -1261,32 +1202,56 @@ const additionalSynonyms = [
                 { word: "accept", antonym: "reject", options: ["receive", "reject", "welcome", "embrace"] },
                 { word: "accurate", antonym: "incorrect", options: ["right", "incorrect", "precise", "exact"] },
                 { word: "advance", antonym: "retreat", options: ["progress", "retreat", "move", "forward"] },
-                { word: "advantage", antonym: "disadvantage", options: ["benefit", "disadvantage", "asset", "plus"] },
                 { word: "agree", antonym: "disagree", options: ["consent", "disagree", "accept", "approve"] },
-                { word: "alive", antonym: "dead", options: ["living", "dead", "breathing", "active"] },
-                { word: "allow", antonym: "forbid", options: ["permit", "forbid", "enable", "let"] },
                 { word: "ancient", antonym: "modern", options: ["old", "modern", "historic", "past"] },
                 { word: "angry", antonym: "calm", options: ["furious", "calm", "mad", "irritated"] },
                 { word: "appear", antonym: "disappear", options: ["show", "disappear", "emerge", "arrive"] },
-                { word: "approve", antonym: "disapprove", options: ["endorse", "disapprove", "support", "accept"] },
-                { word: "arrive", antonym: "depart", options: ["come", "depart", "reach", "enter"] },
                 { word: "artificial", antonym: "natural", options: ["fake", "natural", "synthetic", "manufactured"] },
-                { word: "ascend", antonym: "descend", options: ["rise", "descend", "climb", "elevate"] },
                 { word: "attack", antonym: "defend", options: ["assault", "defend", "strike", "charge"] },
                 { word: "attract", antonym: "repel", options: ["draw", "repel", "pull", "lure"] },
-                { word: "awake", antonym: "asleep", options: ["alert", "asleep", "conscious", "aware"] },
                 { word: "beautiful", antonym: "ugly", options: ["attractive", "ugly", "pretty", "lovely"] },
                 { word: "begin", antonym: "end", options: ["start", "end", "commence", "initiate"] },
                 { word: "big", antonym: "small", options: ["large", "small", "huge", "enormous"] },
-                { word: "bitter", antonym: "sweet", options: ["sour", "sweet", "harsh", "unpleasant"] },
-                { word: "black", antonym: "white", options: ["dark", "white", "ebony", "coal"] },
-                { word: "borrow", antonym: "lend", options: ["take", "lend", "use", "get"] },
                 { word: "brave", antonym: "cowardly", options: ["courageous", "cowardly", "bold", "fearless"] },
                 { word: "bright", antonym: "dim", options: ["brilliant", "dim", "shining", "radiant"] },
-                { word: "broad", antonym: "narrow", options: ["wide", "narrow", "extensive", "vast"] },
                 { word: "build", antonym: "destroy", options: ["construct", "destroy", "create", "make"] },
                 { word: "buy", antonym: "sell", options: ["purchase", "sell", "acquire", "get"] },
-                
+                { word: "calm", antonym: "agitated", options: ["peaceful", "agitated", "serene", "quiet"] },
+                { word: "certain", antonym: "doubtful", options: ["sure", "doubtful", "confident", "positive"] },
+                { word: "clever", antonym: "stupid", options: ["smart", "stupid", "intelligent", "bright"] },
+                { word: "close", antonym: "open", options: ["shut", "open", "near", "tight"] },
+                { word: "cold", antonym: "hot", options: ["freezing", "hot", "cool", "chilly"] },
+                { word: "complex", antonym: "simple", options: ["complicated", "simple", "difficult", "intricate"] },
+                { word: "cruel", antonym: "kind", options: ["mean", "kind", "harsh", "brutal"] },
+                { word: "dark", antonym: "light", options: ["black", "light", "dim", "shadow"] },
+                { word: "difficult", antonym: "easy", options: ["hard", "easy", "tough", "challenging"] },
+                { word: "empty", antonym: "full", options: ["vacant", "full", "hollow", "blank"] },
+                { word: "enemy", antonym: "friend", options: ["foe", "friend", "rival", "opponent"] },
+                { word: "entrance", antonym: "exit", options: ["entry", "exit", "door", "gate"] },
+                { word: "expand", antonym: "contract", options: ["grow", "contract", "enlarge", "increase"] },
+                { word: "expensive", antonym: "cheap", options: ["costly", "cheap", "dear", "valuable"] },
+                { word: "export", antonym: "import", options: ["send out", "import", "ship", "sell"] },
+                { word: "external", antonym: "internal", options: ["outside", "internal", "outer", "exterior"] },
+                { word: "failure", antonym: "success", options: ["defeat", "success", "loss", "mistake"] },
+                { word: "false", antonym: "true", options: ["wrong", "true", "incorrect", "fake"] },
+                { word: "far", antonym: "near", options: ["distant", "near", "remote", "away"] },
+                { word: "fast", antonym: "slow", options: ["quick", "slow", "rapid", "swift"] },
+                { word: "first", antonym: "last", options: ["initial", "last", "beginning", "primary"] },
+                { word: "forget", antonym: "remember", options: ["overlook", "remember", "ignore", "neglect"] },
+                { word: "freedom", antonym: "slavery", options: ["liberty", "slavery", "independence", "rights"] },
+                { word: "fresh", antonym: "stale", options: ["new", "stale", "clean", "crisp"] },
+                { word: "guilty", antonym: "innocent", options: ["responsible", "innocent", "blameworthy", "culpable"] },
+                { word: "happy", antonym: "sad", options: ["joyful", "sad", "cheerful", "glad"] },
+                { word: "hard", antonym: "soft", options: ["tough", "soft", "solid", "firm"] },
+                { word: "hate", antonym: "love", options: ["despise", "love", "dislike", "loathe"] },
+                { word: "healthy", antonym: "sick", options: ["well", "sick", "fit", "strong"] },
+                { word: "heavy", antonym: "light", options: ["weighty", "light", "massive", "dense"] },
+                { word: "high", antonym: "low", options: ["tall", "low", "elevated", "up"] },
+                { word: "honest", antonym: "dishonest", options: ["truthful", "dishonest", "sincere", "frank"] },
+                { word: "hope", antonym: "despair", options: ["optimism", "despair", "faith", "trust"] },
+                { word: "huge", antonym: "tiny", options: ["enormous", "tiny", "massive", "gigantic"] }
+
+
     { word: "aberrant", antonym: "normal", options: ["deviant", "normal", "unusual", "strange"] },
     { word: "abject", antonym: "dignified", options: ["miserable", "dignified", "wretched", "pathetic"] },
     { word: "abnegate", antonym: "accept", options: ["deny", "accept", "refuse", "reject"] },
@@ -1639,10 +1604,7 @@ const additionalSynonyms = [
     { word: "xenophobia", antonym: "tolerance", options: ["prejudice", "tolerance", "bigotry", "hatred"] },
     { word: "yoke", antonym: "freedom", options: ["harness", "freedom", "bondage", "restraint"] },
     { word: "zeal", antonym: "apathy", options: ["enthusiasm", "apathy", "fervor", "passion"] },
-    { word: "zenith", antonym: "nadir", options: ["peak", "nadir", "apex", "summit"] }
-
-
-     { word: "calm", antonym: "agitated", options: ["peaceful", "agitated", "serene", "quiet"] }
+    { word: "zenith", antonym: "nadir", options: ["peak", "nadir", "apex", "summit"] },
             ],
 
             sentenceCompletion: [
@@ -1746,9 +1708,274 @@ const additionalSynonyms = [
                     word: "vibrant",
                     options: ["dull", "vibrant", "boring", "lifeless"]
                 },
-
+                {
+                    sentence: "The lawyer's _____ argument convinced the jury of his client's innocence.",
+                    word: "compelling",
+                    options: ["weak", "compelling", "poor", "unconvincing"]
+                },
+                {
+                    sentence: "Her _____ performance in the play earned her a standing ovation.",
+                    word: "stellar",
+                    options: ["mediocre", "stellar", "disappointing", "lackluster"]
+                },
+                {
+                    sentence: "The _____ businessman refused to compromise his ethical standards.",
+                    word: "principled",
+                    options: ["corrupt", "principled", "dishonest", "flexible"]
+                },
+                {
+                    sentence: "The mountain climber showed remarkable _____ in extreme conditions.",
+                    word: "tenacity",
+                    options: ["weakness", "tenacity", "fear", "hesitation"]
+                },
+                {
+                    sentence: "The professor's _____ lecture put half the class to sleep.",
+                    word: "monotonous",
+                    options: ["engaging", "monotonous", "exciting", "captivating"]
+                },
+                {
+                    sentence: "The detective's _____ observation skills helped solve the case.",
+                    word: "acute",
+                    options: ["poor", "acute", "weak", "dull"]
+                },
+                {
+                    sentence: "Despite her _____ schedule, she always made time for friends.",
+                    word: "hectic",
+                    options: ["relaxed", "hectic", "easy", "simple"]
+                },
+                {
+                    sentence: "The artist's _____ use of color created a masterpiece.",
+                    word: "innovative",
+                    options: ["traditional", "innovative", "conventional", "ordinary"]
+                },
+                {
+                    sentence: "The _____ aroma of fresh bread filled the bakery.",
+                    word: "tantalizing",
+                    options: ["repulsive", "tantalizing", "unpleasant", "offensive"]
+                },
+                {
+                    sentence: "His _____ commitment to charity work inspired many volunteers.",
+                    word: "unwavering",
+                    options: ["weak", "unwavering", "inconsistent", "variable"]
+                },
 
     {
+        sentence: "Her _____ personality made her popular among her peers.",
+        word: "gregarious",
+        options: ["antisocial", "gregarious", "withdrawn", "shy"]
+    },
+    {
+        sentence: "The _____ student always completed assignments ahead of schedule.",
+        word: "conscientious",
+        options: ["lazy", "conscientious", "careless", "irresponsible"]
+    },
+    {
+        sentence: "The restaurant's _____ atmosphere attracted many young professionals.",
+        word: "vibrant",
+        options: ["dull", "vibrant", "boring", "lifeless"]
+    },
+    {
+        sentence: "The lawyer's _____ argument convinced the jury of his client's innocence.",
+        word: "compelling",
+        options: ["weak", "compelling", "poor", "unconvincing"]
+    },
+    {
+        sentence: "Her _____ personality made her the life of every party she attended.",
+        word: "vivacious",
+        options: ["dull", "vivacious", "boring", "withdrawn"]
+    },
+    {
+        sentence: "The mountain climber showed remarkable _____ in the face of extreme weather.",
+        word: "tenacity",
+        options: ["weakness", "tenacity", "fear", "hesitation"]
+    },
+    {
+        sentence: "The professor's _____ lecture put half the class to sleep.",
+        word: "monotonous",
+        options: ["engaging", "monotonous", "exciting", "captivating"]
+    },
+    {
+        sentence: "The detective's _____ observation skills helped solve the mysterious case.",
+        word: "acute",
+        options: ["poor", "acute", "weak", "dull"]
+    },
+    {
+        sentence: "The company's _____ expansion strategy led to significant losses.",
+        word: "reckless",
+        options: ["careful", "reckless", "prudent", "thoughtful"]
+    },
+    {
+        sentence: "Despite her _____ schedule, she always made time for her friends.",
+        word: "hectic",
+        options: ["relaxed", "hectic", "easy", "simple"]
+    },
+    {
+        sentence: "The artist's _____ use of color created a stunning masterpiece.",
+        word: "innovative",
+        options: ["traditional", "innovative", "conventional", "ordinary"]
+    },
+    {
+        sentence: "The student's _____ behavior in class earned him multiple detentions.",
+        word: "disruptive",
+        options: ["exemplary", "disruptive", "good", "respectful"]
+    },
+    {
+        sentence: "The _____ aroma of fresh bread filled the entire bakery.",
+        word: "tantalizing",
+        options: ["repulsive", "tantalizing", "unpleasant", "offensive"]
+    },
+    {
+        sentence: "Her _____ commitment to charity work inspired many volunteers.",
+        word: "unwavering",
+        options: ["weak", "unwavering", "inconsistent", "variable"]
+    },
+    {
+        sentence: "The _____ student always completed extra credit assignments.",
+        word: "industrious",
+        options: ["lazy", "industrious", "idle", "sluggish"]
+    },
+    {
+        sentence: "The manager's _____ leadership style motivated the entire team.",
+        word: "charismatic",
+        options: ["boring", "charismatic", "uninspiring", "dull"]
+    },
+    {
+        sentence: "The _____ storm destroyed several buildings in the downtown area.",
+        word: "ferocious",
+        options: ["gentle", "ferocious", "mild", "calm"]
+    },
+    {
+        sentence: "The scientist's _____ research contributed to medical breakthroughs.",
+        word: "pioneering",
+        options: ["outdated", "pioneering", "conventional", "routine"]
+    },
+    {
+        sentence: "The _____ noise from the construction site disrupted the peaceful neighborhood.",
+        word: "incessant",
+        options: ["occasional", "incessant", "quiet", "soft"]
+    },
+    {
+        sentence: "His _____ sense of humor always lightened the mood during stressful times.",
+        word: "infectious",
+        options: ["grim", "infectious", "serious", "solemn"]
+    },
+    {
+        sentence: "The _____ beauty of the sunset left everyone speechless.",
+        word: "breathtaking",
+        options: ["ordinary", "breathtaking", "common", "plain"]
+    },
+    {
+        sentence: "The politician's _____ promises failed to gain voter support.",
+        word: "hollow",
+        options: ["sincere", "hollow", "genuine", "meaningful"]
+    },
+    {
+        sentence: "The chef's _____ skills earned the restaurant a five-star rating.",
+        word: "exceptional",
+        options: ["poor", "exceptional", "average", "mediocre"]
+    },
+    {
+        sentence: "The ambassador's _____ negotiations prevented an international crisis.",
+        word: "diplomatic",
+        options: ["hostile", "diplomatic", "aggressive", "confrontational"]
+    },
+    {
+        sentence: "The _____ complexity of the mathematical proof challenged even expert mathematicians.",
+        word: "formidable",
+        options: ["simple", "formidable", "easy", "basic"]
+    },
+    {
+        sentence: "Her _____ dedication to environmental causes earned her widespread recognition.",
+        word: "zealous",
+        options: ["halfhearted", "zealous", "indifferent", "lukewarm"]
+    },
+    {
+        sentence: "The _____ defendant maintained his innocence throughout the trial.",
+        word: "adamant",
+        options: ["uncertain", "adamant", "wavering", "doubtful"]
+    },
+    {
+        sentence: "The museum's _____ collection attracted visitors from around the world.",
+        word: "eclectic",
+        options: ["uniform", "eclectic", "monotonous", "repetitive"]
+    },
+    {
+        sentence: "The author's _____ writing style made the complex topic accessible to general readers.",
+        word: "lucid",
+        options: ["confusing", "lucid", "obscure", "muddled"]
+    },
+    {
+        sentence: "The _____ critic demolished the new play in a scathing review.",
+        word: "sardonic",
+        options: ["gentle", "sardonic", "kind", "supportive"]
+    },
+    {
+        sentence: "Despite the _____ circumstances, she maintained her optimistic outlook.",
+        word: "dire",
+        options: ["favorable", "dire", "pleasant", "encouraging"]
+    },
+    {
+        sentence: "The _____ employee was finally terminated after multiple warnings.",
+        word: "insubordinate",
+        options: ["obedient", "insubordinate", "cooperative", "compliant"]
+    },
+    {
+        sentence: "His _____ knowledge of classical music impressed the conservatory professors.",
+        word: "encyclopedic",
+        options: ["limited", "encyclopedic", "superficial", "basic"]
+    },
+    {
+        sentence: "The _____ businessman built his empire through questionable practices.",
+        word: "unscrupulous",
+        options: ["ethical", "unscrupulous", "honest", "principled"]
+    },
+    {
+        sentence: "The _____ patient endured months of painful treatment without complaint.",
+        word: "stoic",
+        options: ["emotional", "stoic", "dramatic", "expressive"]
+    },
+    {
+        sentence: "The prosecutor's _____ cross-examination revealed the witness's lies.",
+        word: "relentless",
+        options: ["gentle", "relentless", "superficial", "brief"]
+    },
+    {
+        sentence: "The _____ fragrance of jasmine wafted through the garden.",
+        word: "intoxicating",
+        options: ["repugnant", "intoxicating", "unpleasant", "offensive"]
+    },
+    {
+        sentence: "Her _____ comments about her colleague's appearance were inappropriate.",
+        word: "disparaging",
+        options: ["complimentary", "disparaging", "flattering", "kind"]
+    },
+    {
+        sentence: "The _____ politician changed his position on every major issue.",
+        word: "opportunistic",
+        options: ["principled", "opportunistic", "consistent", "steadfast"]
+    },
+    {
+        sentence: "The _____ old professor had forgotten more about physics than most people ever learn.",
+        word: "venerable",
+        options: ["young", "venerable", "inexperienced", "novice"]
+    },
+    {
+        sentence: "The _____ details of the contract required careful examination by legal experts.",
+        word: "byzantine",
+        options: ["simple", "byzantine", "straightforward", "clear"]
+    },
+    {
+        sentence: "His _____ behavior at the formal dinner embarrassed his hosts.",
+        word: "boorish",
+        options: ["refined", "boorish", "elegant", "sophisticated"]
+    },
+    {
+        sentence: "The _____ design of the new building divided architectural critics.",
+        word: "avant-garde",
+        options: ["traditional", "avant-garde", "conventional", "conservative"]
+    },
+
+ {
         sentence: "The teacher's explanation was so _____ that even the most confused students understood.",
         word: "lucid",
         options: ["obscure", "lucid", "complex", "vague"]
@@ -2262,231 +2489,8 @@ const additionalSynonyms = [
         sentence: "The _____ patient waited hours to see the busy doctor.",
         word: "stoic",
         options: ["impatient", "stoic", "restless", "agitated"]
-    }
-];
-
-
-    },
-    {
-        sentence: "Her _____ personality made her popular among her peers.",
-        word: "gregarious",
-        options: ["antisocial", "gregarious", "withdrawn", "shy"]
-    },
-    {
-        sentence: "The _____ student always completed assignments ahead of schedule.",
-        word: "conscientious",
-        options: ["lazy", "conscientious", "careless", "irresponsible"]
-    },
-    {
-        sentence: "The restaurant's _____ atmosphere attracted many young professionals.",
-        word: "vibrant",
-        options: ["dull", "vibrant", "boring", "lifeless"]
-    },
-    {
-        sentence: "The lawyer's _____ argument convinced the jury of his client's innocence.",
-        word: "compelling",
-        options: ["weak", "compelling", "poor", "unconvincing"]
-    },
-    {
-        sentence: "Her _____ personality made her the life of every party she attended.",
-        word: "vivacious",
-        options: ["dull", "vivacious", "boring", "withdrawn"]
-    },
-    {
-        sentence: "The mountain climber showed remarkable _____ in the face of extreme weather.",
-        word: "tenacity",
-        options: ["weakness", "tenacity", "fear", "hesitation"]
-    },
-    {
-        sentence: "The professor's _____ lecture put half the class to sleep.",
-        word: "monotonous",
-        options: ["engaging", "monotonous", "exciting", "captivating"]
-    },
-    {
-        sentence: "The detective's _____ observation skills helped solve the mysterious case.",
-        word: "acute",
-        options: ["poor", "acute", "weak", "dull"]
-    },
-    {
-        sentence: "The company's _____ expansion strategy led to significant losses.",
-        word: "reckless",
-        options: ["careful", "reckless", "prudent", "thoughtful"]
-    },
-    {
-        sentence: "Despite her _____ schedule, she always made time for her friends.",
-        word: "hectic",
-        options: ["relaxed", "hectic", "easy", "simple"]
-    },
-    {
-        sentence: "The artist's _____ use of color created a stunning masterpiece.",
-        word: "innovative",
-        options: ["traditional", "innovative", "conventional", "ordinary"]
-    },
-    {
-        sentence: "The student's _____ behavior in class earned him multiple detentions.",
-        word: "disruptive",
-        options: ["exemplary", "disruptive", "good", "respectful"]
-    },
-    {
-        sentence: "The _____ aroma of fresh bread filled the entire bakery.",
-        word: "tantalizing",
-        options: ["repulsive", "tantalizing", "unpleasant", "offensive"]
-    },
-    {
-        sentence: "Her _____ commitment to charity work inspired many volunteers.",
-        word: "unwavering",
-        options: ["weak", "unwavering", "inconsistent", "variable"]
-    },
-    {
-        sentence: "The _____ student always completed extra credit assignments.",
-        word: "industrious",
-        options: ["lazy", "industrious", "idle", "sluggish"]
-    },
-    {
-        sentence: "The manager's _____ leadership style motivated the entire team.",
-        word: "charismatic",
-        options: ["boring", "charismatic", "uninspiring", "dull"]
-    },
-    {
-        sentence: "The _____ storm destroyed several buildings in the downtown area.",
-        word: "ferocious",
-        options: ["gentle", "ferocious", "mild", "calm"]
-    },
-    {
-        sentence: "The scientist's _____ research contributed to medical breakthroughs.",
-        word: "pioneering",
-        options: ["outdated", "pioneering", "conventional", "routine"]
-    },
-    {
-        sentence: "The _____ noise from the construction site disrupted the peaceful neighborhood.",
-        word: "incessant",
-        options: ["occasional", "incessant", "quiet", "soft"]
-    },
-    {
-        sentence: "His _____ sense of humor always lightened the mood during stressful times.",
-        word: "infectious",
-        options: ["grim", "infectious", "serious", "solemn"]
-    },
-    {
-        sentence: "The _____ beauty of the sunset left everyone speechless.",
-        word: "breathtaking",
-        options: ["ordinary", "breathtaking", "common", "plain"]
-    },
-    {
-        sentence: "The politician's _____ promises failed to gain voter support.",
-        word: "hollow",
-        options: ["sincere", "hollow", "genuine", "meaningful"]
-    },
-    {
-        sentence: "The chef's _____ skills earned the restaurant a five-star rating.",
-        word: "exceptional",
-        options: ["poor", "exceptional", "average", "mediocre"]
-    },
-    {
-        sentence: "The ambassador's _____ negotiations prevented an international crisis.",
-        word: "diplomatic",
-        options: ["hostile", "diplomatic", "aggressive", "confrontational"]
-    },
-    {
-        sentence: "The _____ complexity of the mathematical proof challenged even expert mathematicians.",
-        word: "formidable",
-        options: ["simple", "formidable", "easy", "basic"]
-    },
-    {
-        sentence: "Her _____ dedication to environmental causes earned her widespread recognition.",
-        word: "zealous",
-        options: ["halfhearted", "zealous", "indifferent", "lukewarm"]
-    },
-    {
-        sentence: "The _____ defendant maintained his innocence throughout the trial.",
-        word: "adamant",
-        options: ["uncertain", "adamant", "wavering", "doubtful"]
-    },
-    {
-        sentence: "The museum's _____ collection attracted visitors from around the world.",
-        word: "eclectic",
-        options: ["uniform", "eclectic", "monotonous", "repetitive"]
-    },
-    {
-        sentence: "The author's _____ writing style made the complex topic accessible to general readers.",
-        word: "lucid",
-        options: ["confusing", "lucid", "obscure", "muddled"]
-    },
-    {
-        sentence: "The _____ critic demolished the new play in a scathing review.",
-        word: "sardonic",
-        options: ["gentle", "sardonic", "kind", "supportive"]
-    },
-    {
-        sentence: "Despite the _____ circumstances, she maintained her optimistic outlook.",
-        word: "dire",
-        options: ["favorable", "dire", "pleasant", "encouraging"]
-    },
-    {
-        sentence: "The _____ employee was finally terminated after multiple warnings.",
-        word: "insubordinate",
-        options: ["obedient", "insubordinate", "cooperative", "compliant"]
-    },
-    {
-        sentence: "His _____ knowledge of classical music impressed the conservatory professors.",
-        word: "encyclopedic",
-        options: ["limited", "encyclopedic", "superficial", "basic"]
-    },
-    {
-        sentence: "The _____ businessman built his empire through questionable practices.",
-        word: "unscrupulous",
-        options: ["ethical", "unscrupulous", "honest", "principled"]
-    },
-    {
-        sentence: "The _____ patient endured months of painful treatment without complaint.",
-        word: "stoic",
-        options: ["emotional", "stoic", "dramatic", "expressive"]
-    },
-    {
-        sentence: "The prosecutor's _____ cross-examination revealed the witness's lies.",
-        word: "relentless",
-        options: ["gentle", "relentless", "superficial", "brief"]
-    },
-    {
-        sentence: "The _____ fragrance of jasmine wafted through the garden.",
-        word: "intoxicating",
-        options: ["repugnant", "intoxicating", "unpleasant", "offensive"]
-    },
-    {
-        sentence: "Her _____ comments about her colleague's appearance were inappropriate.",
-        word: "disparaging",
-        options: ["complimentary", "disparaging", "flattering", "kind"]
-    },
-    {
-        sentence: "The _____ politician changed his position on every major issue.",
-        word: "opportunistic",
-        options: ["principled", "opportunistic", "consistent", "steadfast"]
-    },
-    {
-        sentence: "The _____ old professor had forgotten more about physics than most people ever learn.",
-        word: "venerable",
-        options: ["young", "venerable", "inexperienced", "novice"]
-    },
-    {
-        sentence: "The _____ details of the contract required careful examination by legal experts.",
-        word: "byzantine",
-        options: ["simple", "byzantine", "straightforward", "clear"]
-    },
-    {
-        sentence: "His _____ behavior at the formal dinner embarrassed his hosts.",
-        word: "boorish",
-        options: ["refined", "boorish", "elegant", "sophisticated"]
-    },
-    {
-        sentence: "The _____ design of the new building divided architectural critics.",
-        word: "avant-garde",
-        options: ["traditional", "avant-garde", "conventional", "conservative"]
     },
     
-        
-
-
-              
             ],
 
             wordFormation: [
@@ -2502,14 +2506,6 @@ const additionalSynonyms = [
                 { root: "struct", meaning: "to build", examples: ["construct", "structure", "instruct", "destruction"] },
                 { root: "form", meaning: "shape", examples: ["transform", "conform", "deform", "uniform"] },
                 { root: "tract", meaning: "to pull", examples: ["attract", "contract", "extract", "distract"] },
-                { root: "ject", meaning: "to throw", examples: ["project", "reject", "inject", "subject"] },
-                { root: "mit/miss", meaning: "to send", examples: ["transmit", "mission", "permit", "submit"] },
-                { root: "graph", meaning: "to write", examples: ["photograph", "biography", "autograph", "telegraph"] },
-                { root: "log", meaning: "word/study", examples: ["biology", "psychology", "dialogue", "catalog"] },
-                { root: "phon", meaning: "sound", examples: ["telephone", "microphone", "symphony", "phonics"] },
-                { root: "geo", meaning: "earth", examples: ["geography", "geology", "geometry", "geothermal"] },
-                { root: "bio", meaning: "life", examples: ["biology", "biography", "antibiotic", "biodegradable"] },
-                    { root: "cogn", meaning: "to know", examples: ["recognize", "cognitive", "incognito", "cognizant"] },
     { root: "temp", meaning: "time", examples: ["temporary", "contemporary", "temporal", "tempo"] },
     { root: "man", meaning: "hand", examples: ["manual", "manufacture", "manuscript", "manipulate"] },
     { root: "cap/capt", meaning: "to take", examples: ["capture", "captive", "caption", "capacity"] },
@@ -2685,10 +2681,49 @@ const additionalSynonyms = [
     { root: "moment", meaning: "movement/time", examples: ["moment", "momentum", "momentary", "momentous"] },
     { root: "perman", meaning: "lasting", examples: ["permanent", "permanence", "permanently", "impermanent"] },
     { root: "spat", meaning: "space", examples: ["spatial", "space", "spacious", "spatially"] },
-    { root: "tempor", meaning: "time", examples: ["temporary", "temporal", "contemporary", "extemporaneous"] }
-
-
-                { root: "chron", meaning: "time", examples: ["chronological", "synchronize", "chronicle", "chronic"] }
+    { root: "tempor", meaning: "time", examples: ["temporary", "temporal", "contemporary", "extemporaneous"] },
+                { root: "ject", meaning: "to throw", examples: ["project", "reject", "inject", "subject"] },
+                { root: "mit/miss", meaning: "to send", examples: ["transmit", "mission", "permit", "submit"] },
+                { root: "graph", meaning: "to write", examples: ["photograph", "biography", "autograph", "telegraph"] },
+                { root: "log", meaning: "word/study", examples: ["biology", "psychology", "dialogue", "catalog"] },
+                { root: "phon", meaning: "sound", examples: ["telephone", "microphone", "symphony", "phonics"] },
+                { root: "geo", meaning: "earth", examples: ["geography", "geology", "geometry", "geothermal"] },
+                { root: "bio", meaning: "life", examples: ["biology", "biography", "antibiotic", "biodegradable"] },
+                { root: "chron", meaning: "time", examples: ["chronological", "synchronize", "chronicle", "chronic"] },
+                { root: "cogn", meaning: "to know", examples: ["recognize", "cognitive", "incognito", "cognizant"] },
+                { root: "temp", meaning: "time", examples: ["temporary", "contemporary", "temporal", "tempo"] },
+                { root: "man", meaning: "hand", examples: ["manual", "manufacture", "manuscript", "manipulate"] },
+                { root: "cap/capt", meaning: "to take", examples: ["capture", "captive", "caption", "capacity"] },
+                { root: "sent/sens", meaning: "to feel", examples: ["sentiment", "sensitive", "sensory", "sensation"] },
+                { root: "loc", meaning: "place", examples: ["location", "allocate", "relocate", "locomotive"] },
+                { root: "terr", meaning: "earth/land", examples: ["territory", "terrain", "terrestrial", "terrace"] },
+                { root: "mort", meaning: "death", examples: ["mortal", "immortal", "mortuary", "mortgage"] },
+                { root: "viv", meaning: "life", examples: ["vivid", "survive", "revival", "vivacious"] },
+                { root: "flu/flux", meaning: "to flow", examples: ["fluid", "influence", "confluence", "fluctuate"] },
+                { root: "psych", meaning: "mind", examples: ["psychology", "psychic", "psychiatry", "psyche"] },
+                { root: "path", meaning: "feeling/disease", examples: ["sympathy", "pathology", "empathy", "apathy"] },
+                { root: "gen", meaning: "birth/kind", examples: ["generate", "generation", "genetics", "genuine"] },
+                { root: "dem", meaning: "people", examples: ["democracy", "demographic", "epidemic", "demagogue"] },
+                { root: "phil", meaning: "love", examples: ["philosophy", "philanthropy", "Philadelphia", "philharmonic"] },
+                { root: "auto", meaning: "self", examples: ["automatic", "automobile", "autobiography", "autonomous"] },
+                { root: "tele", meaning: "far", examples: ["telephone", "television", "telescope", "telecommute"] },
+                { root: "micro", meaning: "small", examples: ["microscope", "microphone", "microwave", "microorganism"] },
+                { root: "macro", meaning: "large", examples: ["macroscopic", "macroeconomics", "macrobiotics", "macrocosm"] },
+                { root: "poly", meaning: "many", examples: ["polygon", "polynomial", "polyglot", "polygamy"] },
+                { root: "mono", meaning: "one", examples: ["monopoly", "monologue", "monotone", "monarchy"] },
+                { root: "multi", meaning: "many", examples: ["multiple", "multimedia", "multicultural", "multiverse"] },
+                { root: "neo", meaning: "new", examples: ["neonatal", "neoclassical", "neophyte", "neologism"] },
+                { root: "proto", meaning: "first", examples: ["prototype", "protocol", "protozoa", "protagonist"] },
+                { root: "hyper", meaning: "over/above", examples: ["hyperactive", "hyperbole", "hypertension", "hyperlink"] },
+                { root: "hypo", meaning: "under/below", examples: ["hypothesis", "hypocrite", "hypodermic", "hypoglycemia"] },
+                { root: "super", meaning: "above/over", examples: ["superior", "supernatural", "supervise", "superfluous"] },
+                { root: "sub", meaning: "under/below", examples: ["submarine", "subconscious", "substitute", "subway"] },
+                { root: "inter", meaning: "between", examples: ["international", "interact", "interrupt", "interval"] },
+                { root: "intra", meaning: "within", examples: ["intramural", "intravenous", "intranet", "intracellular"] },
+                { root: "extra", meaning: "outside/beyond", examples: ["extraordinary", "extraterrestrial", "extracurricular", "extract"] },
+                { root: "ultra", meaning: "beyond/extreme", examples: ["ultraviolet", "ultrasonic", "ultramodern", "ultra-conservative"] },
+                { root: "trans", meaning: "across/through", examples: ["transport", "transform", "translate", "transparent"] },
+                { root: "circum", meaning: "around", examples: ["circumference", "circumstance", "circumnavigate", "circumvent"] }
             ]
         };
 
@@ -2769,16 +2804,19 @@ const additionalSynonyms = [
                 const correctExample = root.examples[Math.floor(Math.random() * root.examples.length)];
                 const wrongOptions = [];
                 
-                // Generate some wrong options
-                const allWords = vocabularyData.definitions.map(d => d.word);
-                const randomWords = shuffleArray(allWords).slice(0, 3);
+                // Generate some wrong options from other roots
+                const otherRoots = vocabularyData.wordFormation.filter(r => r.root !== root.root);
+                const randomRoots = shuffleArray(otherRoots).slice(0, 3);
+                randomRoots.forEach(r => {
+                    wrongOptions.push(r.examples[Math.floor(Math.random() * r.examples.length)]);
+                });
                 
                 formationQuestions.push({
                     type: 'word-formation',
                     root: root.root,
                     meaning: root.meaning,
                     word: correctExample,
-                    options: shuffleArray([correctExample, ...randomWords])
+                    options: shuffleArray([correctExample, ...wrongOptions])
                 });
             });
             
