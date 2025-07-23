@@ -1008,41 +1008,84 @@
 
         // Display spelling question
         function displaySpellingQuestion(question) {
-            document.getElementById('question-text').innerHTML = `Spell this word correctly: <strong>"${question.word}"</strong>`;
+            const wordPattern = createWordPattern(question.word);
+            document.getElementById('question-text').innerHTML = `Complete the spelling:`;
             
             const content = document.getElementById('question-content');
-            // Show the word briefly, then hide it for spelling challenge
             content.innerHTML = `
-                <div class="word-display" id="word-to-spell" style="background: rgba(220, 53, 69, 0.1); color: #dc3545; font-size: 1.6rem; margin: 20px 0; padding: 20px; border-radius: 15px;">
-                    <div style="font-size: 1rem; margin-bottom: 10px; opacity: 0.8;">Word to spell:</div>
-                    <div style="font-weight: bold;">${question.word}</div>
-                    <div style="font-size: 0.9rem; margin-top: 10px; opacity: 0.7;">Study this word, then spell it below!</div>
+                <div class="word-display" style="background: rgba(102, 126, 234, 0.1); color: #667eea; font-size: 2rem; margin: 20px 0; padding: 20px; border-radius: 15px; font-family: monospace; letter-spacing: 3px;">
+                    ${wordPattern}
                 </div>
                 <div class="definition-display">💡 Hint: ${question.hint}</div>
-                <input type="text" class="text-input" id="spelling-input" placeholder="Type the word here..." 
+                <input type="text" class="text-input" id="spelling-input" placeholder="Type the complete word here..." 
                        onkeypress="handleSpellingKeypress(event)">
-                <div style="display: flex; gap: 10px; justify-content: center; margin-top: 15px;">
+                <div style="display: flex; gap: 10px; justify-content: center; margin-top: 15px; flex-wrap: wrap;">
                     <button class="btn btn-secondary" onclick="speakWord('${question.word}')">🔊 Hear Word</button>
-                    <button class="btn btn-secondary" onclick="toggleWordDisplay()">👁️ Show/Hide Word</button>
+                    <button class="btn btn-secondary" onclick="showFullWord('${question.word}')">👁️ Show Full Word</button>
+                </div>
+                <div id="full-word-display" style="display: none; margin-top: 15px; padding: 10px; background: rgba(40, 167, 69, 0.1); border-radius: 10px; text-align: center;">
+                    <strong>${question.word}</strong>
                 </div>
             `;
             
-            // Auto-hide the word after 5 seconds to create spelling challenge
-            setTimeout(() => {
-                const wordDisplay = document.getElementById('word-to-spell');
-                if (wordDisplay) {
-                    wordDisplay.style.opacity = '0.3';
-                    wordDisplay.innerHTML = `
-                        <div style="font-size: 1rem; margin-bottom: 10px;">Word hidden - now spell it!</div>
-                        <div style="font-size: 0.9rem; opacity: 0.7;">Click "Show/Hide Word" if you need to see it again</div>
-                    `;
-                }
-            }, 5000);
-            
-            // Focus on input after a brief delay
+            // Focus on input
             setTimeout(() => {
                 document.getElementById('spelling-input').focus();
             }, 100);
+        }
+
+        // Create word pattern with missing letters
+        function createWordPattern(word) {
+            const length = word.length;
+            let pattern = '';
+            
+            // Different strategies based on word length and difficulty
+            if (length <= 4) {
+                // Short words: remove 1-2 letters
+                pattern = hideRandomLetters(word, Math.ceil(length * 0.3));
+            } else if (length <= 8) {
+                // Medium words: remove 2-3 letters, focus on tricky parts
+                pattern = hideRandomLetters(word, Math.ceil(length * 0.4));
+            } else {
+                // Long words: remove 3-4 letters
+                pattern = hideRandomLetters(word, Math.ceil(length * 0.5));
+            }
+            
+            return pattern;
+        }
+
+        // Hide random letters but keep some structure
+        function hideRandomLetters(word, numToHide) {
+            const wordArray = word.split('');
+            const indices = [];
+            
+            // Always show first and last letter for context
+            for (let i = 1; i < word.length - 1; i++) {
+                indices.push(i);
+            }
+            
+            // Shuffle and take the required number
+            const shuffled = indices.sort(() => 0.5 - Math.random());
+            const toHide = shuffled.slice(0, Math.min(numToHide, indices.length));
+            
+            // Create pattern
+            return wordArray.map((letter, index) => {
+                if (toHide.includes(index)) {
+                    return '<span style="color: #ff6b6b; font-weight: bold;">_</span>';
+                }
+                return letter;
+            }).join('');
+        }
+
+        // Show full word temporarily
+        function showFullWord(word) {
+            const display = document.getElementById('full-word-display');
+            display.style.display = 'block';
+            
+            // Hide again after 3 seconds
+            setTimeout(() => {
+                display.style.display = 'none';
+            }, 3000);
         }
 
         // Display mixed question
@@ -1055,29 +1098,6 @@
                 displaySentenceCompletionQuestion(question);
             } else if (question.hint) {
                 displaySpellingQuestion(question);
-            }
-        }
-
-        // Toggle word display for spelling
-        function toggleWordDisplay() {
-            const wordDisplay = document.getElementById('word-to-spell');
-            const question = questions[currentQuestion];
-            
-            if (wordDisplay.style.opacity === '0.3') {
-                // Show the word
-                wordDisplay.style.opacity = '1';
-                wordDisplay.innerHTML = `
-                    <div style="font-size: 1rem; margin-bottom: 10px; opacity: 0.8;">Word to spell:</div>
-                    <div style="font-weight: bold;">${question.word}</div>
-                    <div style="font-size: 0.9rem; margin-top: 10px; opacity: 0.7;">Now spell it below!</div>
-                `;
-            } else {
-                // Hide the word
-                wordDisplay.style.opacity = '0.3';
-                wordDisplay.innerHTML = `
-                    <div style="font-size: 1rem; margin-bottom: 10px;">Word hidden - now spell it!</div>
-                    <div style="font-size: 0.9rem; opacity: 0.7;">Click "Show/Hide Word" if you need to see it again</div>
-                `;
             }
         }
 
