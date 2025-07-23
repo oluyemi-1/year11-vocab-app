@@ -493,6 +493,11 @@
                     <p>Find words with similar meanings</p>
                 </button>
                 
+                <button class="nav-btn" onclick="startGame('antonyms')">
+                    <h3>⚡ Antonyms</h3>
+                    <p>Find words with opposite meanings</p>
+                </button>
+                
                 <button class="nav-btn" onclick="startGame('sentence-completion')">
                     <h3>✏️ Complete Sentences</h3>
                     <p>Fill in the missing words</p>
@@ -501,11 +506,6 @@
                 <button class="nav-btn" onclick="startGame('word-formation')">
                     <h3>🔨 Word Formation</h3>
                     <p>Build new words from roots</p>
-                </button>
-                
-                <button class="nav-btn" onclick="startGame('spelling')">
-                    <h3>🎯 Spelling Challenge</h3>
-                    <p>Test your spelling skills</p>
                 </button>
                 
                 <button class="nav-btn" onclick="startGame('mixed-review')">
@@ -729,6 +729,82 @@
                     options: ["brief", "protracted", "quick", "hasty"]
                 }
             ],
+                {
+                    sentence: "The teacher's explanation was so _____ that even the most confused students understood.",
+                    word: "lucid",
+                    options: ["obscure", "lucid", "complex", "vague"]
+                },
+                {
+                    sentence: "Despite the _____ weather, the hikers continued their journey up the mountain.",
+                    word: "adverse",
+                    options: ["favorable", "adverse", "pleasant", "mild"]
+                },
+                {
+                    sentence: "The politician's _____ speech failed to convince the skeptical audience.",
+                    word: "eloquent",
+                    options: ["eloquent", "inarticulate", "clear", "persuasive"]
+                },
+                {
+                    sentence: "Her _____ attitude toward work earned her a promotion within six months.",
+                    word: "diligent",
+                    options: ["lazy", "careless", "diligent", "negligent"]
+                },
+                {
+                    sentence: "The ancient manuscript was so _____ that scholars spent years deciphering it.",
+                    word: "cryptic",
+                    options: ["clear", "simple", "cryptic", "obvious"]
+                },
+                {
+                    sentence: "The company's _____ policies resulted in high employee turnover.",
+                    word: "draconian",
+                    options: ["lenient", "fair", "draconian", "reasonable"]
+                },
+                {
+                    sentence: "His _____ remarks during the meeting offended several colleagues.",
+                    word: "tactless",
+                    options: ["thoughtful", "tactless", "considerate", "diplomatic"]
+                },
+                {
+                    sentence: "The evidence presented was so _____ that the jury reached a quick verdict.",
+                    word: "compelling",
+                    options: ["weak", "compelling", "doubtful", "insufficient"]
+                },
+                {
+                    sentence: "She showed remarkable _____ in the face of personal tragedy.",
+                    word: "fortitude",
+                    options: ["weakness", "fortitude", "despair", "fragility"]
+                },
+                {
+                    sentence: "The artist's _____ use of color created a stunning visual effect.",
+                    word: "judicious",
+                    options: ["careless", "judicious", "random", "thoughtless"]
+                },
+                {
+                    sentence: "The CEO's _____ decision to expand internationally proved very profitable.",
+                    word: "astute",
+                    options: ["foolish", "astute", "reckless", "impulsive"]
+                },
+                {
+                    sentence: "The protesters remained _____ despite police attempts to disperse them.",
+                    word: "resolute",
+                    options: ["wavering", "resolute", "uncertain", "hesitant"]
+                },
+                {
+                    sentence: "His _____ lifestyle contributed to his poor health and low energy.",
+                    word: "sedentary",
+                    options: ["active", "sedentary", "vigorous", "energetic"]
+                },
+                {
+                    sentence: "The novel's _____ plot kept readers guessing until the final chapter.",
+                    word: "intricate",
+                    options: ["simple", "intricate", "straightforward", "basic"]
+                },
+                {
+                    sentence: "The committee's _____ deliberations lasted well into the night.",
+                    word: "protracted",
+                    options: ["brief", "protracted", "quick", "hasty"]
+                }
+            ],
 
             wordFormation: [
                 { root: "spect", meaning: "to look", examples: ["inspect", "respect", "prospect", "spectacle"] },
@@ -743,7 +819,89 @@
                 { root: "struct", meaning: "to build", examples: ["construct", "structure", "instruct", "destruction"] }
             ],
 
-            spelling: [
+            antonyms: [
+                { word: "abundance", antonym: "scarcity", options: ["plenty", "scarcity", "wealth", "excess"] },
+                { word: "advance", antonym: "retreat", options: ["progress", "retreat", "move", "forward"] },
+                { word: "ancient", antonym: "modern", options: ["old", "modern", "historic", "past"] },
+                { word: "artificial", antonym: "natural", options: ["fake", "natural", "synthetic", "manufactured"] },
+                { word: "ascend", antonym: "descend", options: ["rise", "descend", "climb", "elevate"] },
+                { word: "brave", antonym: "cowardly", options: ["courageous", "cowardly", "bold", "fearless"] },
+                { word: "broad", antonym: "narrow", options: ["wide", "narrow", "extensive", "vast"] },
+                { word: "calm", antonym: "agitated", options: ["peaceful", "agitated", "serene", "quiet"] },
+                { word: "captive", antonym: "free", options: ["prisoner", "free", "confined", "trapped"] },
+                { word: "certain", antonym: "doubtful", options: ["sure", "doubtful", "confident", "definite"] },
+                { word: "cheerful", antonym: "gloomy", options: ["happy", "gloomy", "joyful", "bright"] },
+                { word: "clever", antonym: "stupid", options: ["smart", "stupid", "intelligent", "wise"] },
+                { word: "comfort", antonym: "discomfort", options: ["ease", "discomfort", "relief", "luxury"] },
+                { word: "common", antonym: "rare", options: ["usual", "rare", "ordinary", "typical"] },
+                { word: "complex", antonym: "simple", options: ["complicated", "simple", "intricate", "difficult"] },
+                { word: "conceal", antonym: "reveal", options: ["hide", "reveal", "cover", "mask"] },
+                { word: "confident", antonym: "insecure", options: ["assured", "insecure", "certain", "bold"] },
+                { word: "construct", antonym: "destroy", options: ["build", "destroy", "create", "erect"] },
+                { word: "courage", antonym: "cowardice", options: ["bravery", "cowardice", "valor", "boldness"] },
+                { word: "create", antonym: "destroy", options: ["make", "destroy", "build", "form"] },
+                { word: "cruel", antonym: "kind", options: ["harsh", "kind", "brutal", "mean"] },
+                { word: "damage", antonym: "repair", options: ["harm", "repair", "break", "ruin"] },
+                { word: "dangerous", antonym: "safe", options: ["risky", "safe", "hazardous", "perilous"] },
+                { word: "darkness", antonym: "light", options: ["shadow", "light", "gloom", "blackness"] },
+                { word: "defeat", antonym: "victory", options: ["loss", "victory", "failure", "conquest"] },
+                { word: "difficult", antonym: "easy", options: ["hard", "easy", "challenging", "tough"] },
+                { word: "disappear", antonym: "appear", options: ["vanish", "appear", "fade", "hide"] },
+                { word: "dry", antonym: "wet", options: ["arid", "wet", "parched", "dehydrated"] },
+                { word: "dull", antonym: "bright", options: ["boring", "bright", "bland", "lifeless"] },
+                { word: "early", antonym: "late", options: ["soon", "late", "prompt", "ahead"] },
+                { word: "empty", antonym: "full", options: ["vacant", "full", "hollow", "blank"] },
+                { word: "enemy", antonym: "friend", options: ["foe", "friend", "opponent", "rival"] },
+                { word: "expand", antonym: "contract", options: ["grow", "contract", "enlarge", "extend"] },
+                { word: "expensive", antonym: "cheap", options: ["costly", "cheap", "pricey", "valuable"] },
+                { word: "export", antonym: "import", options: ["send out", "import", "ship", "sell"] },
+                { word: "external", antonym: "internal", options: ["outside", "internal", "outer", "exterior"] },
+                { word: "failure", antonym: "success", options: ["defeat", "success", "loss", "flop"] },
+                { word: "false", antonym: "true", options: ["wrong", "true", "incorrect", "fake"] },
+                { word: "famous", antonym: "unknown", options: ["renowned", "unknown", "celebrated", "notable"] },
+                { word: "fast", antonym: "slow", options: ["quick", "slow", "rapid", "speedy"] },
+                { word: "fiction", antonym: "fact", options: ["fantasy", "fact", "story", "imagination"] },
+                { word: "final", antonym: "initial", options: ["last", "initial", "ending", "ultimate"] },
+                { word: "flexible", antonym: "rigid", options: ["bendable", "rigid", "adaptable", "pliable"] },
+                { word: "frequent", antonym: "rare", options: ["common", "rare", "regular", "often"] },
+                { word: "fresh", antonym: "stale", options: ["new", "stale", "recent", "crisp"] },
+                { word: "generous", antonym: "selfish", options: ["giving", "selfish", "kind", "charitable"] },
+                { word: "gentle", antonym: "rough", options: ["soft", "rough", "mild", "tender"] },
+                { word: "giant", antonym: "tiny", options: ["huge", "tiny", "enormous", "massive"] },
+                { word: "guilty", antonym: "innocent", options: ["responsible", "innocent", "blamed", "at fault"] },
+                { word: "happy", antonym: "sad", options: ["joyful", "sad", "cheerful", "glad"] },
+                { word: "healthy", antonym: "sick", options: ["well", "sick", "fit", "strong"] },
+                { word: "heavy", antonym: "light", options: ["weighty", "light", "massive", "bulky"] },
+                { word: "honest", antonym: "dishonest", options: ["truthful", "dishonest", "sincere", "genuine"] },
+                { word: "huge", antonym: "tiny", options: ["enormous", "tiny", "massive", "gigantic"] },
+                { word: "increase", antonym: "decrease", options: ["grow", "decrease", "expand", "rise"] },
+                { word: "inferior", antonym: "superior", options: ["lower", "superior", "worse", "lesser"] },
+                { word: "innocent", antonym: "guilty", options: ["pure", "guilty", "blameless", "clean"] },
+                { word: "junior", antonym: "senior", options: ["younger", "senior", "lower", "subordinate"] },
+                { word: "knowledge", antonym: "ignorance", options: ["wisdom", "ignorance", "learning", "understanding"] },
+                { word: "legal", antonym: "illegal", options: ["lawful", "illegal", "legitimate", "permitted"] },
+                { word: "liquid", antonym: "solid", options: ["fluid", "solid", "wet", "flowing"] },
+                { word: "maximum", antonym: "minimum", options: ["highest", "minimum", "greatest", "most"] },
+                { word: "natural", antonym: "artificial", options: ["real", "artificial", "organic", "genuine"] },
+                { word: "negative", antonym: "positive", options: ["bad", "positive", "harmful", "pessimistic"] },
+                { word: "noisy", antonym: "quiet", options: ["loud", "quiet", "boisterous", "clamorous"] },
+                { word: "optimistic", antonym: "pessimistic", options: ["hopeful", "pessimistic", "positive", "confident"] },
+                { word: "ordinary", antonym: "extraordinary", options: ["common", "extraordinary", "normal", "typical"] },
+                { word: "permanent", antonym: "temporary", options: ["lasting", "temporary", "enduring", "fixed"] },
+                { word: "poverty", antonym: "wealth", options: ["poorness", "wealth", "need", "lack"] },
+                { word: "private", antonym: "public", options: ["personal", "public", "secret", "individual"] },
+                { word: "professional", antonym: "amateur", options: ["expert", "amateur", "skilled", "trained"] },
+                { word: "rapid", antonym: "slow", options: ["fast", "slow", "quick", "speedy"] },
+                { word: "rough", antonym: "smooth", options: ["coarse", "smooth", "harsh", "uneven"] },
+                { word: "rural", antonym: "urban", options: ["countryside", "urban", "agricultural", "rustic"] },
+                { word: "shallow", antonym: "deep", options: ["surface", "deep", "superficial", "thin"] },
+                { word: "strong", antonym: "weak", options: ["powerful", "weak", "sturdy", "robust"] },
+                { word: "victory", antonym: "defeat", options: ["win", "defeat", "triumph", "success"] },
+                { word: "visible", antonym: "invisible", options: ["seen", "invisible", "apparent", "obvious"] },
+                { word: "wisdom", antonym: "foolishness", options: ["knowledge", "foolishness", "intelligence", "insight"] }
+            ],
+
+            sentenceCompletion: [
                 { word: "accommodate", hint: "double 'c' and double 'm'" },
                 { word: "achievement", hint: "'i' before 'e' except after 'c'" },
                 { word: "acquire", hint: "'c' then 'qu'" },
@@ -842,14 +1000,14 @@
                 case 'synonyms':
                     questions = shuffleArray(vocabularyData.synonyms).slice(0, totalQuestions);
                     break;
+                case 'antonyms':
+                    questions = shuffleArray(vocabularyData.antonyms).slice(0, totalQuestions);
+                    break;
                 case 'sentence-completion':
                     questions = shuffleArray(vocabularyData.sentenceCompletion).slice(0, totalQuestions);
                     break;
                 case 'word-formation':
                     questions = generateWordFormationQuestions();
-                    break;
-                case 'spelling':
-                    questions = shuffleArray(vocabularyData.spelling).slice(0, totalQuestions);
                     break;
                 case 'mixed-review':
                     questions = generateMixedQuestions();
@@ -893,12 +1051,13 @@
         // Generate mixed questions
         function generateMixedQuestions() {
             const mixed = [];
-            const typesCount = Math.floor(totalQuestions / 4);
+            const typesCount = Math.floor(totalQuestions / 5);
             
             mixed.push(...shuffleArray(vocabularyData.definitions).slice(0, typesCount));
             mixed.push(...shuffleArray(vocabularyData.synonyms).slice(0, typesCount));
+            mixed.push(...shuffleArray(vocabularyData.antonyms).slice(0, typesCount));
             mixed.push(...shuffleArray(vocabularyData.sentenceCompletion).slice(0, typesCount));
-            mixed.push(...shuffleArray(vocabularyData.spelling).slice(0, totalQuestions - mixed.length));
+            mixed.push(...shuffleArray(vocabularyData.definitions).slice(0, totalQuestions - mixed.length));
             
             return shuffleArray(mixed);
         }
@@ -931,14 +1090,14 @@
                 case 'synonyms':
                     displaySynonymQuestion(question);
                     break;
+                case 'antonyms':
+                    displayAntonymQuestion(question);
+                    break;
                 case 'sentence-completion':
                     displaySentenceCompletionQuestion(question);
                     break;
                 case 'word-formation':
                     displayWordFormationQuestion(question);
-                    break;
-                case 'spelling':
-                    displaySpellingQuestion(question);
                     break;
                 case 'mixed-review':
                     displayMixedQuestion(question);
@@ -976,6 +1135,21 @@
             `;
         }
 
+        // Display antonym question
+        function displayAntonymQuestion(question) {
+            document.getElementById('question-text').textContent = 'Which word is the opposite (antonym) of:';
+            
+            const content = document.getElementById('question-content');
+            content.innerHTML = `
+                <div class="word-display">${question.word}</div>
+                <div class="options-grid">
+                    ${question.options.map((option, index) => 
+                        `<button class="option-btn" onclick="selectOption(${index}, '${option}')">${option}</button>`
+                    ).join('')}
+                </div>
+            `;
+        }
+
         // Display sentence completion question
         function displaySentenceCompletionQuestion(question) {
             document.getElementById('question-text').textContent = 'Complete the sentence with the most appropriate word:';
@@ -1006,55 +1180,7 @@
             `;
         }
 
-        // Display spelling question
-        function displaySpellingQuestion(question) {
-            document.getElementById('question-text').innerHTML = `Complete the spelling:`;
-            
-            // Create initial pattern and store it
-            const initialPattern = createWordPattern(question.word);
-            
-            const content = document.getElementById('question-content');
-            content.innerHTML = `
-                <div class="word-display" id="word-pattern" style="background: rgba(102, 126, 234, 0.1); color: #667eea; font-size: 2rem; margin: 20px 0; padding: 20px; border-radius: 15px; font-family: monospace; letter-spacing: 3px;">
-                    ${initialPattern}
-                </div>
-                <div class="definition-display">💡 Spelling Hint: ${question.hint}</div>
-                <input type="text" class="text-input" id="spelling-input" placeholder="Type the complete word here..." 
-                       onkeypress="handleSpellingKeypress(event)">
-                <div style="display: flex; gap: 10px; justify-content: center; margin-top: 15px; flex-wrap: wrap;">
-                    <button class="btn btn-secondary" onclick="speakWord('${question.word}')">🔊 Hear Word</button>
-                    <button class="btn btn-secondary" onclick="revealLetter()">💡 Reveal One Letter</button>
-                    <button class="btn btn-secondary" onclick="showAdditionalClue('${question.word}')">🔍 More Clues</button>
-                </div>
-                <div id="additional-clues" style="margin-top: 15px;"></div>
-            `;
-            
-            // Store word data for this question
-            window.spellingData = {
-                word: question.word,
-                revealedLetters: [],
-                maxReveals: Math.max(2, Math.ceil(question.word.length * 0.3)),
-                usedReveals: 0
-            };
-            
-            // Focus on input
-            setTimeout(() => {
-                document.getElementById('spelling-input').focus();
-            }, 100);
-        }
-
-        // Create word pattern with missing letters - simpler approach
-        function createWordPattern(word) {
-            const wordArray = word.split('');
-            const pattern = [];
-            
-            // Always show first and last letter
-            for (let i = 0; i < word.length; i++) {
-                if (i === 0 || i === word.length - 1) {
-                    pattern.push(wordArray[i]);
-                } else {
-                    // Hide about 50% of middle letters
-                    if (Math.random() > 0.5) {
+        // Handle keypress for inputs {
                         pattern.push('<span style="color: #ff6b6b; font-weight: bold;" data-letter="' + wordArray[i] + '" data-position="' + i + '">_</span>');
                     } else {
                         pattern.push(wordArray[i]);
@@ -1247,10 +1373,10 @@
                 displayDefinitionQuestion(question);
             } else if (question.synonyms) {
                 displaySynonymQuestion(question);
+            } else if (question.antonym) {
+                displayAntonymQuestion(question);
             } else if (question.sentence) {
                 displaySentenceCompletionQuestion(question);
-            } else if (question.hint) {
-                displaySpellingQuestion(question);
             }
         }
 
@@ -1298,42 +1424,28 @@
 
             const question = questions[currentQuestion];
 
-            // Get user answer based on question type
-            if (currentGame === 'spelling' || (currentGame === 'mixed-review' && question.hint)) {
-                userAnswer = document.getElementById('spelling-input').value.trim().toLowerCase();
-                correctAnswer = question.word.toLowerCase();
+            // Get user answer - no spelling questions now
+            const selectedBtn = document.querySelector('.option-btn[data-selected="true"]');
+            if (!selectedBtn) {
+                showFeedback('Please select an answer!', false);
+                return;
+            }
+            
+            userAnswer = selectedBtn.dataset.value;
+            
+            // Determine correct answer based on question type
+            if (question.correct) {
+                correctAnswer = question.correct;
                 isCorrect = userAnswer === correctAnswer;
-            } else {
-                const selectedBtn = document.querySelector('.option-btn[data-selected="true"]');
-                if (!selectedBtn) {
-                    showFeedback('Please select an answer!', false);
-                    return;
-                }
-                
-                userAnswer = selectedBtn.dataset.value;
-                
-                // Determine correct answer based on question type
-                if (question.correct) {
-                    correctAnswer = question.correct;
-                    isCorrect = userAnswer === correctAnswer;
-                } else if (question.definition) {
-                    correctAnswer = question.definition;
-                    isCorrect = userAnswer === correctAnswer;
-                } else if (question.answer) {
-                    correctAnswer = question.answer;
-                    isCorrect = userAnswer === correctAnswer;
-                } else if (question.word) {
-                    correctAnswer = question.word;
-                    isCorrect = userAnswer === correctAnswer;
-                }
-                
-                // For definition questions, check if selected option is the correct answer
-                if (currentGame === 'definitions' || (currentGame === 'mixed-review' && question.definition)) {
-                    isCorrect = userAnswer === (question.correct || question.options.find(opt => 
-                        opt.toLowerCase().includes(question.word.toLowerCase()) || 
-                        question.definition.toLowerCase().includes(opt.toLowerCase())
-                    ));
-                }
+            } else if (question.answer) {
+                correctAnswer = question.answer;
+                isCorrect = userAnswer === correctAnswer;
+            } else if (question.antonym) {
+                correctAnswer = question.antonym;
+                isCorrect = userAnswer === correctAnswer;
+            } else if (question.word) {
+                correctAnswer = question.word;
+                isCorrect = userAnswer === correctAnswer;
             }
 
             // Update score and stats
@@ -1377,35 +1489,24 @@
                 message = '🎉 <strong>Correct!</strong> Well done!';
             } else {
                 // Show what they selected vs correct answer
-                let userAnswer = '';
-                if (currentGame === 'spelling' || (currentGame === 'mixed-review' && question.hint)) {
-                    userAnswer = document.getElementById('spelling-input').value.trim();
-                    // For spelling, make sure to show the actual word they were supposed to spell
-                    correctAnswer = question.word;
-                    
-                    message = `❌ <strong>Incorrect</strong><br><br>`;
-                    message += `<span style="color: #dc3545;">Your spelling:</span> "${userAnswer}"<br>`;
-                    message += `<span style="color: #28a745; font-weight: bold;">Correct spelling:</span> "${correctAnswer}"<br>`;
-                } else {
-                    const selectedBtn = document.querySelector('.option-btn[data-selected="true"]');
-                    userAnswer = selectedBtn ? selectedBtn.textContent : 'No selection';
-                    
-                    message = `❌ <strong>Incorrect</strong><br><br>`;
-                    message += `<span style="color: #dc3545;">Your answer:</span> "${userAnswer}"<br>`;
-                    message += `<span style="color: #28a745; font-weight: bold;">Correct answer:</span> "${correctAnswer}"<br>`;
-                }
+                const selectedBtn = document.querySelector('.option-btn[data-selected="true"]');
+                userAnswer = selectedBtn ? selectedBtn.textContent : 'No selection';
                 
-                // Add definition context for learning
+                message = `❌ <strong>Incorrect</strong><br><br>`;
+                message += `<span style="color: #dc3545;">Your answer:</span> "${userAnswer}"<br>`;
+                message += `<span style="color: #28a745; font-weight: bold;">Correct answer:</span> "${correctAnswer}"<br>`;
+                
+                // Add context for learning
                 if (question.definition) {
                     message += `<br><div class="definition-context">💡 <strong>${question.word}</strong> means "${question.definition}"</div>`;
                 } else if (question.sentence) {
                     message += `<br><div class="definition-context">💡 The word "<strong>${correctAnswer}</strong>" fits best in this context.</div>`;
                 } else if (question.synonyms) {
                     message += `<br><div class="definition-context">💡 "<strong>${correctAnswer}</strong>" is a synonym for "<strong>${question.word}</strong>".</div>`;
+                } else if (question.antonym) {
+                    message += `<br><div class="definition-context">💡 "<strong>${correctAnswer}</strong>" is the opposite of "<strong>${question.word}</strong>".</div>`;
                 } else if (question.root) {
                     message += `<br><div class="definition-context">💡 "<strong>${correctAnswer}</strong>" contains the root "<strong>${question.root}</strong>" meaning "${question.meaning}".</div>`;
-                } else if (question.hint) {
-                    message += `<br><div class="definition-context">💡 Remember: ${question.hint}</div>`;
                 }
             }
             
