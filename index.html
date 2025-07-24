@@ -2913,20 +2913,22 @@
             `;
         }
 
-        // Display antonym question
         function displayAntonymQuestion(question) {
-            document.getElementById('question-text').textContent = 'Which word is the opposite (antonym) of:';
-            
-            const content = document.getElementById('question-content');
-            content.innerHTML = `
-                <div class="word-display">${question.word}</div>
-                <div class="options-grid">
-                    ${question.options.map((option, index) => 
-                        `<button class="option-btn" onclick="selectOption(${index}, '${option}')">${option}</button>`
-                    ).join('')}
-                </div>
-            `;
-        }
+    document.getElementById('question-text').textContent = 'Which word is the opposite (antonym) of:';
+    
+    // Shuffle the options to randomize position
+    const shuffledOptions = shuffleArray(question.options);
+    
+    const content = document.getElementById('question-content');
+    content.innerHTML = `
+        <div class="word-display">${question.word}</div>
+        <div class="options-grid">
+            ${shuffledOptions.map((option, index) => 
+                `<button class="option-btn" onclick="selectOption(${index}, '${option}')">${option}</button>`
+            ).join('')}
+        </div>
+    `;
+}
 
         // Display sentence completion question
         function displaySentenceCompletionQuestion(question) {
