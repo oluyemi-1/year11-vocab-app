@@ -2905,8 +2905,8 @@
         function displaySynonymQuestion(question) {
     document.getElementById('question-text').textContent = 'Which word is a synonym for:';
     
-    // Shuffle all options to randomize correct answer position
-    const shuffledOptions = shuffleArray(question.options);
+    // Use question.synonyms instead of question.options
+    const shuffledOptions = shuffleArray([...question.synonyms]);
     
     const content = document.getElementById('question-content');
     content.innerHTML = `
