@@ -2884,36 +2884,40 @@
         }
 
         // Display definition question
-        function displayDefinitionQuestion(question) {
-            document.getElementById('question-text').textContent = 'What does this word mean?';
-            
-            const content = document.getElementById('question-content');
-            const shuffledOptions = shuffleArray(question.options);
-            content.innerHTML = `
-                <div class="word-display">${question.word}</div>
-                <div class="options-grid">
-                    ${question.options.map((option, index) => 
-                        `<button class="option-btn" onclick="selectOption(${index}, '${option}')">${option}</button>`
-                    ).join('')}
-                </div>
-            `;
-        }
+       function displayDefinitionQuestion(question) {
+    document.getElementById('question-text').textContent = 'What does this word mean?';
+    
+    // Shuffle all options to randomize correct answer position
+    const shuffledOptions = shuffleArray([...question.options]);
+    
+    const content = document.getElementById('question-content');
+    content.innerHTML = `
+        <div class="word-display">${question.word}</div>
+        <div class="options-grid">
+            ${shuffledOptions.map((option, index) => 
+                `<button class="option-btn" onclick="selectOption(${index}, '${option}')">${option}</button>`
+            ).join('')}
+        </div>
+    `;
+}
 
         // Display synonym question
         function displaySynonymQuestion(question) {
-            document.getElementById('question-text').textContent = 'Which word is a synonym for:';
-            
-            const content = document.getElementById('question-content');
-            const shuffledOptions = shuffleArray(question.synonyms);
-            content.innerHTML = `
-                <div class="word-display">${question.word}</div>
-                <div class="options-grid">
-                    ${question.synonyms.map((option, index) => 
-                        `<button class="option-btn" onclick="selectOption(${index}, '${option}')">${option}</button>`
-                    ).join('')}
-                </div>
-            `;
-        }
+    document.getElementById('question-text').textContent = 'Which word is a synonym for:';
+    
+    // Shuffle all options to randomize correct answer position
+    const shuffledOptions = shuffleArray([...question.synonyms]);
+    
+    const content = document.getElementById('question-content');
+    content.innerHTML = `
+        <div class="word-display">${question.word}</div>
+        <div class="options-grid">
+            ${shuffledOptions.map((option, index) => 
+                `<button class="option-btn" onclick="selectOption(${index}, '${option}')">${option}</button>`
+            ).join('')}
+        </div>
+    `;
+}
 
         function displayAntonymQuestion(question) {
     document.getElementById('question-text').textContent = 'Which word is the opposite (antonym) of:';
@@ -2933,20 +2937,22 @@
 }
 
         // Display sentence completion question
-        function displaySentenceCompletionQuestion(question) {
-            document.getElementById('question-text').textContent = 'Complete the sentence with the most appropriate word:';
-            
-            const content = document.getElementById('question-content');
-            const shuffledOptions = shuffleArray(question.options);
-            content.innerHTML = `
-                <div class="definition-display">"${question.sentence}"</div>
-                <div class="options-grid">
-                    ${question.options.map((option, index) => 
-                        `<button class="option-btn" onclick="selectOption(${index}, '${option}')">${option}</button>`
-                    ).join('')}
-                </div>
-            `;
-        }
+       function displaySentenceCompletionQuestion(question) {
+    document.getElementById('question-text').textContent = 'Complete the sentence with the most appropriate word:';
+    
+    // Shuffle all options to randomize correct answer position
+    const shuffledOptions = shuffleArray([...question.options]);
+    
+    const content = document.getElementById('question-content');
+    content.innerHTML = `
+        <div class="definition-display">"${question.sentence}"</div>
+        <div class="options-grid">
+            ${shuffledOptions.map((option, index) => 
+                `<button class="option-btn" onclick="selectOption(${index}, '${option}')">${option}</button>`
+            ).join('')}
+        </div>
+    `;
+}
 
         // Display word formation question
         function displayWordFormationQuestion(question) {
@@ -2977,19 +2983,19 @@
         }
 
         // Select option
-        function selectOption(index, value) {
-            if (answered) return;
-            
-            // Remove previous selections
-            document.querySelectorAll('.option-btn').forEach(btn => {
-                btn.classList.remove('selected');
-            });
-            
-            // Select current option
-            event.target.classList.add('selected');
-            event.target.dataset.selected = 'true';
-            event.target.dataset.value = value;
-        }
+       function selectOption(index, value) {
+    if (answered) return;
+    
+    // Remove previous selections
+    document.querySelectorAll('.option-btn').forEach(btn => {
+        btn.classList.remove('selected');
+    });
+    
+    // Select current option
+    event.target.classList.add('selected');
+    event.target.dataset.selected = 'true';
+    event.target.dataset.value = value; // Make sure this is set correctly
+}
 
         // Submit answer
         function submitAnswer() {
