@@ -2888,6 +2888,7 @@
             document.getElementById('question-text').textContent = 'What does this word mean?';
             
             const content = document.getElementById('question-content');
+            const shuffledOptions = shuffleArray(question.options);
             content.innerHTML = `
                 <div class="word-display">${question.word}</div>
                 <div class="options-grid">
@@ -2903,6 +2904,7 @@
             document.getElementById('question-text').textContent = 'Which word is a synonym for:';
             
             const content = document.getElementById('question-content');
+            const shuffledOptions = shuffleArray(question.synonyms);
             content.innerHTML = `
                 <div class="word-display">${question.word}</div>
                 <div class="options-grid">
@@ -2935,6 +2937,7 @@
             document.getElementById('question-text').textContent = 'Complete the sentence with the most appropriate word:';
             
             const content = document.getElementById('question-content');
+            const shuffledOptions = shuffleArray(question.options);
             content.innerHTML = `
                 <div class="definition-display">"${question.sentence}"</div>
                 <div class="options-grid">
